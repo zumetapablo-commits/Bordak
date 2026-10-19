@@ -30,6 +30,6 @@ sources:
   cocampo: {enabled: true}
   egana: {enabled: false}
   siro: {enabled: false}
-  moldatu: {enabled: false}
+  moldatu: {enabled: true}
   flysch: {enabled: false}
   adoshome: {enabled: false}

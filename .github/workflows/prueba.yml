@@ -1,0 +1,40 @@
+name: Prueba en seco
+
+on:
+  workflow_dispatch:
+    inputs:
+      sources:
+        description: "Fuentes (vacío = las activas), p. ej. 'cocampo moldatu'"
+        default: ""
+
+permissions:
+  contents: write
+
+jobs:
+  dry-run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install .
+      - name: Ejecutar sin guardar ni enviar
+        run: |
+          mkdir -p /tmp/out
+          ARGS=""
+          for s in ${{ inputs.sources }}; do ARGS="$ARGS --source $s"; done
+          set -o pipefail
+          fincas run --dry-run $ARGS 2>&1 | tee /tmp/out/prueba.log
+      - name: Publicar registro en la rama "pruebas"
+        if: always()
+        run: |
+          git config user.name "fincas-bot"
+          git config user.email "fincas-bot@users.noreply.github.com"
+          git checkout --orphan pruebas
+          git rm -rfq .
+          cp /tmp/out/prueba.log .
+          git add prueba.log
+          git commit -qm "Prueba ${{ github.run_id }}"
+          git push -f origin pruebas

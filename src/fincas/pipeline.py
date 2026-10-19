@@ -46,6 +46,9 @@ def process_listing(l: Listing, src: Source, client: PoliteClient, store: Store,
     elif l.kind:
         log.info("Sin ubicación: %s %s", l.source, l.url)
 
+    log.info("%s %s | %s | %s € | %s | costa=%s km%s | punt=%s | %s",
+             l.source, l.source_id, l.kind, l.price, l.municipality, l.coast_km,
+             " ≈" if l.geo_approx else "", l.score, "CUMPLE" if matches else "no")
     already_notified = bool(known and known["notified"])
     is_hit = matches and not already_notified
     store.upsert(l, matches=matches, notified=seed and matches)
