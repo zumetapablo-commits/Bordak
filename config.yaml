@@ -31,7 +31,7 @@ db_path: state/fincas.sqlite
 sources:
   cocampo: {enabled: true}
   egana: {enabled: false}
-  siro: {enabled: false}
+  siro: {enabled: true}
   moldatu: {enabled: true}
   flysch: {enabled: false}
   adoshome: {enabled: false}
