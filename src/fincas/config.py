@@ -1,11 +1,13 @@
 from __future__ import annotations
 
+import os
 from pathlib import Path
 from typing import Any
 
 import yaml
 
-ROOT = Path(__file__).resolve().parents[2]
+# Carpeta del proyecto (config.yaml, data/, state/): la actual, o FINCAS_ROOT
+ROOT = Path(os.environ.get("FINCAS_ROOT") or Path.cwd()).resolve()
 DATA_DIR = ROOT / "data"
 
 
