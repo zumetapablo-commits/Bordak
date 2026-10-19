@@ -1,0 +1,563 @@
+2026-10-19 13:36:54,868 DEBUG httpcore.connection: connect_tcp.started host='www.cocampo.com' port=443 local_address=None timeout=30 socket_options=None
+2026-10-19 13:36:54,961 DEBUG httpcore.connection: connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x7f9a8fc007a0>
+2026-10-19 13:36:54,962 DEBUG httpcore.connection: start_tls.started ssl_context=<ssl.SSLContext object at 0x7f9a8fc982d0> server_hostname='www.cocampo.com' timeout=30
+2026-10-19 13:36:55,002 DEBUG httpcore.connection: start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x7f9a9e6b6c00>
+2026-10-19 13:36:55,002 DEBUG httpcore.http11: send_request_headers.started request=<Request [b'GET']>
+2026-10-19 13:36:55,002 DEBUG httpcore.http11: send_request_headers.complete
+2026-10-19 13:36:55,002 DEBUG httpcore.http11: send_request_body.started request=<Request [b'GET']>
+2026-10-19 13:36:55,002 DEBUG httpcore.http11: send_request_body.complete
+2026-10-19 13:36:55,002 DEBUG httpcore.http11: receive_response_headers.started request=<Request [b'GET']>
+2026-10-19 13:36:55,414 DEBUG httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Mon, 19 Oct 2026 13:36:55 GMT'), (b'Content-Type', b'text/plain'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Server', b'cloudflare'), (b'vary', b'rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch'), (b'x-nextjs-cache', b'HIT'), (b'Cache-Control', b'public, max-age=16070400, must-revalidate'), (b'last-modified', b'Mon, 19 Oct 2026 13:36:55 GMT'), (b'cf-cache-status', b'MISS'), (b'Nel', b'{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'), (b'Strict-Transport-Security', b'max-age=15552000; includeSubDomains; preload'), (b'X-Content-Type-Options', b'nosniff'), (b'Report-To', b'{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=R6xKfc32Dj1xXuRapwbWWJWjgR8rTRK1nYREwRz0UOagMF5PtoaJsUz83GLGep2XVu%2BsVfpPnPRBL%2BzEuX6rd6ESR1lnpqz2UjQcpSIEGm2OlUM8wj9DgaRIa7y%2F5wO17YI%3D"}]}'), (b'Content-Encoding', b'gzip'), (b'CF-RAY', b'a4d02ca7dda336d0-YYZ'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2026-10-19 13:36:55,414 INFO httpx: HTTP Request: GET https://www.cocampo.com/robots.txt "HTTP/1.1 200 OK"
+2026-10-19 13:36:55,415 DEBUG httpcore.http11: receive_response_body.started request=<Request [b'GET']>
+2026-10-19 13:36:55,415 DEBUG httpcore.http11: receive_response_body.complete
+2026-10-19 13:36:55,415 DEBUG httpcore.http11: response_closed.started
+2026-10-19 13:36:55,415 DEBUG httpcore.http11: response_closed.complete
+2026-10-19 13:36:55,868 DEBUG httpcore.http11: send_request_headers.started request=<Request [b'GET']>
+2026-10-19 13:36:55,868 DEBUG httpcore.http11: send_request_headers.complete
+2026-10-19 13:36:55,868 DEBUG httpcore.http11: send_request_body.started request=<Request [b'GET']>
+2026-10-19 13:36:55,868 DEBUG httpcore.http11: send_request_body.complete
+2026-10-19 13:36:55,868 DEBUG httpcore.http11: receive_response_headers.started request=<Request [b'GET']>
+2026-10-19 13:36:56,248 DEBUG httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Mon, 19 Oct 2026 13:36:56 GMT'), (b'Content-Type', b'text/html; charset=utf-8'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Server', b'cloudflare'), (b'cocampo__page_config', b'{"locale":"es-es","countrySettings":{"isHiddenPrice":false,"countryLanguages":["es-es","es-ca","es-en"],"countryDefaultLanguage":"es-es","pageSections":["news","agents","financing","insurances","appraisers","page_by_location","mapa_por_capas","languages_menu"],"countryIsoCode":"ES","currencies":[{"id":47,"name":"EUR","isDefault":true},{"id":151,"name":"USD","isDefault":false}],"geoData":{"center":{"type":"Point","coordinates":[40.463667,-3.74922]}}}}'), (b'cookies__request_url', b'/es/es/explorar/comprar/fincas-rusticas/espana/pais-vasco/guipuzcoa/'), (b'cookies_locale', b'es-es'), (b'Set-Cookie', b'COOKIES__REQUEST_URL=%2Fes%2Fes%2Fexplorar%2Fcomprar%2Ffincas-rusticas%2Fespana%2Fpais-vasco%2Fguipuzcoa%2F; Path=/'), (b'Set-Cookie', b'COCAMPO__PAGE_CONFIG=%7B%22locale%22%3A%22es-es%22%2C%22countrySettings%22%3A%7B%22isHiddenPrice%22%3Afalse%2C%22countryLanguages%22%3A%5B%22es-es%22%2C%22es-ca%22%2C%22es-en%22%5D%2C%22countryDefaultLanguage%22%3A%22es-es%22%2C%22pageSections%22%3A%5B%22news%22%2C%22agents%22%2C%22financing%22%2C%22insurances%22%2C%22appraisers%22%2C%22page_by_location%22%2C%22mapa_por_capas%22%2C%22languages_menu%22%5D%2C%22countryIsoCode%22%3A%22ES%22%2C%22currencies%22%3A%5B%7B%22id%22%3A47%2C%22name%22%3A%22EUR%22%2C%22isDefault%22%3Atrue%7D%2C%7B%22id%22%3A151%2C%22name%22%3A%22USD%22%2C%22isDefault%22%3Afalse%7D%5D%2C%22geoData%22%3A%7B%22center%22%3A%7B%22type%22%3A%22Point%22%2C%22coordinates%22%3A%5B40.463667%2C-3.74922%5D%7D%7D%7D%7D; Path=/'), (b'Set-Cookie', b'COOKIES_LOCALE=es-es; Path=/'), (b'x-middleware-rewrite', b'/es-es/main-search/comprar/fincas-rusticas/espana/pais-vasco/guipuzcoa/'), (b'vary', b'rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch, Accept-Encoding'), (b'link', b'</_next/static/media/85e270911e713436-s.p.2cxg062isz68x.woff2>; rel=preload; as="font"; crossorigin=""; type="font/woff2"'), (b'x-powered-by', b'Next.js'), (b'Cache-Control', b'private, no-cache, no-store, max-age=0, must-revalidate'), (b'Report-To', b'{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=5hVk4u%2BR2CKd7OgVwj7e5yn7B4cBAD6M%2F8u4sEj%2BAY12Bi%2FSqs8mFxhABYpuUMoXoNIwqcFZKtZ0FCSFTOCKOi%2F71iIwxuTUZydafmRpJZWhInX5bsgY8pditUHzb2uHjUc%3D"}]}'), (b'cf-cache-status', b'DYNAMIC'), (b'Nel', b'{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'), (b'Strict-Transport-Security', b'max-age=15552000; includeSubDomains; preload'), (b'X-Content-Type-Options', b'nosniff'), (b'Content-Encoding', b'gzip'), (b'CF-RAY', b'a4d02cad4be636d0-YYZ'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2026-10-19 13:36:56,248 INFO httpx: HTTP Request: GET https://www.cocampo.com/es/es/explorar/comprar/fincas-rusticas/espana/pais-vasco/guipuzcoa/ "HTTP/1.1 200 OK"
+2026-10-19 13:36:56,248 DEBUG httpcore.http11: receive_response_body.started request=<Request [b'GET']>
+2026-10-19 13:36:56,529 DEBUG httpcore.http11: receive_response_body.complete
+2026-10-19 13:36:56,529 DEBUG httpcore.http11: response_closed.started
+2026-10-19 13:36:56,530 DEBUG httpcore.http11: response_closed.complete
+2026-10-19 13:36:56,868 DEBUG httpcore.http11: send_request_headers.started request=<Request [b'GET']>
+2026-10-19 13:36:56,868 DEBUG httpcore.http11: send_request_headers.complete
+2026-10-19 13:36:56,868 DEBUG httpcore.http11: send_request_body.started request=<Request [b'GET']>
+2026-10-19 13:36:56,868 DEBUG httpcore.http11: send_request_body.complete
+2026-10-19 13:36:56,868 DEBUG httpcore.http11: receive_response_headers.started request=<Request [b'GET']>
+2026-10-19 13:36:57,207 DEBUG httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Mon, 19 Oct 2026 13:36:57 GMT'), (b'Content-Type', b'text/html; charset=utf-8'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Server', b'cloudflare'), (b'cocampo__page_config', b'{"locale":"es-es","countrySettings":{"isHiddenPrice":false,"countryLanguages":["es-es","es-ca","es-en"],"countryDefaultLanguage":"es-es","pageSections":["news","agents","financing","insurances","appraisers","page_by_location","mapa_por_capas","languages_menu"],"countryIsoCode":"ES","currencies":[{"id":47,"name":"EUR","isDefault":true},{"id":151,"name":"USD","isDefault":false}],"geoData":{"center":{"type":"Point","coordinates":[40.463667,-3.74922]}}}}'), (b'cookies__request_url', b'/es/es/propiedades/8307ccbd-313a-422e-a1ff-3c6dd4bca975/'), (b'cookies_locale', b'es-es'), (b'Set-Cookie', b'COOKIES__REQUEST_URL=%2Fes%2Fes%2Fpropiedades%2F8307ccbd-313a-422e-a1ff-3c6dd4bca975%2F; Path=/'), (b'Set-Cookie', b'COCAMPO__PAGE_CONFIG=%7B%22locale%22%3A%22es-es%22%2C%22countrySettings%22%3A%7B%22isHiddenPrice%22%3Afalse%2C%22countryLanguages%22%3A%5B%22es-es%22%2C%22es-ca%22%2C%22es-en%22%5D%2C%22countryDefaultLanguage%22%3A%22es-es%22%2C%22pageSections%22%3A%5B%22news%22%2C%22agents%22%2C%22financing%22%2C%22insurances%22%2C%22appraisers%22%2C%22page_by_location%22%2C%22mapa_por_capas%22%2C%22languages_menu%22%5D%2C%22countryIsoCode%22%3A%22ES%22%2C%22currencies%22%3A%5B%7B%22id%22%3A47%2C%22name%22%3A%22EUR%22%2C%22isDefault%22%3Atrue%7D%2C%7B%22id%22%3A151%2C%22name%22%3A%22USD%22%2C%22isDefault%22%3Afalse%7D%5D%2C%22geoData%22%3A%7B%22center%22%3A%7B%22type%22%3A%22Point%22%2C%22coordinates%22%3A%5B40.463667%2C-3.74922%5D%7D%7D%7D%7D; Path=/'), (b'Set-Cookie', b'COOKIES_LOCALE=es-es; Path=/'), (b'x-middleware-rewrite', b'/es-es/spot/8307ccbd-313a-422e-a1ff-3c6dd4bca975/'), (b'vary', b'rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch, Accept-Encoding'), (b'link', b'</_next/static/media/85e270911e713436-s.p.2cxg062isz68x.woff2>; rel=preload; as="font"; crossorigin=""; type="font/woff2"'), (b'x-powered-by', b'Next.js'), (b'Cache-Control', b'private, no-cache, no-store, max-age=0, must-revalidate'), (b'Report-To', b'{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=yyOdcEEu4LUs2380Pu6wk3uxgdOiuRyq27lKK4Wrmgyjha7tj9eZB9juRWVpT5yleJ8sGgSSYtN6AfJjX36%2BgCh5GdHoNPYMlpSR2at2LD4tvyht7vDuMuFc4YC1XqgxhO4%3D"}]}'), (b'cf-cache-status', b'DYNAMIC'), (b'Nel', b'{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'), (b'Strict-Transport-Security', b'max-age=15552000; includeSubDomains; preload'), (b'X-Content-Type-Options', b'nosniff'), (b'Content-Encoding', b'gzip'), (b'CF-RAY', b'a4d02cb389f536d0-YYZ'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2026-10-19 13:36:57,208 INFO httpx: HTTP Request: GET https://www.cocampo.com/es/es/propiedades/8307ccbd-313a-422e-a1ff-3c6dd4bca975/ "HTTP/1.1 200 OK"
+2026-10-19 13:36:57,208 DEBUG httpcore.http11: receive_response_body.started request=<Request [b'GET']>
+2026-10-19 13:36:57,302 DEBUG httpcore.http11: receive_response_body.complete
+2026-10-19 13:36:57,302 DEBUG httpcore.http11: response_closed.started
+2026-10-19 13:36:57,302 DEBUG httpcore.http11: response_closed.complete
+2026-10-19 13:36:57,305 INFO fincas.pipeline: cocampo 8307ccbd-313a-422e-a1ff-3c6dd4bca975 | finca_rustica | 45000 € | Aretxabaleta | costa=33.1 km | punt=8.9 | no
+2026-10-19 13:36:57,868 DEBUG httpcore.http11: send_request_headers.started request=<Request [b'GET']>
+2026-10-19 13:36:57,868 DEBUG httpcore.http11: send_request_headers.complete
+2026-10-19 13:36:57,868 DEBUG httpcore.http11: send_request_body.started request=<Request [b'GET']>
+2026-10-19 13:36:57,868 DEBUG httpcore.http11: send_request_body.complete
+2026-10-19 13:36:57,868 DEBUG httpcore.http11: receive_response_headers.started request=<Request [b'GET']>
+2026-10-19 13:36:58,158 DEBUG httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Mon, 19 Oct 2026 13:36:58 GMT'), (b'Content-Type', b'text/html; charset=utf-8'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Server', b'cloudflare'), (b'cocampo__page_config', b'{"locale":"es-es","countrySettings":{"isHiddenPrice":false,"countryLanguages":["es-es","es-ca","es-en"],"countryDefaultLanguage":"es-es","pageSections":["news","agents","financing","insurances","appraisers","page_by_location","mapa_por_capas","languages_menu"],"countryIsoCode":"ES","currencies":[{"id":47,"name":"EUR","isDefault":true},{"id":151,"name":"USD","isDefault":false}],"geoData":{"center":{"type":"Point","coordinates":[40.463667,-3.74922]}}}}'), (b'cookies__request_url', b'/es/es/propiedades/6d925241-f7bd-51a7-b4d2-2322c5e2030d/'), (b'cookies_locale', b'es-es'), (b'Set-Cookie', b'COOKIES__REQUEST_URL=%2Fes%2Fes%2Fpropiedades%2F6d925241-f7bd-51a7-b4d2-2322c5e2030d%2F; Path=/'), (b'Set-Cookie', b'COCAMPO__PAGE_CONFIG=%7B%22locale%22%3A%22es-es%22%2C%22countrySettings%22%3A%7B%22isHiddenPrice%22%3Afalse%2C%22countryLanguages%22%3A%5B%22es-es%22%2C%22es-ca%22%2C%22es-en%22%5D%2C%22countryDefaultLanguage%22%3A%22es-es%22%2C%22pageSections%22%3A%5B%22news%22%2C%22agents%22%2C%22financing%22%2C%22insurances%22%2C%22appraisers%22%2C%22page_by_location%22%2C%22mapa_por_capas%22%2C%22languages_menu%22%5D%2C%22countryIsoCode%22%3A%22ES%22%2C%22currencies%22%3A%5B%7B%22id%22%3A47%2C%22name%22%3A%22EUR%22%2C%22isDefault%22%3Atrue%7D%2C%7B%22id%22%3A151%2C%22name%22%3A%22USD%22%2C%22isDefault%22%3Afalse%7D%5D%2C%22geoData%22%3A%7B%22center%22%3A%7B%22type%22%3A%22Point%22%2C%22coordinates%22%3A%5B40.463667%2C-3.74922%5D%7D%7D%7D%7D; Path=/'), (b'Set-Cookie', b'COOKIES_LOCALE=es-es; Path=/'), (b'x-middleware-rewrite', b'/es-es/spot/6d925241-f7bd-51a7-b4d2-2322c5e2030d/'), (b'vary', b'rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch, Accept-Encoding'), (b'link', b'</_next/static/media/85e270911e713436-s.p.2cxg062isz68x.woff2>; rel=preload; as="font"; crossorigin=""; type="font/woff2"'), (b'x-powered-by', b'Next.js'), (b'Cache-Control', b'private, no-cache, no-store, max-age=0, must-revalidate'), (b'Report-To', b'{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=oysmgHIdfljcTE4pos%2FxmfARWW%2F4MyxEBK%2FigJwo5XdpjIBt0pW3UuR9%2BTcx3bFlV8m8QIWTdYZPjMG60tjOcHmxePXVa16oq%2Feyl0U7yFmOis4PeJ94iwZnn%2BX6H3pV7yI%3D"}]}'), (b'cf-cache-status', b'DYNAMIC'), (b'Nel', b'{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'), (b'Strict-Transport-Security', b'max-age=15552000; includeSubDomains; preload'), (b'X-Content-Type-Options', b'nosniff'), (b'Content-Encoding', b'gzip'), (b'CF-RAY', b'a4d02cb9c85136d0-YYZ'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2026-10-19 13:36:58,159 INFO httpx: HTTP Request: GET https://www.cocampo.com/es/es/propiedades/6d925241-f7bd-51a7-b4d2-2322c5e2030d/ "HTTP/1.1 200 OK"
+2026-10-19 13:36:58,159 DEBUG httpcore.http11: receive_response_body.started request=<Request [b'GET']>
+2026-10-19 13:36:58,345 DEBUG httpcore.http11: receive_response_body.complete
+2026-10-19 13:36:58,345 DEBUG httpcore.http11: response_closed.started
+2026-10-19 13:36:58,345 DEBUG httpcore.http11: response_closed.complete
+2026-10-19 13:36:58,348 INFO fincas.pipeline: cocampo 6d925241-f7bd-51a7-b4d2-2322c5e2030d | finca_rustica | None € | Ezquioga-Ichaso | costa=21.67 km | punt=25.2 | no
+2026-10-19 13:36:58,868 DEBUG httpcore.http11: send_request_headers.started request=<Request [b'GET']>
+2026-10-19 13:36:58,868 DEBUG httpcore.http11: send_request_headers.complete
+2026-10-19 13:36:58,868 DEBUG httpcore.http11: send_request_body.started request=<Request [b'GET']>
+2026-10-19 13:36:58,869 DEBUG httpcore.http11: send_request_body.complete
+2026-10-19 13:36:58,869 DEBUG httpcore.http11: receive_response_headers.started request=<Request [b'GET']>
+2026-10-19 13:36:59,096 DEBUG httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Mon, 19 Oct 2026 13:36:59 GMT'), (b'Content-Type', b'text/html; charset=utf-8'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Server', b'cloudflare'), (b'cocampo__page_config', b'{"locale":"es-es","countrySettings":{"isHiddenPrice":false,"countryLanguages":["es-es","es-ca","es-en"],"countryDefaultLanguage":"es-es","pageSections":["news","agents","financing","insurances","appraisers","page_by_location","mapa_por_capas","languages_menu"],"countryIsoCode":"ES","currencies":[{"id":47,"name":"EUR","isDefault":true},{"id":151,"name":"USD","isDefault":false}],"geoData":{"center":{"type":"Point","coordinates":[40.463667,-3.74922]}}}}'), (b'cookies__request_url', b'/es/es/propiedades/06f6fd06-7094-5c68-a4c7-2cc0f63ec856/'), (b'cookies_locale', b'es-es'), (b'Set-Cookie', b'COOKIES__REQUEST_URL=%2Fes%2Fes%2Fpropiedades%2F06f6fd06-7094-5c68-a4c7-2cc0f63ec856%2F; Path=/'), (b'Set-Cookie', b'COCAMPO__PAGE_CONFIG=%7B%22locale%22%3A%22es-es%22%2C%22countrySettings%22%3A%7B%22isHiddenPrice%22%3Afalse%2C%22countryLanguages%22%3A%5B%22es-es%22%2C%22es-ca%22%2C%22es-en%22%5D%2C%22countryDefaultLanguage%22%3A%22es-es%22%2C%22pageSections%22%3A%5B%22news%22%2C%22agents%22%2C%22financing%22%2C%22insurances%22%2C%22appraisers%22%2C%22page_by_location%22%2C%22mapa_por_capas%22%2C%22languages_menu%22%5D%2C%22countryIsoCode%22%3A%22ES%22%2C%22currencies%22%3A%5B%7B%22id%22%3A47%2C%22name%22%3A%22EUR%22%2C%22isDefault%22%3Atrue%7D%2C%7B%22id%22%3A151%2C%22name%22%3A%22USD%22%2C%22isDefault%22%3Afalse%7D%5D%2C%22geoData%22%3A%7B%22center%22%3A%7B%22type%22%3A%22Point%22%2C%22coordinates%22%3A%5B40.463667%2C-3.74922%5D%7D%7D%7D%7D; Path=/'), (b'Set-Cookie', b'COOKIES_LOCALE=es-es; Path=/'), (b'x-middleware-rewrite', b'/es-es/spot/06f6fd06-7094-5c68-a4c7-2cc0f63ec856/'), (b'vary', b'rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch, Accept-Encoding'), (b'link', b'</_next/static/media/85e270911e713436-s.p.2cxg062isz68x.woff2>; rel=preload; as="font"; crossorigin=""; type="font/woff2"'), (b'x-powered-by', b'Next.js'), (b'Cache-Control', b'private, no-cache, no-store, max-age=0, must-revalidate'), (b'Report-To', b'{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=szMRPA1ifZugOGsfArA3Ij3sNrhL23oUJJajcQOR4abpR6Mh39ImNxNDJNeQemXFSaMBZXZsyFWPRZ8LPeBrajDaLrnxaS4ZxtxRRaZF69NMpwAWB2rsdmYuVwASIVRZXf4%3D"}]}'), (b'cf-cache-status', b'DYNAMIC'), (b'Nel', b'{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'), (b'Strict-Transport-Security', b'max-age=15552000; includeSubDomains; preload'), (b'X-Content-Type-Options', b'nosniff'), (b'Content-Encoding', b'gzip'), (b'CF-RAY', b'a4d02cc00e3436d0-YYZ'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2026-10-19 13:36:59,096 INFO httpx: HTTP Request: GET https://www.cocampo.com/es/es/propiedades/06f6fd06-7094-5c68-a4c7-2cc0f63ec856/ "HTTP/1.1 200 OK"
+2026-10-19 13:36:59,096 DEBUG httpcore.http11: receive_response_body.started request=<Request [b'GET']>
+2026-10-19 13:36:59,264 DEBUG httpcore.http11: receive_response_body.complete
+2026-10-19 13:36:59,264 DEBUG httpcore.http11: response_closed.started
+2026-10-19 13:36:59,264 DEBUG httpcore.http11: response_closed.complete
+2026-10-19 13:36:59,268 INFO fincas.pipeline: cocampo 06f6fd06-7094-5c68-a4c7-2cc0f63ec856 | finca_rustica | None € | Hernani | costa=9.53 km | punt=47.3 | CUMPLE
+2026-10-19 13:36:59,868 DEBUG httpcore.http11: send_request_headers.started request=<Request [b'GET']>
+2026-10-19 13:36:59,869 DEBUG httpcore.http11: send_request_headers.complete
+2026-10-19 13:36:59,869 DEBUG httpcore.http11: send_request_body.started request=<Request [b'GET']>
+2026-10-19 13:36:59,869 DEBUG httpcore.http11: send_request_body.complete
+2026-10-19 13:36:59,869 DEBUG httpcore.http11: receive_response_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:00,197 DEBUG httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Mon, 19 Oct 2026 13:37:00 GMT'), (b'Content-Type', b'text/html; charset=utf-8'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Server', b'cloudflare'), (b'cocampo__page_config', b'{"locale":"es-es","countrySettings":{"isHiddenPrice":false,"countryLanguages":["es-es","es-ca","es-en"],"countryDefaultLanguage":"es-es","pageSections":["news","agents","financing","insurances","appraisers","page_by_location","mapa_por_capas","languages_menu"],"countryIsoCode":"ES","currencies":[{"id":47,"name":"EUR","isDefault":true},{"id":151,"name":"USD","isDefault":false}],"geoData":{"center":{"type":"Point","coordinates":[40.463667,-3.74922]}}}}'), (b'cookies__request_url', b'/es/es/propiedades/ac9d048e-1459-5e6f-8f0e-0cd0b7c142e5/'), (b'cookies_locale', b'es-es'), (b'Set-Cookie', b'COOKIES__REQUEST_URL=%2Fes%2Fes%2Fpropiedades%2Fac9d048e-1459-5e6f-8f0e-0cd0b7c142e5%2F; Path=/'), (b'Set-Cookie', b'COCAMPO__PAGE_CONFIG=%7B%22locale%22%3A%22es-es%22%2C%22countrySettings%22%3A%7B%22isHiddenPrice%22%3Afalse%2C%22countryLanguages%22%3A%5B%22es-es%22%2C%22es-ca%22%2C%22es-en%22%5D%2C%22countryDefaultLanguage%22%3A%22es-es%22%2C%22pageSections%22%3A%5B%22news%22%2C%22agents%22%2C%22financing%22%2C%22insurances%22%2C%22appraisers%22%2C%22page_by_location%22%2C%22mapa_por_capas%22%2C%22languages_menu%22%5D%2C%22countryIsoCode%22%3A%22ES%22%2C%22currencies%22%3A%5B%7B%22id%22%3A47%2C%22name%22%3A%22EUR%22%2C%22isDefault%22%3Atrue%7D%2C%7B%22id%22%3A151%2C%22name%22%3A%22USD%22%2C%22isDefault%22%3Afalse%7D%5D%2C%22geoData%22%3A%7B%22center%22%3A%7B%22type%22%3A%22Point%22%2C%22coordinates%22%3A%5B40.463667%2C-3.74922%5D%7D%7D%7D%7D; Path=/'), (b'Set-Cookie', b'COOKIES_LOCALE=es-es; Path=/'), (b'x-middleware-rewrite', b'/es-es/spot/ac9d048e-1459-5e6f-8f0e-0cd0b7c142e5/'), (b'vary', b'rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch, Accept-Encoding'), (b'link', b'</_next/static/media/85e270911e713436-s.p.2cxg062isz68x.woff2>; rel=preload; as="font"; crossorigin=""; type="font/woff2"'), (b'x-powered-by', b'Next.js'), (b'Cache-Control', b'private, no-cache, no-store, max-age=0, must-revalidate'), (b'Report-To', b'{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=4wQlWLit2uVjTbx5IeR1aKcD%2B7z9tDPXGItK3iFY%2Bhm%2FsSMdvBKk4ws7TpH4i36yeXBXeYyhgI%2B3rvC8QawjaY%2BKGCKlxoF6wrI%2BjrcQAVH7Er%2FMVxtOrTbW7hV4YyOysPE%3D"}]}'), (b'cf-cache-status', b'DYNAMIC'), (b'Nel', b'{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'), (b'Strict-Transport-Security', b'max-age=15552000; includeSubDomains; preload'), (b'X-Content-Type-Options', b'nosniff'), (b'Content-Encoding', b'gzip'), (b'CF-RAY', b'a4d02cc64bf536d0-YYZ'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2026-10-19 13:37:00,197 INFO httpx: HTTP Request: GET https://www.cocampo.com/es/es/propiedades/ac9d048e-1459-5e6f-8f0e-0cd0b7c142e5/ "HTTP/1.1 200 OK"
+2026-10-19 13:37:00,197 DEBUG httpcore.http11: receive_response_body.started request=<Request [b'GET']>
+2026-10-19 13:37:00,391 DEBUG httpcore.http11: receive_response_body.complete
+2026-10-19 13:37:00,391 DEBUG httpcore.http11: response_closed.started
+2026-10-19 13:37:00,391 DEBUG httpcore.http11: response_closed.complete
+2026-10-19 13:37:00,394 INFO fincas.pipeline: cocampo ac9d048e-1459-5e6f-8f0e-0cd0b7c142e5 | finca_rustica | None € | Ezquioga-Ichaso | costa=21.67 km | punt=25.2 | no
+2026-10-19 13:37:00,868 DEBUG httpcore.http11: send_request_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:00,869 DEBUG httpcore.http11: send_request_headers.complete
+2026-10-19 13:37:00,869 DEBUG httpcore.http11: send_request_body.started request=<Request [b'GET']>
+2026-10-19 13:37:00,869 DEBUG httpcore.http11: send_request_body.complete
+2026-10-19 13:37:00,869 DEBUG httpcore.http11: receive_response_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:01,148 DEBUG httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Mon, 19 Oct 2026 13:37:01 GMT'), (b'Content-Type', b'text/html; charset=utf-8'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Server', b'cloudflare'), (b'cocampo__page_config', b'{"locale":"es-es","countrySettings":{"isHiddenPrice":false,"countryLanguages":["es-es","es-ca","es-en"],"countryDefaultLanguage":"es-es","pageSections":["news","agents","financing","insurances","appraisers","page_by_location","mapa_por_capas","languages_menu"],"countryIsoCode":"ES","currencies":[{"id":47,"name":"EUR","isDefault":true},{"id":151,"name":"USD","isDefault":false}],"geoData":{"center":{"type":"Point","coordinates":[40.463667,-3.74922]}}}}'), (b'cookies__request_url', b'/es/es/propiedades/3da644f5-2500-52e5-96b1-6ef5d8d2af7c/'), (b'cookies_locale', b'es-es'), (b'Set-Cookie', b'COOKIES__REQUEST_URL=%2Fes%2Fes%2Fpropiedades%2F3da644f5-2500-52e5-96b1-6ef5d8d2af7c%2F; Path=/'), (b'Set-Cookie', b'COCAMPO__PAGE_CONFIG=%7B%22locale%22%3A%22es-es%22%2C%22countrySettings%22%3A%7B%22isHiddenPrice%22%3Afalse%2C%22countryLanguages%22%3A%5B%22es-es%22%2C%22es-ca%22%2C%22es-en%22%5D%2C%22countryDefaultLanguage%22%3A%22es-es%22%2C%22pageSections%22%3A%5B%22news%22%2C%22agents%22%2C%22financing%22%2C%22insurances%22%2C%22appraisers%22%2C%22page_by_location%22%2C%22mapa_por_capas%22%2C%22languages_menu%22%5D%2C%22countryIsoCode%22%3A%22ES%22%2C%22currencies%22%3A%5B%7B%22id%22%3A47%2C%22name%22%3A%22EUR%22%2C%22isDefault%22%3Atrue%7D%2C%7B%22id%22%3A151%2C%22name%22%3A%22USD%22%2C%22isDefault%22%3Afalse%7D%5D%2C%22geoData%22%3A%7B%22center%22%3A%7B%22type%22%3A%22Point%22%2C%22coordinates%22%3A%5B40.463667%2C-3.74922%5D%7D%7D%7D%7D; Path=/'), (b'Set-Cookie', b'COOKIES_LOCALE=es-es; Path=/'), (b'x-middleware-rewrite', b'/es-es/spot/3da644f5-2500-52e5-96b1-6ef5d8d2af7c/'), (b'vary', b'rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch, Accept-Encoding'), (b'link', b'</_next/static/media/85e270911e713436-s.p.2cxg062isz68x.woff2>; rel=preload; as="font"; crossorigin=""; type="font/woff2"'), (b'x-powered-by', b'Next.js'), (b'Cache-Control', b'private, no-cache, no-store, max-age=0, must-revalidate'), (b'Report-To', b'{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=ViYaC%2BVGkyir8lJNOMhxyXo1wYKutMuz9iv94k%2BI2p7bh6gbC705W1VS%2BFYJ4m%2FbutnmEmbWMt2fy9f20IxUXGCT%2FGYEhURwAuVlf3Rynx%2FEhwaurh2LovRQC7lbQlVfbYw%3D"}]}'), (b'cf-cache-status', b'DYNAMIC'), (b'Nel', b'{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'), (b'Strict-Transport-Security', b'max-age=15552000; includeSubDomains; preload'), (b'X-Content-Type-Options', b'nosniff'), (b'Content-Encoding', b'gzip'), (b'CF-RAY', b'a4d02ccc8a1536d0-YYZ'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2026-10-19 13:37:01,148 INFO httpx: HTTP Request: GET https://www.cocampo.com/es/es/propiedades/3da644f5-2500-52e5-96b1-6ef5d8d2af7c/ "HTTP/1.1 200 OK"
+2026-10-19 13:37:01,148 DEBUG httpcore.http11: receive_response_body.started request=<Request [b'GET']>
+2026-10-19 13:37:01,317 DEBUG httpcore.http11: receive_response_body.complete
+2026-10-19 13:37:01,318 DEBUG httpcore.http11: response_closed.started
+2026-10-19 13:37:01,318 DEBUG httpcore.http11: response_closed.complete
+2026-10-19 13:37:01,321 INFO fincas.pipeline: cocampo 3da644f5-2500-52e5-96b1-6ef5d8d2af7c | finca_rustica | None € | Ezquioga-Ichaso | costa=21.67 km | punt=25.2 | no
+2026-10-19 13:37:01,869 DEBUG httpcore.http11: send_request_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:01,869 DEBUG httpcore.http11: send_request_headers.complete
+2026-10-19 13:37:01,869 DEBUG httpcore.http11: send_request_body.started request=<Request [b'GET']>
+2026-10-19 13:37:01,869 DEBUG httpcore.http11: send_request_body.complete
+2026-10-19 13:37:01,869 DEBUG httpcore.http11: receive_response_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:02,144 DEBUG httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Mon, 19 Oct 2026 13:37:02 GMT'), (b'Content-Type', b'text/html; charset=utf-8'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Server', b'cloudflare'), (b'cocampo__page_config', b'{"locale":"es-es","countrySettings":{"isHiddenPrice":false,"countryLanguages":["es-es","es-ca","es-en"],"countryDefaultLanguage":"es-es","pageSections":["news","agents","financing","insurances","appraisers","page_by_location","mapa_por_capas","languages_menu"],"countryIsoCode":"ES","currencies":[{"id":47,"name":"EUR","isDefault":true},{"id":151,"name":"USD","isDefault":false}],"geoData":{"center":{"type":"Point","coordinates":[40.463667,-3.74922]}}}}'), (b'cookies__request_url', b'/es/es/propiedades/4d74879b-0d71-5717-b25f-640891e27192/'), (b'cookies_locale', b'es-es'), (b'Set-Cookie', b'COOKIES__REQUEST_URL=%2Fes%2Fes%2Fpropiedades%2F4d74879b-0d71-5717-b25f-640891e27192%2F; Path=/'), (b'Set-Cookie', b'COCAMPO__PAGE_CONFIG=%7B%22locale%22%3A%22es-es%22%2C%22countrySettings%22%3A%7B%22isHiddenPrice%22%3Afalse%2C%22countryLanguages%22%3A%5B%22es-es%22%2C%22es-ca%22%2C%22es-en%22%5D%2C%22countryDefaultLanguage%22%3A%22es-es%22%2C%22pageSections%22%3A%5B%22news%22%2C%22agents%22%2C%22financing%22%2C%22insurances%22%2C%22appraisers%22%2C%22page_by_location%22%2C%22mapa_por_capas%22%2C%22languages_menu%22%5D%2C%22countryIsoCode%22%3A%22ES%22%2C%22currencies%22%3A%5B%7B%22id%22%3A47%2C%22name%22%3A%22EUR%22%2C%22isDefault%22%3Atrue%7D%2C%7B%22id%22%3A151%2C%22name%22%3A%22USD%22%2C%22isDefault%22%3Afalse%7D%5D%2C%22geoData%22%3A%7B%22center%22%3A%7B%22type%22%3A%22Point%22%2C%22coordinates%22%3A%5B40.463667%2C-3.74922%5D%7D%7D%7D%7D; Path=/'), (b'Set-Cookie', b'COOKIES_LOCALE=es-es; Path=/'), (b'x-middleware-rewrite', b'/es-es/spot/4d74879b-0d71-5717-b25f-640891e27192/'), (b'vary', b'rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch, Accept-Encoding'), (b'link', b'</_next/static/media/85e270911e713436-s.p.2cxg062isz68x.woff2>; rel=preload; as="font"; crossorigin=""; type="font/woff2"'), (b'x-powered-by', b'Next.js'), (b'Cache-Control', b'private, no-cache, no-store, max-age=0, must-revalidate'), (b'Report-To', b'{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=h24YXv1MkJ0hGNijSS6bUCjHatND807evaofLAGo9n%2FIShH48nsKF7vT1qtW%2FkVbnK6XZ1RKDpdzSxZUOtUPFMEAqPOdpe7dMv2Mn9bKWHWnPfxAewj%2FahYSUcYc9oWgjzw%3D"}]}'), (b'cf-cache-status', b'DYNAMIC'), (b'Nel', b'{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'), (b'Strict-Transport-Security', b'max-age=15552000; includeSubDomains; preload'), (b'X-Content-Type-Options', b'nosniff'), (b'Content-Encoding', b'gzip'), (b'CF-RAY', b'a4d02cd2c86336d0-YYZ'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2026-10-19 13:37:02,145 INFO httpx: HTTP Request: GET https://www.cocampo.com/es/es/propiedades/4d74879b-0d71-5717-b25f-640891e27192/ "HTTP/1.1 200 OK"
+2026-10-19 13:37:02,145 DEBUG httpcore.http11: receive_response_body.started request=<Request [b'GET']>
+2026-10-19 13:37:02,311 DEBUG httpcore.http11: receive_response_body.complete
+2026-10-19 13:37:02,311 DEBUG httpcore.http11: response_closed.started
+2026-10-19 13:37:02,311 DEBUG httpcore.http11: response_closed.complete
+2026-10-19 13:37:02,314 INFO fincas.pipeline: cocampo 4d74879b-0d71-5717-b25f-640891e27192 | finca_rustica | None € | San Sebastián | costa=2.23 km | punt=62.9 | CUMPLE
+2026-10-19 13:37:02,868 DEBUG httpcore.http11: send_request_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:02,869 DEBUG httpcore.http11: send_request_headers.complete
+2026-10-19 13:37:02,869 DEBUG httpcore.http11: send_request_body.started request=<Request [b'GET']>
+2026-10-19 13:37:02,869 DEBUG httpcore.http11: send_request_body.complete
+2026-10-19 13:37:02,869 DEBUG httpcore.http11: receive_response_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:03,195 DEBUG httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Mon, 19 Oct 2026 13:37:03 GMT'), (b'Content-Type', b'text/html; charset=utf-8'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Server', b'cloudflare'), (b'cocampo__page_config', b'{"locale":"es-es","countrySettings":{"isHiddenPrice":false,"countryLanguages":["es-es","es-ca","es-en"],"countryDefaultLanguage":"es-es","pageSections":["news","agents","financing","insurances","appraisers","page_by_location","mapa_por_capas","languages_menu"],"countryIsoCode":"ES","currencies":[{"id":47,"name":"EUR","isDefault":true},{"id":151,"name":"USD","isDefault":false}],"geoData":{"center":{"type":"Point","coordinates":[40.463667,-3.74922]}}}}'), (b'cookies__request_url', b'/es/es/explorar/comprar/casas-rusticas/espana/pais-vasco/guipuzcoa/'), (b'cookies_locale', b'es-es'), (b'Set-Cookie', b'COOKIES__REQUEST_URL=%2Fes%2Fes%2Fexplorar%2Fcomprar%2Fcasas-rusticas%2Fespana%2Fpais-vasco%2Fguipuzcoa%2F; Path=/'), (b'Set-Cookie', b'COCAMPO__PAGE_CONFIG=%7B%22locale%22%3A%22es-es%22%2C%22countrySettings%22%3A%7B%22isHiddenPrice%22%3Afalse%2C%22countryLanguages%22%3A%5B%22es-es%22%2C%22es-ca%22%2C%22es-en%22%5D%2C%22countryDefaultLanguage%22%3A%22es-es%22%2C%22pageSections%22%3A%5B%22news%22%2C%22agents%22%2C%22financing%22%2C%22insurances%22%2C%22appraisers%22%2C%22page_by_location%22%2C%22mapa_por_capas%22%2C%22languages_menu%22%5D%2C%22countryIsoCode%22%3A%22ES%22%2C%22currencies%22%3A%5B%7B%22id%22%3A47%2C%22name%22%3A%22EUR%22%2C%22isDefault%22%3Atrue%7D%2C%7B%22id%22%3A151%2C%22name%22%3A%22USD%22%2C%22isDefault%22%3Afalse%7D%5D%2C%22geoData%22%3A%7B%22center%22%3A%7B%22type%22%3A%22Point%22%2C%22coordinates%22%3A%5B40.463667%2C-3.74922%5D%7D%7D%7D%7D; Path=/'), (b'Set-Cookie', b'COOKIES_LOCALE=es-es; Path=/'), (b'x-middleware-rewrite', b'/es-es/main-search/comprar/casas-rusticas/espana/pais-vasco/guipuzcoa/'), (b'vary', b'rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch, Accept-Encoding'), (b'link', b'</_next/static/media/85e270911e713436-s.p.2cxg062isz68x.woff2>; rel=preload; as="font"; crossorigin=""; type="font/woff2"'), (b'x-powered-by', b'Next.js'), (b'Cache-Control', b'private, no-cache, no-store, max-age=0, must-revalidate'), (b'Report-To', b'{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=T4StY4Q%2FbgLxr2zh9X%2BMWjJNmlr1ZWSDTcWInOZZS36iohbDwePfOsHBZG4GTJD0kHJ43by7%2B6FYeB1gP%2FcBmj2p3eXWBX3gk4OpjL0SRS58Q0wxDkqeAxEu6LA656VD2O0%3D"}]}'), (b'cf-cache-status', b'DYNAMIC'), (b'Nel', b'{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'), (b'Strict-Transport-Security', b'max-age=15552000; includeSubDomains; preload'), (b'X-Content-Type-Options', b'nosniff'), (b'Content-Encoding', b'gzip'), (b'CF-RAY', b'a4d02cd90f0136d0-YYZ'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2026-10-19 13:37:03,195 INFO httpx: HTTP Request: GET https://www.cocampo.com/es/es/explorar/comprar/casas-rusticas/espana/pais-vasco/guipuzcoa/ "HTTP/1.1 200 OK"
+2026-10-19 13:37:03,195 DEBUG httpcore.http11: receive_response_body.started request=<Request [b'GET']>
+2026-10-19 13:37:03,470 DEBUG httpcore.http11: receive_response_body.complete
+2026-10-19 13:37:03,470 DEBUG httpcore.http11: response_closed.started
+2026-10-19 13:37:03,470 DEBUG httpcore.http11: response_closed.complete
+2026-10-19 13:37:03,478 INFO fincas.pipeline: cocampo: 21 anuncios en listado
+2026-10-19 13:37:03,478 DEBUG httpcore.connection: connect_tcp.started host='www.siroinmobiliaria.com' port=443 local_address=None timeout=30 socket_options=None
+2026-10-19 13:37:03,549 DEBUG httpcore.connection: connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x7f9a8fb162d0>
+2026-10-19 13:37:03,549 DEBUG httpcore.connection: start_tls.started ssl_context=<ssl.SSLContext object at 0x7f9a8fc982d0> server_hostname='www.siroinmobiliaria.com' timeout=30
+2026-10-19 13:37:03,701 DEBUG httpcore.connection: start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x7f9a8fb160c0>
+2026-10-19 13:37:03,701 DEBUG httpcore.http11: send_request_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:03,702 DEBUG httpcore.http11: send_request_headers.complete
+2026-10-19 13:37:03,702 DEBUG httpcore.http11: send_request_body.started request=<Request [b'GET']>
+2026-10-19 13:37:03,702 DEBUG httpcore.http11: send_request_body.complete
+2026-10-19 13:37:03,702 DEBUG httpcore.http11: receive_response_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:03,736 DEBUG httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Accept-Ranges', b'bytes'), (b'Access-Control-Allow-Origin', b'*'), (b'Age', b'330882'), (b'Cache-Control', b'public, max-age=0, must-revalidate'), (b'Content-Disposition', b'inline; filename="robots.txt"'), (b'Content-Length', b'78'), (b'Content-Type', b'text/plain; charset=utf-8'), (b'Date', b'Mon, 19 Oct 2026 13:37:03 GMT'), (b'Etag', b'"238bd8318b98ecbc52fb86ed47d153fa"'), (b'Last-Modified', b'Thu, 15 Oct 2026 17:42:21 GMT'), (b'Server', b'Vercel'), (b'Strict-Transport-Security', b'max-age=63072000'), (b'X-Vercel-Cache', b'HIT'), (b'X-Vercel-Id', b'cle1::sjhd6-1792417023713-0f4d809c860b')])
+2026-10-19 13:37:03,736 INFO httpx: HTTP Request: GET https://www.siroinmobiliaria.com/robots.txt "HTTP/1.1 200 OK"
+2026-10-19 13:37:03,736 DEBUG httpcore.http11: receive_response_body.started request=<Request [b'GET']>
+2026-10-19 13:37:03,737 DEBUG httpcore.http11: receive_response_body.complete
+2026-10-19 13:37:03,737 DEBUG httpcore.http11: response_closed.started
+2026-10-19 13:37:03,737 DEBUG httpcore.http11: response_closed.complete
+2026-10-19 13:37:04,479 DEBUG httpcore.http11: send_request_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:04,479 DEBUG httpcore.http11: send_request_headers.complete
+2026-10-19 13:37:04,479 DEBUG httpcore.http11: send_request_body.started request=<Request [b'GET']>
+2026-10-19 13:37:04,479 DEBUG httpcore.http11: send_request_body.complete
+2026-10-19 13:37:04,479 DEBUG httpcore.http11: receive_response_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:04,514 DEBUG httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Access-Control-Allow-Origin', b'*'), (b'Age', b'1670'), (b'Cache-Control', b'public, max-age=0, must-revalidate'), (b'Content-Disposition', b'inline; filename="catalogo.js"'), (b'Content-Encoding', b'gzip'), (b'Content-Type', b'application/javascript; charset=utf-8'), (b'Date', b'Mon, 19 Oct 2026 13:37:04 GMT'), (b'Etag', b'W/"aa1e59025b5bfe8f1dab94e3574f752f"'), (b'Last-Modified', b'Mon, 19 Oct 2026 13:09:14 GMT'), (b'Server', b'Vercel'), (b'Strict-Transport-Security', b'max-age=63072000'), (b'X-Vercel-Cache', b'HIT'), (b'X-Vercel-Id', b'cle1::g4lg9-1792417024489-b77a91dbfcc7'), (b'Transfer-Encoding', b'chunked')])
+2026-10-19 13:37:04,515 INFO httpx: HTTP Request: GET https://www.siroinmobiliaria.com/js/catalogo.js "HTTP/1.1 200 OK"
+2026-10-19 13:37:04,515 DEBUG httpcore.http11: receive_response_body.started request=<Request [b'GET']>
+2026-10-19 13:37:04,515 DEBUG httpcore.http11: receive_response_body.complete
+2026-10-19 13:37:04,515 DEBUG httpcore.http11: response_closed.started
+2026-10-19 13:37:04,515 DEBUG httpcore.http11: response_closed.complete
+2026-10-19 13:37:04,516 DEBUG httpcore.connection: connect_tcp.started host='wgqziotedvxbhghthkxx.supabase.co' port=443 local_address=None timeout=30 socket_options=None
+2026-10-19 13:37:04,559 DEBUG httpcore.connection: connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x7f9a8fb2e510>
+2026-10-19 13:37:04,559 DEBUG httpcore.connection: start_tls.started ssl_context=<ssl.SSLContext object at 0x7f9a8fc982d0> server_hostname='wgqziotedvxbhghthkxx.supabase.co' timeout=30
+2026-10-19 13:37:04,570 DEBUG httpcore.connection: start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x7f9a8fb2de20>
+2026-10-19 13:37:04,570 DEBUG httpcore.http11: send_request_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:04,570 DEBUG httpcore.http11: send_request_headers.complete
+2026-10-19 13:37:04,570 DEBUG httpcore.http11: send_request_body.started request=<Request [b'GET']>
+2026-10-19 13:37:04,570 DEBUG httpcore.http11: send_request_body.complete
+2026-10-19 13:37:04,570 DEBUG httpcore.http11: receive_response_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:04,586 DEBUG httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 404, b'Not Found', [(b'Date', b'Mon, 19 Oct 2026 13:37:04 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'37'), (b'Connection', b'keep-alive'), (b'Cache-Control', b'private, max-age=0, no-store, no-cache, must-revalidate, post-check=0, pre-check=0'), (b'Expires', b'Thu, 01 Jan 1970 00:00:01 GMT'), (b'Referrer-Policy', b'same-origin'), (b'X-Frame-Options', b'SAMEORIGIN'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'set-cookie', b'__cf_bm=gdMUvRBYY5SdWNTXd_9c82kRKyIlHrbB0BWq5i4iplc-1792417024.5742-1.0.1.1-GBoSiQ7md76SHew5_LmePhlBRP.nHyR_F5qK_bOWeioBvWXI7ZiBv.8B2IbR4oC2sXNG.X3SQihzK0FEoUamg5PK4er4_I2laK3YzXMqbjGR1jsNcET6oyt5Td6hF14O; HttpOnly; SameSite=None; Secure; Path=/; Domain=supabase.co; Expires=Mon, 19 Oct 2026 14:07:04 GMT'), (b'Server', b'cloudflare'), (b'CF-RAY', b'a4d02ce39f0eacd8-MSP'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2026-10-19 13:37:04,586 INFO httpx: HTTP Request: GET https://wgqziotedvxbhghthkxx.supabase.co/robots.txt "HTTP/1.1 404 Not Found"
+2026-10-19 13:37:04,586 DEBUG httpcore.http11: receive_response_body.started request=<Request [b'GET']>
+2026-10-19 13:37:04,586 DEBUG httpcore.http11: receive_response_body.complete
+2026-10-19 13:37:04,587 DEBUG httpcore.http11: response_closed.started
+2026-10-19 13:37:04,587 DEBUG httpcore.http11: response_closed.complete
+2026-10-19 13:37:05,516 DEBUG httpcore.http11: send_request_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:05,516 DEBUG httpcore.http11: send_request_headers.complete
+2026-10-19 13:37:05,516 DEBUG httpcore.http11: send_request_body.started request=<Request [b'GET']>
+2026-10-19 13:37:05,517 DEBUG httpcore.http11: send_request_body.complete
+2026-10-19 13:37:05,517 DEBUG httpcore.http11: receive_response_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:06,141 DEBUG httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Mon, 19 Oct 2026 13:37:06 GMT'), (b'Content-Type', b'application/json; charset=utf-8'), (b'Content-Length', b'2'), (b'Connection', b'keep-alive'), (b'Content-Range', b'*/*'), (b'CF-Ray', b'a4d02ce97898acd8-MSP'), (b'CF-Cache-Status', b'DYNAMIC'), (b'Content-Location', b'/properties?estado=eq.publicada&operacion=eq.venta&select=%2A&tipo=in.%28caserio%2Cterreno%2Ccasa%2Cchalet%29'), (b'Server', b'cloudflare'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'X-Content-Type-Options', b'nosniff'), (b'content-profile', b'public'), (b'sb-gateway-version', b'1'), (b'sb-project-ref', b'wgqziotedvxbhghthkxx'), (b'sb-request-id', b'01a15461-4e05-7fdb-98da-f518e501637f'), (b'x-envoy-attempt-count', b'1'), (b'x-envoy-upstream-service-time', b'75'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2026-10-19 13:37:06,141 INFO httpx: HTTP Request: GET https://wgqziotedvxbhghthkxx.supabase.co/rest/v1/properties?select=*&operacion=eq.venta&estado=eq.publicada&tipo=in.(caserio%2Cterreno%2Ccasa%2Cchalet) "HTTP/1.1 200 OK"
+2026-10-19 13:37:06,141 DEBUG httpcore.http11: receive_response_body.started request=<Request [b'GET']>
+2026-10-19 13:37:06,141 DEBUG httpcore.http11: receive_response_body.complete
+2026-10-19 13:37:06,141 DEBUG httpcore.http11: response_closed.started
+2026-10-19 13:37:06,141 DEBUG httpcore.http11: response_closed.complete
+2026-10-19 13:37:06,141 INFO fincas.pipeline: siro: 0 anuncios en listado
+2026-10-19 13:37:06,142 DEBUG httpcore.connection: connect_tcp.started host='www.inmuebles.moldatuhome.com' port=443 local_address=None timeout=30 socket_options=None
+2026-10-19 13:37:06,580 DEBUG httpcore.connection: connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x7f9a8fb2c6e0>
+2026-10-19 13:37:06,580 DEBUG httpcore.connection: start_tls.started ssl_context=<ssl.SSLContext object at 0x7f9a8fc982d0> server_hostname='www.inmuebles.moldatuhome.com' timeout=30
+2026-10-19 13:37:06,713 DEBUG httpcore.connection: start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x7f9a8fb2c680>
+2026-10-19 13:37:06,713 DEBUG httpcore.http11: send_request_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:06,714 DEBUG httpcore.http11: send_request_headers.complete
+2026-10-19 13:37:06,714 DEBUG httpcore.http11: send_request_body.started request=<Request [b'GET']>
+2026-10-19 13:37:06,714 DEBUG httpcore.http11: send_request_body.complete
+2026-10-19 13:37:06,714 DEBUG httpcore.http11: receive_response_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:06,857 DEBUG httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Alt-Svc', b'h3=":60413"; ma=2592000,h3=":60418"; ma=2592000,h3=":60414"; ma=2592000'), (b'Content-Encoding', b'gzip'), (b'Content-Type', b'text/plain'), (b'Date', b'Mon, 19 Oct 2026 13:37:06 GMT'), (b'Etag', b'"6a7201b8-1408-gzip"'), (b'Last-Modified', b'Tue, 04 Aug 2026 15:14:00 GMT'), (b'Server', b'BitNinja-WafPro'), (b'Set-Cookie', b'backend-port=; Path=/; Max-Age=0; HttpOnly; Domain=www.inmuebles.moldatuhome.com'), (b'Vary', b'Accept-Encoding'), (b'Via', b'1.1 Caddy'), (b'X-Cache-Status', b'MISS'), (b'X-Powered-By', b'BitNinja'), (b'Content-Length', b'1208')])
+2026-10-19 13:37:06,858 INFO httpx: HTTP Request: GET https://www.inmuebles.moldatuhome.com/robots.txt "HTTP/1.1 200 OK"
+2026-10-19 13:37:06,858 DEBUG httpcore.http11: receive_response_body.started request=<Request [b'GET']>
+2026-10-19 13:37:06,858 DEBUG httpcore.http11: receive_response_body.complete
+2026-10-19 13:37:06,858 DEBUG httpcore.http11: response_closed.started
+2026-10-19 13:37:06,858 DEBUG httpcore.http11: response_closed.complete
+2026-10-19 13:37:07,142 DEBUG httpcore.http11: send_request_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:07,142 DEBUG httpcore.http11: send_request_headers.complete
+2026-10-19 13:37:07,142 DEBUG httpcore.http11: send_request_body.started request=<Request [b'GET']>
+2026-10-19 13:37:07,142 DEBUG httpcore.http11: send_request_body.complete
+2026-10-19 13:37:07,143 DEBUG httpcore.http11: receive_response_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:07,280 DEBUG httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Alt-Svc', b'h3=":60413"; ma=2592000,h3=":60418"; ma=2592000,h3=":60414"; ma=2592000'), (b'Content-Encoding', b'gzip'), (b'Content-Type', b'text/html; charset=UTF-8'), (b'Date', b'Mon, 19 Oct 2026 13:37:07 GMT'), (b'Server', b'BitNinja-WafPro'), (b'Set-Cookie', b'backend-port=; Path=/; Max-Age=0; HttpOnly; Domain=www.inmuebles.moldatuhome.com'), (b'Vary', b'Accept-Encoding'), (b'Via', b'1.1 Caddy'), (b'X-Cache-Status', b'STALE'), (b'X-Powered-By', b'BitNinja'), (b'X-Powered-By', b'BitNinja'), (b'Transfer-Encoding', b'chunked')])
+2026-10-19 13:37:07,280 INFO httpx: HTTP Request: GET https://www.inmuebles.moldatuhome.com/fincas-rusticas-en-venta-9-1.html "HTTP/1.1 200 OK"
+2026-10-19 13:37:07,281 DEBUG httpcore.http11: receive_response_body.started request=<Request [b'GET']>
+2026-10-19 13:37:07,408 DEBUG httpcore.http11: receive_response_body.complete
+2026-10-19 13:37:07,408 DEBUG httpcore.http11: response_closed.started
+2026-10-19 13:37:07,408 DEBUG httpcore.http11: response_closed.complete
+2026-10-19 13:37:08,142 DEBUG httpcore.http11: send_request_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:08,142 DEBUG httpcore.http11: send_request_headers.complete
+2026-10-19 13:37:08,143 DEBUG httpcore.http11: send_request_body.started request=<Request [b'GET']>
+2026-10-19 13:37:08,143 DEBUG httpcore.http11: send_request_body.complete
+2026-10-19 13:37:08,143 DEBUG httpcore.http11: receive_response_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:08,534 DEBUG httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Alt-Svc', b'h3=":60413"; ma=2592000,h3=":60418"; ma=2592000,h3=":60414"; ma=2592000'), (b'Content-Encoding', b'gzip'), (b'Content-Type', b'text/html; charset=UTF-8'), (b'Date', b'Mon, 19 Oct 2026 13:37:08 GMT'), (b'Server', b'BitNinja-WafPro'), (b'Set-Cookie', b'backend-port=; Path=/; Max-Age=0; HttpOnly; Domain=www.inmuebles.moldatuhome.com'), (b'Set-Cookie', b'last_seen=1772555; expires=Wed, 18 Nov 2026 14:37:08 GMT; Max-Age=2595600; path=/; domain=inmuebles.moldatuhome.com'), (b'Vary', b'Accept-Encoding'), (b'Via', b'1.1 Caddy'), (b'X-Cache-Status', b'MISS'), (b'X-Powered-By', b'BitNinja'), (b'X-Powered-By', b'BitNinja'), (b'Transfer-Encoding', b'chunked')])
+2026-10-19 13:37:08,535 INFO httpx: HTTP Request: GET https://www.inmuebles.moldatuhome.com/finca-rustica-en-lezo-es1772555.html "HTTP/1.1 200 OK"
+2026-10-19 13:37:08,535 DEBUG httpcore.http11: receive_response_body.started request=<Request [b'GET']>
+2026-10-19 13:37:08,662 DEBUG httpcore.http11: receive_response_body.complete
+2026-10-19 13:37:08,663 DEBUG httpcore.http11: response_closed.started
+2026-10-19 13:37:08,663 DEBUG httpcore.http11: response_closed.complete
+2026-10-19 13:37:08,663 DEBUG httpcore.connection: close.started
+2026-10-19 13:37:08,663 DEBUG httpcore.connection: close.complete
+2026-10-19 13:37:08,665 INFO fincas.pipeline: moldatu 1772555 | finca_rustica | 60000 € | Lezo | costa=3.24 km | punt=52.1 | CUMPLE
+2026-10-19 13:37:09,142 DEBUG httpcore.http11: send_request_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:09,143 DEBUG httpcore.http11: send_request_headers.complete
+2026-10-19 13:37:09,143 DEBUG httpcore.http11: send_request_body.started request=<Request [b'GET']>
+2026-10-19 13:37:09,143 DEBUG httpcore.http11: send_request_body.complete
+2026-10-19 13:37:09,143 DEBUG httpcore.http11: receive_response_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:09,606 DEBUG httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Alt-Svc', b'h3=":60413"; ma=2592000,h3=":60418"; ma=2592000,h3=":60414"; ma=2592000'), (b'Content-Encoding', b'gzip'), (b'Content-Type', b'text/html; charset=UTF-8'), (b'Date', b'Mon, 19 Oct 2026 13:37:09 GMT'), (b'Server', b'BitNinja-WafPro'), (b'Set-Cookie', b'backend-port=; Path=/; Max-Age=0; HttpOnly; Domain=www.inmuebles.moldatuhome.com'), (b'Set-Cookie', b'last_seen=1772555%2C1752836; expires=Wed, 18 Nov 2026 14:37:09 GMT; Max-Age=2595600; path=/; domain=inmuebles.moldatuhome.com'), (b'Vary', b'Accept-Encoding'), (b'Via', b'1.1 Caddy'), (b'X-Cache-Status', b'BYPASS'), (b'X-Powered-By', b'BitNinja'), (b'X-Powered-By', b'BitNinja'), (b'Transfer-Encoding', b'chunked')])
+2026-10-19 13:37:09,606 INFO httpx: HTTP Request: GET https://www.inmuebles.moldatuhome.com/finca-rustica-en-belascoain-es1752836.html "HTTP/1.1 200 OK"
+2026-10-19 13:37:09,606 DEBUG httpcore.http11: receive_response_body.started request=<Request [b'GET']>
+2026-10-19 13:37:09,734 DEBUG httpcore.http11: receive_response_body.complete
+2026-10-19 13:37:09,734 DEBUG httpcore.http11: response_closed.started
+2026-10-19 13:37:09,734 DEBUG httpcore.http11: response_closed.complete
+2026-10-19 13:37:09,734 DEBUG httpcore.connection: close.started
+2026-10-19 13:37:09,734 DEBUG httpcore.connection: close.complete
+2026-10-19 13:37:09,739 DEBUG httpcore.connection: connect_tcp.started host='nominatim.openstreetmap.org' port=443 local_address=None timeout=30 socket_options=None
+2026-10-19 13:37:09,774 DEBUG httpcore.connection: connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x7f9a8fb2d520>
+2026-10-19 13:37:09,774 DEBUG httpcore.connection: start_tls.started ssl_context=<ssl.SSLContext object at 0x7f9a8fc982d0> server_hostname='nominatim.openstreetmap.org' timeout=30
+2026-10-19 13:37:09,787 DEBUG httpcore.connection: start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x7f9a8fb2d4f0>
+2026-10-19 13:37:09,787 DEBUG httpcore.http11: send_request_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:09,788 DEBUG httpcore.http11: send_request_headers.complete
+2026-10-19 13:37:09,788 DEBUG httpcore.http11: send_request_body.started request=<Request [b'GET']>
+2026-10-19 13:37:09,788 DEBUG httpcore.http11: send_request_body.complete
+2026-10-19 13:37:09,788 DEBUG httpcore.http11: receive_response_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:10,150 DEBUG httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Connection', b'keep-alive'), (b'Content-Length', b'22'), (b'server', b'gunicorn/asgi'), (b'content-type', b'application/json; charset=utf-8'), (b'x-nominatim-server', b'longma.openstreetmap.org'), (b'Content-Encoding', b'gzip'), (b'Accept-Ranges', b'bytes'), (b'Age', b'0'), (b'Date', b'Mon, 19 Oct 2026 13:37:10 GMT'), (b'Via', b'1.1 varnish'), (b'X-Served-By', b'cache-chi-kigq8000070-CHI, cache-chi-kmdw8640082-CHI'), (b'X-Cache', b'MISS, MISS'), (b'X-Cache-Hits', b'0, 0'), (b'X-Timer', b'S1792417030.793881,VS0,VE351'), (b'Vary', b'accept-language, Accept-Encoding'), (b'Strict-Transport-Security', b'max-age=300'), (b'alt-svc', b'h3=":443";ma=86400,h3-29=":443";ma=86400,h3-27=":443";ma=86400')])
+2026-10-19 13:37:10,150 INFO httpx: HTTP Request: GET https://nominatim.openstreetmap.org/search?q=Belasco%C3%A1in%2C+Gipuzkoa&format=jsonv2&limit=1&countrycodes=es&viewbox=-2.62%2C42.88%2C-1.7%2C43.45&bounded=1 "HTTP/1.1 200 OK"
+2026-10-19 13:37:10,151 DEBUG httpcore.http11: receive_response_body.started request=<Request [b'GET']>
+2026-10-19 13:37:10,151 DEBUG httpcore.http11: receive_response_body.complete
+2026-10-19 13:37:10,151 DEBUG httpcore.http11: response_closed.started
+2026-10-19 13:37:10,151 DEBUG httpcore.http11: response_closed.complete
+2026-10-19 13:37:10,151 INFO fincas.pipeline: Sin ubicación: moldatu https://www.inmuebles.moldatuhome.com/finca-rustica-en-belascoain-es1752836.html
+2026-10-19 13:37:10,151 INFO fincas.pipeline: moldatu 1752836 | finca_rustica | 115000 € | Belascoáin | costa=None km | punt=None | no
+2026-10-19 13:37:10,152 DEBUG httpcore.http11: send_request_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:10,152 DEBUG httpcore.http11: send_request_headers.complete
+2026-10-19 13:37:10,152 DEBUG httpcore.http11: send_request_body.started request=<Request [b'GET']>
+2026-10-19 13:37:10,152 DEBUG httpcore.http11: send_request_body.complete
+2026-10-19 13:37:10,152 DEBUG httpcore.http11: receive_response_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:10,617 DEBUG httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Alt-Svc', b'h3=":60413"; ma=2592000,h3=":60418"; ma=2592000,h3=":60414"; ma=2592000'), (b'Content-Encoding', b'gzip'), (b'Content-Type', b'text/html; charset=UTF-8'), (b'Date', b'Mon, 19 Oct 2026 13:37:10 GMT'), (b'Server', b'BitNinja-WafPro'), (b'Set-Cookie', b'backend-port=; Path=/; Max-Age=0; HttpOnly; Domain=www.inmuebles.moldatuhome.com'), (b'Set-Cookie', b'last_seen=1772555%2C1752836%2C1741779; expires=Wed, 18 Nov 2026 14:37:10 GMT; Max-Age=2595600; path=/; domain=inmuebles.moldatuhome.com'), (b'Vary', b'Accept-Encoding'), (b'Via', b'1.1 Caddy'), (b'X-Cache-Status', b'BYPASS'), (b'X-Powered-By', b'BitNinja'), (b'X-Powered-By', b'BitNinja'), (b'Transfer-Encoding', b'chunked')])
+2026-10-19 13:37:10,618 INFO httpx: HTTP Request: GET https://www.inmuebles.moldatuhome.com/finca-rustica-en-lodosa-con-piscina-es1741779.html "HTTP/1.1 200 OK"
+2026-10-19 13:37:10,618 DEBUG httpcore.http11: receive_response_body.started request=<Request [b'GET']>
+2026-10-19 13:37:10,746 DEBUG httpcore.http11: receive_response_body.complete
+2026-10-19 13:37:10,746 DEBUG httpcore.http11: response_closed.started
+2026-10-19 13:37:10,746 DEBUG httpcore.http11: response_closed.complete
+2026-10-19 13:37:10,749 DEBUG httpcore.http11: send_request_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:10,749 DEBUG httpcore.http11: send_request_headers.complete
+2026-10-19 13:37:10,749 DEBUG httpcore.http11: send_request_body.started request=<Request [b'GET']>
+2026-10-19 13:37:10,749 DEBUG httpcore.http11: send_request_body.complete
+2026-10-19 13:37:10,749 DEBUG httpcore.http11: receive_response_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:11,123 DEBUG httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Connection', b'keep-alive'), (b'Content-Length', b'22'), (b'server', b'gunicorn/asgi'), (b'content-type', b'application/json; charset=utf-8'), (b'x-nominatim-server', b'dulcy.openstreetmap.org'), (b'Content-Encoding', b'gzip'), (b'Accept-Ranges', b'bytes'), (b'Age', b'0'), (b'Date', b'Mon, 19 Oct 2026 13:37:11 GMT'), (b'Via', b'1.1 varnish'), (b'X-Served-By', b'cache-chi-klot8100058-CHI, cache-chi-kmdw8640082-CHI'), (b'X-Cache', b'MISS, MISS'), (b'X-Cache-Hits', b'0, 0'), (b'X-Timer', b'S1792417031.755291,VS0,VE362'), (b'Vary', b'accept-language, Accept-Encoding'), (b'Strict-Transport-Security', b'max-age=300'), (b'alt-svc', b'h3=":443";ma=86400,h3-29=":443";ma=86400,h3-27=":443";ma=86400')])
+2026-10-19 13:37:11,123 INFO httpx: HTTP Request: GET https://nominatim.openstreetmap.org/search?q=Lodosa%2C+Gipuzkoa&format=jsonv2&limit=1&countrycodes=es&viewbox=-2.62%2C42.88%2C-1.7%2C43.45&bounded=1 "HTTP/1.1 200 OK"
+2026-10-19 13:37:11,124 DEBUG httpcore.http11: receive_response_body.started request=<Request [b'GET']>
+2026-10-19 13:37:11,124 DEBUG httpcore.http11: receive_response_body.complete
+2026-10-19 13:37:11,124 DEBUG httpcore.http11: response_closed.started
+2026-10-19 13:37:11,124 DEBUG httpcore.http11: response_closed.complete
+2026-10-19 13:37:11,124 INFO fincas.pipeline: Sin ubicación: moldatu https://www.inmuebles.moldatuhome.com/finca-rustica-en-lodosa-con-piscina-es1741779.html
+2026-10-19 13:37:11,124 INFO fincas.pipeline: moldatu 1741779 | finca_rustica | 175000 € | Lodosa | costa=None km | punt=None | no
+2026-10-19 13:37:11,152 DEBUG httpcore.connection: close.started
+2026-10-19 13:37:11,152 DEBUG httpcore.connection: close.complete
+2026-10-19 13:37:11,152 DEBUG httpcore.http11: send_request_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:11,152 DEBUG httpcore.http11: send_request_headers.complete
+2026-10-19 13:37:11,152 DEBUG httpcore.http11: send_request_body.started request=<Request [b'GET']>
+2026-10-19 13:37:11,152 DEBUG httpcore.http11: send_request_body.complete
+2026-10-19 13:37:11,152 DEBUG httpcore.http11: receive_response_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:11,505 DEBUG httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Alt-Svc', b'h3=":60413"; ma=2592000,h3=":60418"; ma=2592000,h3=":60414"; ma=2592000'), (b'Content-Encoding', b'gzip'), (b'Content-Type', b'text/html; charset=UTF-8'), (b'Date', b'Mon, 19 Oct 2026 13:37:11 GMT'), (b'Server', b'BitNinja-WafPro'), (b'Set-Cookie', b'backend-port=; Path=/; Max-Age=0; HttpOnly; Domain=www.inmuebles.moldatuhome.com'), (b'Vary', b'Accept-Encoding'), (b'Via', b'1.1 Caddy'), (b'X-Cache-Status', b'BYPASS'), (b'X-Powered-By', b'BitNinja'), (b'X-Powered-By', b'BitNinja'), (b'Transfer-Encoding', b'chunked')])
+2026-10-19 13:37:11,506 INFO httpx: HTTP Request: GET https://www.inmuebles.moldatuhome.com/parcelas-en-venta-5-1.html "HTTP/1.1 200 OK"
+2026-10-19 13:37:11,506 DEBUG httpcore.http11: receive_response_body.started request=<Request [b'GET']>
+2026-10-19 13:37:11,634 DEBUG httpcore.http11: receive_response_body.complete
+2026-10-19 13:37:11,634 DEBUG httpcore.http11: response_closed.started
+2026-10-19 13:37:11,634 DEBUG httpcore.http11: response_closed.complete
+2026-10-19 13:37:12,152 DEBUG httpcore.http11: send_request_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:12,152 DEBUG httpcore.http11: send_request_headers.complete
+2026-10-19 13:37:12,153 DEBUG httpcore.http11: send_request_body.started request=<Request [b'GET']>
+2026-10-19 13:37:12,153 DEBUG httpcore.http11: send_request_body.complete
+2026-10-19 13:37:12,153 DEBUG httpcore.http11: receive_response_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:12,515 DEBUG httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Alt-Svc', b'h3=":60413"; ma=2592000,h3=":60418"; ma=2592000,h3=":60414"; ma=2592000'), (b'Content-Encoding', b'gzip'), (b'Content-Type', b'text/html; charset=UTF-8'), (b'Date', b'Mon, 19 Oct 2026 13:37:12 GMT'), (b'Server', b'BitNinja-WafPro'), (b'Set-Cookie', b'backend-port=; Path=/; Max-Age=0; HttpOnly; Domain=www.inmuebles.moldatuhome.com'), (b'Vary', b'Accept-Encoding'), (b'Via', b'1.1 Caddy'), (b'X-Cache-Status', b'BYPASS'), (b'X-Powered-By', b'BitNinja'), (b'X-Powered-By', b'BitNinja'), (b'Transfer-Encoding', b'chunked')])
+2026-10-19 13:37:12,515 INFO httpx: HTTP Request: GET https://www.inmuebles.moldatuhome.com/casas-chalets-en-venta-3-1.html "HTTP/1.1 200 OK"
+2026-10-19 13:37:12,515 DEBUG httpcore.http11: receive_response_body.started request=<Request [b'GET']>
+2026-10-19 13:37:12,643 DEBUG httpcore.http11: receive_response_body.complete
+2026-10-19 13:37:12,643 DEBUG httpcore.http11: response_closed.started
+2026-10-19 13:37:12,643 DEBUG httpcore.http11: response_closed.complete
+2026-10-19 13:37:13,152 DEBUG httpcore.http11: send_request_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:13,152 DEBUG httpcore.http11: send_request_headers.complete
+2026-10-19 13:37:13,152 DEBUG httpcore.http11: send_request_body.started request=<Request [b'GET']>
+2026-10-19 13:37:13,153 DEBUG httpcore.http11: send_request_body.complete
+2026-10-19 13:37:13,153 DEBUG httpcore.http11: receive_response_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:13,497 DEBUG httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Alt-Svc', b'h3=":60413"; ma=2592000,h3=":60418"; ma=2592000,h3=":60414"; ma=2592000'), (b'Content-Encoding', b'gzip'), (b'Content-Type', b'text/html; charset=UTF-8'), (b'Date', b'Mon, 19 Oct 2026 13:37:13 GMT'), (b'Server', b'BitNinja-WafPro'), (b'Set-Cookie', b'backend-port=; Path=/; Max-Age=0; HttpOnly; Domain=www.inmuebles.moldatuhome.com'), (b'Vary', b'Accept-Encoding'), (b'Via', b'1.1 Caddy'), (b'X-Cache-Status', b'BYPASS'), (b'X-Powered-By', b'BitNinja'), (b'X-Powered-By', b'BitNinja'), (b'Transfer-Encoding', b'chunked')])
+2026-10-19 13:37:13,497 INFO httpx: HTTP Request: GET https://www.inmuebles.moldatuhome.com/ "HTTP/1.1 200 OK"
+2026-10-19 13:37:13,498 DEBUG httpcore.http11: receive_response_body.started request=<Request [b'GET']>
+2026-10-19 13:37:13,625 DEBUG httpcore.http11: receive_response_body.complete
+2026-10-19 13:37:13,625 DEBUG httpcore.http11: response_closed.started
+2026-10-19 13:37:13,625 DEBUG httpcore.http11: response_closed.complete
+2026-10-19 13:37:13,630 INFO fincas.sources.moldatu: Moldatu casas-chalets: 12 de 30 en la 1.ª página; leyendo 10 páginas de municipios de Gipuzkoa
+2026-10-19 13:37:14,152 DEBUG httpcore.http11: send_request_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:14,152 DEBUG httpcore.http11: send_request_headers.complete
+2026-10-19 13:37:14,153 DEBUG httpcore.http11: send_request_body.started request=<Request [b'GET']>
+2026-10-19 13:37:14,153 DEBUG httpcore.http11: send_request_body.complete
+2026-10-19 13:37:14,153 DEBUG httpcore.http11: receive_response_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:14,489 DEBUG httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Alt-Svc', b'h3=":60413"; ma=2592000,h3=":60418"; ma=2592000,h3=":60414"; ma=2592000'), (b'Content-Encoding', b'gzip'), (b'Content-Type', b'text/html; charset=UTF-8'), (b'Date', b'Mon, 19 Oct 2026 13:37:14 GMT'), (b'Server', b'BitNinja-WafPro'), (b'Set-Cookie', b'backend-port=; Path=/; Max-Age=0; HttpOnly; Domain=www.inmuebles.moldatuhome.com'), (b'Vary', b'Accept-Encoding'), (b'Via', b'1.1 Caddy'), (b'X-Cache-Status', b'BYPASS'), (b'X-Powered-By', b'BitNinja'), (b'X-Powered-By', b'BitNinja'), (b'Transfer-Encoding', b'chunked')])
+2026-10-19 13:37:14,489 INFO httpx: HTTP Request: GET https://www.inmuebles.moldatuhome.com/casas-chalets-en-venta-en-deba-3-1-02095.html "HTTP/1.1 200 OK"
+2026-10-19 13:37:14,489 DEBUG httpcore.http11: receive_response_body.started request=<Request [b'GET']>
+2026-10-19 13:37:14,617 DEBUG httpcore.http11: receive_response_body.complete
+2026-10-19 13:37:14,617 DEBUG httpcore.http11: response_closed.started
+2026-10-19 13:37:14,617 DEBUG httpcore.http11: response_closed.complete
+2026-10-19 13:37:15,152 DEBUG httpcore.http11: send_request_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:15,153 DEBUG httpcore.http11: send_request_headers.complete
+2026-10-19 13:37:15,153 DEBUG httpcore.http11: send_request_body.started request=<Request [b'GET']>
+2026-10-19 13:37:15,153 DEBUG httpcore.http11: send_request_body.complete
+2026-10-19 13:37:15,153 DEBUG httpcore.http11: receive_response_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:15,487 DEBUG httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Alt-Svc', b'h3=":60413"; ma=2592000,h3=":60418"; ma=2592000,h3=":60414"; ma=2592000'), (b'Content-Encoding', b'gzip'), (b'Content-Type', b'text/html; charset=UTF-8'), (b'Date', b'Mon, 19 Oct 2026 13:37:15 GMT'), (b'Server', b'BitNinja-WafPro'), (b'Set-Cookie', b'backend-port=; Path=/; Max-Age=0; HttpOnly; Domain=www.inmuebles.moldatuhome.com'), (b'Vary', b'Accept-Encoding'), (b'Via', b'1.1 Caddy'), (b'X-Cache-Status', b'BYPASS'), (b'X-Powered-By', b'BitNinja'), (b'X-Powered-By', b'BitNinja'), (b'Transfer-Encoding', b'chunked')])
+2026-10-19 13:37:15,487 INFO httpx: HTTP Request: GET https://www.inmuebles.moldatuhome.com/casas-chalets-en-venta-en-ezquioga-ichaso-3-1-017290.html "HTTP/1.1 200 OK"
+2026-10-19 13:37:15,487 DEBUG httpcore.http11: receive_response_body.started request=<Request [b'GET']>
+2026-10-19 13:37:15,615 DEBUG httpcore.http11: receive_response_body.complete
+2026-10-19 13:37:15,615 DEBUG httpcore.http11: response_closed.started
+2026-10-19 13:37:15,615 DEBUG httpcore.http11: response_closed.complete
+2026-10-19 13:37:16,152 DEBUG httpcore.connection: close.started
+2026-10-19 13:37:16,153 DEBUG httpcore.connection: close.complete
+2026-10-19 13:37:16,153 DEBUG httpcore.http11: send_request_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:16,153 DEBUG httpcore.http11: send_request_headers.complete
+2026-10-19 13:37:16,153 DEBUG httpcore.http11: send_request_body.started request=<Request [b'GET']>
+2026-10-19 13:37:16,153 DEBUG httpcore.http11: send_request_body.complete
+2026-10-19 13:37:16,153 DEBUG httpcore.http11: receive_response_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:16,486 DEBUG httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Alt-Svc', b'h3=":60413"; ma=2592000,h3=":60418"; ma=2592000,h3=":60414"; ma=2592000'), (b'Content-Encoding', b'gzip'), (b'Content-Type', b'text/html; charset=UTF-8'), (b'Date', b'Mon, 19 Oct 2026 13:37:16 GMT'), (b'Server', b'BitNinja-WafPro'), (b'Set-Cookie', b'backend-port=; Path=/; Max-Age=0; HttpOnly; Domain=www.inmuebles.moldatuhome.com'), (b'Vary', b'Accept-Encoding'), (b'Via', b'1.1 Caddy'), (b'X-Cache-Status', b'BYPASS'), (b'X-Powered-By', b'BitNinja'), (b'X-Powered-By', b'BitNinja'), (b'Transfer-Encoding', b'chunked')])
+2026-10-19 13:37:16,486 INFO httpx: HTTP Request: GET https://www.inmuebles.moldatuhome.com/casas-chalets-en-venta-en-hondarribia-3-1-03374.html "HTTP/1.1 200 OK"
+2026-10-19 13:37:16,486 DEBUG httpcore.http11: receive_response_body.started request=<Request [b'GET']>
+2026-10-19 13:37:16,614 DEBUG httpcore.http11: receive_response_body.complete
+2026-10-19 13:37:16,614 DEBUG httpcore.http11: response_closed.started
+2026-10-19 13:37:16,614 DEBUG httpcore.http11: response_closed.complete
+2026-10-19 13:37:17,153 DEBUG httpcore.http11: send_request_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:17,153 DEBUG httpcore.http11: send_request_headers.complete
+2026-10-19 13:37:17,153 DEBUG httpcore.http11: send_request_body.started request=<Request [b'GET']>
+2026-10-19 13:37:17,153 DEBUG httpcore.http11: send_request_body.complete
+2026-10-19 13:37:17,153 DEBUG httpcore.http11: receive_response_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:17,496 DEBUG httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Alt-Svc', b'h3=":60413"; ma=2592000,h3=":60418"; ma=2592000,h3=":60414"; ma=2592000'), (b'Content-Encoding', b'gzip'), (b'Content-Type', b'text/html; charset=UTF-8'), (b'Date', b'Mon, 19 Oct 2026 13:37:17 GMT'), (b'Server', b'BitNinja-WafPro'), (b'Set-Cookie', b'backend-port=; Path=/; Max-Age=0; HttpOnly; Domain=www.inmuebles.moldatuhome.com'), (b'Vary', b'Accept-Encoding'), (b'Via', b'1.1 Caddy'), (b'X-Cache-Status', b'BYPASS'), (b'X-Powered-By', b'BitNinja'), (b'X-Powered-By', b'BitNinja'), (b'Transfer-Encoding', b'chunked')])
+2026-10-19 13:37:17,497 INFO httpx: HTTP Request: GET https://www.inmuebles.moldatuhome.com/casas-chalets-en-venta-en-irun-3-1-0170.html "HTTP/1.1 200 OK"
+2026-10-19 13:37:17,497 DEBUG httpcore.http11: receive_response_body.started request=<Request [b'GET']>
+2026-10-19 13:37:17,624 DEBUG httpcore.http11: receive_response_body.complete
+2026-10-19 13:37:17,625 DEBUG httpcore.http11: response_closed.started
+2026-10-19 13:37:17,625 DEBUG httpcore.http11: response_closed.complete
+2026-10-19 13:37:18,153 DEBUG httpcore.http11: send_request_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:18,153 DEBUG httpcore.http11: send_request_headers.complete
+2026-10-19 13:37:18,153 DEBUG httpcore.http11: send_request_body.started request=<Request [b'GET']>
+2026-10-19 13:37:18,153 DEBUG httpcore.http11: send_request_body.complete
+2026-10-19 13:37:18,153 DEBUG httpcore.http11: receive_response_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:18,477 DEBUG httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Alt-Svc', b'h3=":60413"; ma=2592000,h3=":60418"; ma=2592000,h3=":60414"; ma=2592000'), (b'Content-Encoding', b'gzip'), (b'Content-Type', b'text/html; charset=UTF-8'), (b'Date', b'Mon, 19 Oct 2026 13:37:18 GMT'), (b'Server', b'BitNinja-WafPro'), (b'Set-Cookie', b'backend-port=; Path=/; Max-Age=0; HttpOnly; Domain=www.inmuebles.moldatuhome.com'), (b'Vary', b'Accept-Encoding'), (b'Via', b'1.1 Caddy'), (b'X-Cache-Status', b'BYPASS'), (b'X-Powered-By', b'BitNinja'), (b'X-Powered-By', b'BitNinja'), (b'Transfer-Encoding', b'chunked')])
+2026-10-19 13:37:18,477 INFO httpx: HTTP Request: GET https://www.inmuebles.moldatuhome.com/casas-chalets-en-venta-en-leaburu-3-1-017300.html "HTTP/1.1 200 OK"
+2026-10-19 13:37:18,477 DEBUG httpcore.http11: receive_response_body.started request=<Request [b'GET']>
+2026-10-19 13:37:18,605 DEBUG httpcore.http11: receive_response_body.complete
+2026-10-19 13:37:18,605 DEBUG httpcore.http11: response_closed.started
+2026-10-19 13:37:18,605 DEBUG httpcore.http11: response_closed.complete
+2026-10-19 13:37:19,153 DEBUG httpcore.http11: send_request_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:19,153 DEBUG httpcore.http11: send_request_headers.complete
+2026-10-19 13:37:19,153 DEBUG httpcore.http11: send_request_body.started request=<Request [b'GET']>
+2026-10-19 13:37:19,153 DEBUG httpcore.http11: send_request_body.complete
+2026-10-19 13:37:19,153 DEBUG httpcore.http11: receive_response_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:19,478 DEBUG httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Alt-Svc', b'h3=":60413"; ma=2592000,h3=":60418"; ma=2592000,h3=":60414"; ma=2592000'), (b'Content-Encoding', b'gzip'), (b'Content-Type', b'text/html; charset=UTF-8'), (b'Date', b'Mon, 19 Oct 2026 13:37:19 GMT'), (b'Server', b'BitNinja-WafPro'), (b'Set-Cookie', b'backend-port=; Path=/; Max-Age=0; HttpOnly; Domain=www.inmuebles.moldatuhome.com'), (b'Vary', b'Accept-Encoding'), (b'Via', b'1.1 Caddy'), (b'X-Cache-Status', b'BYPASS'), (b'X-Powered-By', b'BitNinja'), (b'X-Powered-By', b'BitNinja'), (b'Transfer-Encoding', b'chunked')])
+2026-10-19 13:37:19,478 INFO httpx: HTTP Request: GET https://www.inmuebles.moldatuhome.com/casas-chalets-en-venta-en-lezo-3-1-017301.html "HTTP/1.1 200 OK"
+2026-10-19 13:37:19,479 DEBUG httpcore.http11: receive_response_body.started request=<Request [b'GET']>
+2026-10-19 13:37:19,606 DEBUG httpcore.http11: receive_response_body.complete
+2026-10-19 13:37:19,607 DEBUG httpcore.http11: response_closed.started
+2026-10-19 13:37:19,607 DEBUG httpcore.http11: response_closed.complete
+2026-10-19 13:37:20,153 DEBUG httpcore.http11: send_request_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:20,153 DEBUG httpcore.http11: send_request_headers.complete
+2026-10-19 13:37:20,153 DEBUG httpcore.http11: send_request_body.started request=<Request [b'GET']>
+2026-10-19 13:37:20,153 DEBUG httpcore.http11: send_request_body.complete
+2026-10-19 13:37:20,153 DEBUG httpcore.http11: receive_response_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:20,474 DEBUG httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Alt-Svc', b'h3=":60413"; ma=2592000,h3=":60418"; ma=2592000,h3=":60414"; ma=2592000'), (b'Content-Encoding', b'gzip'), (b'Content-Type', b'text/html; charset=UTF-8'), (b'Date', b'Mon, 19 Oct 2026 13:37:20 GMT'), (b'Server', b'BitNinja-WafPro'), (b'Set-Cookie', b'backend-port=; Path=/; Max-Age=0; HttpOnly; Domain=www.inmuebles.moldatuhome.com'), (b'Vary', b'Accept-Encoding'), (b'Via', b'1.1 Caddy'), (b'X-Cache-Status', b'BYPASS'), (b'X-Powered-By', b'BitNinja'), (b'X-Powered-By', b'BitNinja'), (b'Transfer-Encoding', b'chunked')])
+2026-10-19 13:37:20,475 INFO httpx: HTTP Request: GET https://www.inmuebles.moldatuhome.com/casas-chalets-en-venta-en-mendaro-3-1-017303.html "HTTP/1.1 200 OK"
+2026-10-19 13:37:20,475 DEBUG httpcore.http11: receive_response_body.started request=<Request [b'GET']>
+2026-10-19 13:37:20,602 DEBUG httpcore.http11: receive_response_body.complete
+2026-10-19 13:37:20,603 DEBUG httpcore.http11: response_closed.started
+2026-10-19 13:37:20,603 DEBUG httpcore.http11: response_closed.complete
+2026-10-19 13:37:21,153 DEBUG httpcore.http11: send_request_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:21,153 DEBUG httpcore.http11: send_request_headers.complete
+2026-10-19 13:37:21,153 DEBUG httpcore.http11: send_request_body.started request=<Request [b'GET']>
+2026-10-19 13:37:21,153 DEBUG httpcore.http11: send_request_body.complete
+2026-10-19 13:37:21,153 DEBUG httpcore.http11: receive_response_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:21,473 DEBUG httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Alt-Svc', b'h3=":60413"; ma=2592000,h3=":60418"; ma=2592000,h3=":60414"; ma=2592000'), (b'Content-Encoding', b'gzip'), (b'Content-Type', b'text/html; charset=UTF-8'), (b'Date', b'Mon, 19 Oct 2026 13:37:21 GMT'), (b'Server', b'BitNinja-WafPro'), (b'Set-Cookie', b'backend-port=; Path=/; Max-Age=0; HttpOnly; Domain=www.inmuebles.moldatuhome.com'), (b'Vary', b'Accept-Encoding'), (b'Via', b'1.1 Caddy'), (b'X-Cache-Status', b'BYPASS'), (b'X-Powered-By', b'BitNinja'), (b'X-Powered-By', b'BitNinja'), (b'Transfer-Encoding', b'chunked')])
+2026-10-19 13:37:21,474 INFO httpx: HTTP Request: GET https://www.inmuebles.moldatuhome.com/casas-chalets-en-venta-en-oyarzun-3-1-016999.html "HTTP/1.1 200 OK"
+2026-10-19 13:37:21,474 DEBUG httpcore.http11: receive_response_body.started request=<Request [b'GET']>
+2026-10-19 13:37:21,602 DEBUG httpcore.http11: receive_response_body.complete
+2026-10-19 13:37:21,602 DEBUG httpcore.http11: response_closed.started
+2026-10-19 13:37:21,602 DEBUG httpcore.http11: response_closed.complete
+2026-10-19 13:37:22,153 DEBUG httpcore.http11: send_request_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:22,153 DEBUG httpcore.http11: send_request_headers.complete
+2026-10-19 13:37:22,153 DEBUG httpcore.http11: send_request_body.started request=<Request [b'GET']>
+2026-10-19 13:37:22,154 DEBUG httpcore.http11: send_request_body.complete
+2026-10-19 13:37:22,154 DEBUG httpcore.http11: receive_response_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:22,475 DEBUG httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Alt-Svc', b'h3=":60413"; ma=2592000,h3=":60418"; ma=2592000,h3=":60414"; ma=2592000'), (b'Content-Encoding', b'gzip'), (b'Content-Type', b'text/html; charset=UTF-8'), (b'Date', b'Mon, 19 Oct 2026 13:37:22 GMT'), (b'Server', b'BitNinja-WafPro'), (b'Set-Cookie', b'backend-port=; Path=/; Max-Age=0; HttpOnly; Domain=www.inmuebles.moldatuhome.com'), (b'Vary', b'Accept-Encoding'), (b'Via', b'1.1 Caddy'), (b'X-Cache-Status', b'BYPASS'), (b'X-Powered-By', b'BitNinja'), (b'X-Powered-By', b'BitNinja'), (b'Transfer-Encoding', b'chunked')])
+2026-10-19 13:37:22,475 INFO httpx: HTTP Request: GET https://www.inmuebles.moldatuhome.com/casas-chalets-en-venta-en-san-sebastian-3-1-0102.html "HTTP/1.1 200 OK"
+2026-10-19 13:37:22,475 DEBUG httpcore.http11: receive_response_body.started request=<Request [b'GET']>
+2026-10-19 13:37:22,603 DEBUG httpcore.http11: receive_response_body.complete
+2026-10-19 13:37:22,603 DEBUG httpcore.http11: response_closed.started
+2026-10-19 13:37:22,603 DEBUG httpcore.http11: response_closed.complete
+2026-10-19 13:37:23,153 DEBUG httpcore.http11: send_request_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:23,154 DEBUG httpcore.http11: send_request_headers.complete
+2026-10-19 13:37:23,154 DEBUG httpcore.http11: send_request_body.started request=<Request [b'GET']>
+2026-10-19 13:37:23,154 DEBUG httpcore.http11: send_request_body.complete
+2026-10-19 13:37:23,154 DEBUG httpcore.http11: receive_response_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:23,467 DEBUG httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Alt-Svc', b'h3=":60413"; ma=2592000,h3=":60418"; ma=2592000,h3=":60414"; ma=2592000'), (b'Content-Encoding', b'gzip'), (b'Content-Type', b'text/html; charset=UTF-8'), (b'Date', b'Mon, 19 Oct 2026 13:37:23 GMT'), (b'Server', b'BitNinja-WafPro'), (b'Set-Cookie', b'backend-port=; Path=/; Max-Age=0; HttpOnly; Domain=www.inmuebles.moldatuhome.com'), (b'Vary', b'Accept-Encoding'), (b'Via', b'1.1 Caddy'), (b'X-Cache-Status', b'BYPASS'), (b'X-Powered-By', b'BitNinja'), (b'X-Powered-By', b'BitNinja'), (b'Transfer-Encoding', b'chunked')])
+2026-10-19 13:37:23,467 INFO httpx: HTTP Request: GET https://www.inmuebles.moldatuhome.com/casas-chalets-en-venta-en-segura-3-1-014918.html "HTTP/1.1 200 OK"
+2026-10-19 13:37:23,468 DEBUG httpcore.http11: receive_response_body.started request=<Request [b'GET']>
+2026-10-19 13:37:23,595 DEBUG httpcore.http11: receive_response_body.complete
+2026-10-19 13:37:23,595 DEBUG httpcore.http11: response_closed.started
+2026-10-19 13:37:23,595 DEBUG httpcore.http11: response_closed.complete
+2026-10-19 13:37:24,153 DEBUG httpcore.http11: send_request_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:24,154 DEBUG httpcore.http11: send_request_headers.complete
+2026-10-19 13:37:24,154 DEBUG httpcore.http11: send_request_body.started request=<Request [b'GET']>
+2026-10-19 13:37:24,154 DEBUG httpcore.http11: send_request_body.complete
+2026-10-19 13:37:24,154 DEBUG httpcore.http11: receive_response_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:24,512 DEBUG httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Alt-Svc', b'h3=":60413"; ma=2592000,h3=":60418"; ma=2592000,h3=":60414"; ma=2592000'), (b'Content-Encoding', b'gzip'), (b'Content-Type', b'text/html; charset=UTF-8'), (b'Date', b'Mon, 19 Oct 2026 13:37:24 GMT'), (b'Server', b'BitNinja-WafPro'), (b'Set-Cookie', b'backend-port=; Path=/; Max-Age=0; HttpOnly; Domain=www.inmuebles.moldatuhome.com'), (b'Set-Cookie', b'last_seen=1772555%2C1752836%2C1741779%2C1640721; expires=Wed, 18 Nov 2026 14:37:24 GMT; Max-Age=2595600; path=/; domain=inmuebles.moldatuhome.com'), (b'Vary', b'Accept-Encoding'), (b'Via', b'1.1 Caddy'), (b'X-Cache-Status', b'BYPASS'), (b'X-Powered-By', b'BitNinja'), (b'X-Powered-By', b'BitNinja'), (b'Transfer-Encoding', b'chunked')])
+2026-10-19 13:37:24,513 INFO httpx: HTTP Request: GET https://www.inmuebles.moldatuhome.com/casa-chalet-en-burgos-es1640721.html "HTTP/1.1 200 OK"
+2026-10-19 13:37:24,513 DEBUG httpcore.http11: receive_response_body.started request=<Request [b'GET']>
+2026-10-19 13:37:24,640 DEBUG httpcore.http11: receive_response_body.complete
+2026-10-19 13:37:24,640 DEBUG httpcore.http11: response_closed.started
+2026-10-19 13:37:24,640 DEBUG httpcore.http11: response_closed.complete
+2026-10-19 13:37:24,643 INFO fincas.pipeline: moldatu 1640721 | None | 8500 € | Burgos | costa=None km | punt=None | no
+2026-10-19 13:37:25,154 DEBUG httpcore.http11: send_request_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:25,154 DEBUG httpcore.http11: send_request_headers.complete
+2026-10-19 13:37:25,154 DEBUG httpcore.http11: send_request_body.started request=<Request [b'GET']>
+2026-10-19 13:37:25,154 DEBUG httpcore.http11: send_request_body.complete
+2026-10-19 13:37:25,154 DEBUG httpcore.http11: receive_response_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:25,552 DEBUG httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Alt-Svc', b'h3=":60413"; ma=2592000,h3=":60418"; ma=2592000,h3=":60414"; ma=2592000'), (b'Content-Encoding', b'gzip'), (b'Content-Type', b'text/html; charset=UTF-8'), (b'Date', b'Mon, 19 Oct 2026 13:37:25 GMT'), (b'Server', b'BitNinja-WafPro'), (b'Set-Cookie', b'backend-port=; Path=/; Max-Age=0; HttpOnly; Domain=www.inmuebles.moldatuhome.com'), (b'Set-Cookie', b'last_seen=1772555%2C1752836%2C1741779%2C1640721%2C1736384; expires=Wed, 18 Nov 2026 14:37:25 GMT; Max-Age=2595600; path=/; domain=inmuebles.moldatuhome.com'), (b'Vary', b'Accept-Encoding'), (b'Via', b'1.1 Caddy'), (b'X-Cache-Status', b'BYPASS'), (b'X-Powered-By', b'BitNinja'), (b'X-Powered-By', b'BitNinja'), (b'Transfer-Encoding', b'chunked')])
+2026-10-19 13:37:25,552 INFO httpx: HTTP Request: GET https://www.inmuebles.moldatuhome.com/casa-chalet-en-desojo-con-vistas-es1736384.html "HTTP/1.1 200 OK"
+2026-10-19 13:37:25,552 DEBUG httpcore.http11: receive_response_body.started request=<Request [b'GET']>
+2026-10-19 13:37:25,680 DEBUG httpcore.http11: receive_response_body.complete
+2026-10-19 13:37:25,680 DEBUG httpcore.http11: response_closed.started
+2026-10-19 13:37:25,680 DEBUG httpcore.http11: response_closed.complete
+2026-10-19 13:37:25,682 INFO fincas.pipeline: moldatu 1736384 | None | 80000 € | Desojo | costa=None km | punt=None | no
+2026-10-19 13:37:26,154 DEBUG httpcore.http11: send_request_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:26,154 DEBUG httpcore.http11: send_request_headers.complete
+2026-10-19 13:37:26,154 DEBUG httpcore.http11: send_request_body.started request=<Request [b'GET']>
+2026-10-19 13:37:26,154 DEBUG httpcore.http11: send_request_body.complete
+2026-10-19 13:37:26,154 DEBUG httpcore.http11: receive_response_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:26,588 DEBUG httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Alt-Svc', b'h3=":60413"; ma=2592000,h3=":60418"; ma=2592000,h3=":60414"; ma=2592000'), (b'Content-Encoding', b'gzip'), (b'Content-Type', b'text/html; charset=UTF-8'), (b'Date', b'Mon, 19 Oct 2026 13:37:26 GMT'), (b'Server', b'BitNinja-WafPro'), (b'Set-Cookie', b'backend-port=; Path=/; Max-Age=0; HttpOnly; Domain=www.inmuebles.moldatuhome.com'), (b'Set-Cookie', b'last_seen=1772555%2C1752836%2C1741779%2C1640721%2C1736384%2C1713297; expires=Wed, 18 Nov 2026 14:37:26 GMT; Max-Age=2595600; path=/; domain=inmuebles.moldatuhome.com'), (b'Vary', b'Accept-Encoding'), (b'Via', b'1.1 Caddy'), (b'X-Cache-Status', b'BYPASS'), (b'X-Powered-By', b'BitNinja'), (b'X-Powered-By', b'BitNinja'), (b'Transfer-Encoding', b'chunked')])
+2026-10-19 13:37:26,589 INFO httpx: HTTP Request: GET https://www.inmuebles.moldatuhome.com/casa-chalet-en-allo-es1713297.html "HTTP/1.1 200 OK"
+2026-10-19 13:37:26,589 DEBUG httpcore.http11: receive_response_body.started request=<Request [b'GET']>
+2026-10-19 13:37:26,717 DEBUG httpcore.http11: receive_response_body.complete
+2026-10-19 13:37:26,717 DEBUG httpcore.http11: response_closed.started
+2026-10-19 13:37:26,717 DEBUG httpcore.http11: response_closed.complete
+2026-10-19 13:37:26,719 INFO fincas.pipeline: moldatu 1713297 | None | 130000 € | Allo | costa=None km | punt=None | no
+2026-10-19 13:37:27,154 DEBUG httpcore.http11: send_request_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:27,154 DEBUG httpcore.http11: send_request_headers.complete
+2026-10-19 13:37:27,154 DEBUG httpcore.http11: send_request_body.started request=<Request [b'GET']>
+2026-10-19 13:37:27,154 DEBUG httpcore.http11: send_request_body.complete
+2026-10-19 13:37:27,154 DEBUG httpcore.http11: receive_response_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:27,630 DEBUG httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Alt-Svc', b'h3=":60413"; ma=2592000,h3=":60418"; ma=2592000,h3=":60414"; ma=2592000'), (b'Content-Encoding', b'gzip'), (b'Content-Type', b'text/html; charset=UTF-8'), (b'Date', b'Mon, 19 Oct 2026 13:37:27 GMT'), (b'Server', b'BitNinja-WafPro'), (b'Set-Cookie', b'backend-port=; Path=/; Max-Age=0; HttpOnly; Domain=www.inmuebles.moldatuhome.com'), (b'Set-Cookie', b'last_seen=1772555%2C1752836%2C1741779%2C1640721%2C1736384%2C1713297%2C1761673; expires=Wed, 18 Nov 2026 14:37:27 GMT; Max-Age=2595600; path=/; domain=inmuebles.moldatuhome.com'), (b'Vary', b'Accept-Encoding'), (b'Via', b'1.1 Caddy'), (b'X-Cache-Status', b'BYPASS'), (b'X-Powered-By', b'BitNinja'), (b'X-Powered-By', b'BitNinja'), (b'Transfer-Encoding', b'chunked')])
+2026-10-19 13:37:27,631 INFO httpx: HTTP Request: GET https://www.inmuebles.moldatuhome.com/casa-chalet-en-arcos-los-con-vistas-es1761673.html "HTTP/1.1 200 OK"
+2026-10-19 13:37:27,631 DEBUG httpcore.http11: receive_response_body.started request=<Request [b'GET']>
+2026-10-19 13:37:27,758 DEBUG httpcore.http11: receive_response_body.complete
+2026-10-19 13:37:27,758 DEBUG httpcore.http11: response_closed.started
+2026-10-19 13:37:27,759 DEBUG httpcore.http11: response_closed.complete
+2026-10-19 13:37:27,761 INFO fincas.pipeline: moldatu 1761673 | None | 145000 € | Arcos, Los | costa=None km | punt=None | no
+2026-10-19 13:37:28,154 DEBUG httpcore.http11: send_request_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:28,154 DEBUG httpcore.http11: send_request_headers.complete
+2026-10-19 13:37:28,154 DEBUG httpcore.http11: send_request_body.started request=<Request [b'GET']>
+2026-10-19 13:37:28,154 DEBUG httpcore.http11: send_request_body.complete
+2026-10-19 13:37:28,154 DEBUG httpcore.http11: receive_response_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:28,601 DEBUG httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Alt-Svc', b'h3=":60413"; ma=2592000,h3=":60418"; ma=2592000,h3=":60414"; ma=2592000'), (b'Content-Encoding', b'gzip'), (b'Content-Type', b'text/html; charset=UTF-8'), (b'Date', b'Mon, 19 Oct 2026 13:37:28 GMT'), (b'Server', b'BitNinja-WafPro'), (b'Set-Cookie', b'backend-port=; Path=/; Max-Age=0; HttpOnly; Domain=www.inmuebles.moldatuhome.com'), (b'Set-Cookie', b'last_seen=1772555%2C1752836%2C1741779%2C1640721%2C1736384%2C1713297%2C1761673%2C1713299; expires=Wed, 18 Nov 2026 14:37:28 GMT; Max-Age=2595600; path=/; domain=inmuebles.moldatuhome.com'), (b'Vary', b'Accept-Encoding'), (b'Via', b'1.1 Caddy'), (b'X-Cache-Status', b'BYPASS'), (b'X-Powered-By', b'BitNinja'), (b'X-Powered-By', b'BitNinja'), (b'Transfer-Encoding', b'chunked')])
+2026-10-19 13:37:28,601 INFO httpx: HTTP Request: GET https://www.inmuebles.moldatuhome.com/casa-chalet-en-irujo-con-vistas-es1713299.html "HTTP/1.1 200 OK"
+2026-10-19 13:37:28,601 DEBUG httpcore.http11: receive_response_body.started request=<Request [b'GET']>
+2026-10-19 13:37:28,729 DEBUG httpcore.http11: receive_response_body.complete
+2026-10-19 13:37:28,729 DEBUG httpcore.http11: response_closed.started
+2026-10-19 13:37:28,729 DEBUG httpcore.http11: response_closed.complete
+2026-10-19 13:37:28,731 INFO fincas.pipeline: moldatu 1713299 | None | 225000 € | Irujo | costa=None km | punt=None | no
+2026-10-19 13:37:29,154 DEBUG httpcore.http11: send_request_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:29,154 DEBUG httpcore.http11: send_request_headers.complete
+2026-10-19 13:37:29,154 DEBUG httpcore.http11: send_request_body.started request=<Request [b'GET']>
+2026-10-19 13:37:29,154 DEBUG httpcore.http11: send_request_body.complete
+2026-10-19 13:37:29,154 DEBUG httpcore.http11: receive_response_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:29,597 DEBUG httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Alt-Svc', b'h3=":60413"; ma=2592000,h3=":60418"; ma=2592000,h3=":60414"; ma=2592000'), (b'Content-Encoding', b'gzip'), (b'Content-Type', b'text/html; charset=UTF-8'), (b'Date', b'Mon, 19 Oct 2026 13:37:29 GMT'), (b'Server', b'BitNinja-WafPro'), (b'Set-Cookie', b'backend-port=; Path=/; Max-Age=0; HttpOnly; Domain=www.inmuebles.moldatuhome.com'), (b'Set-Cookie', b'last_seen=1772555%2C1752836%2C1741779%2C1640721%2C1736384%2C1713297%2C1761673%2C1713299%2C1731380; expires=Wed, 18 Nov 2026 14:37:29 GMT; Max-Age=2595600; path=/; domain=inmuebles.moldatuhome.com'), (b'Vary', b'Accept-Encoding'), (b'Via', b'1.1 Caddy'), (b'X-Cache-Status', b'BYPASS'), (b'X-Powered-By', b'BitNinja'), (b'X-Powered-By', b'BitNinja'), (b'Transfer-Encoding', b'chunked')])
+2026-10-19 13:37:29,597 INFO httpx: HTTP Request: GET https://www.inmuebles.moldatuhome.com/casa-chalet-en-galar-con-vistas-es1731380.html "HTTP/1.1 200 OK"
+2026-10-19 13:37:29,597 DEBUG httpcore.http11: receive_response_body.started request=<Request [b'GET']>
+2026-10-19 13:37:29,725 DEBUG httpcore.http11: receive_response_body.complete
+2026-10-19 13:37:29,725 DEBUG httpcore.http11: response_closed.started
+2026-10-19 13:37:29,725 DEBUG httpcore.http11: response_closed.complete
+2026-10-19 13:37:29,727 INFO fincas.pipeline: moldatu 1731380 | None | 237114 € | Galar | costa=None km | punt=None | no
+2026-10-19 13:37:30,154 DEBUG httpcore.http11: send_request_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:30,154 DEBUG httpcore.http11: send_request_headers.complete
+2026-10-19 13:37:30,154 DEBUG httpcore.http11: send_request_body.started request=<Request [b'GET']>
+2026-10-19 13:37:30,154 DEBUG httpcore.http11: send_request_body.complete
+2026-10-19 13:37:30,154 DEBUG httpcore.http11: receive_response_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:30,567 DEBUG httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Alt-Svc', b'h3=":60413"; ma=2592000,h3=":60418"; ma=2592000,h3=":60414"; ma=2592000'), (b'Content-Encoding', b'gzip'), (b'Content-Type', b'text/html; charset=UTF-8'), (b'Date', b'Mon, 19 Oct 2026 13:37:30 GMT'), (b'Server', b'BitNinja-WafPro'), (b'Set-Cookie', b'backend-port=; Path=/; Max-Age=0; HttpOnly; Domain=www.inmuebles.moldatuhome.com'), (b'Set-Cookie', b'last_seen=1772555%2C1752836%2C1741779%2C1640721%2C1736384%2C1713297%2C1761673%2C1713299%2C1731380%2C1744510; expires=Wed, 18 Nov 2026 14:37:30 GMT; Max-Age=2595600; path=/; domain=inmuebles.moldatuhome.com'), (b'Vary', b'Accept-Encoding'), (b'Via', b'1.1 Caddy'), (b'X-Cache-Status', b'BYPASS'), (b'X-Powered-By', b'BitNinja'), (b'X-Powered-By', b'BitNinja'), (b'Transfer-Encoding', b'chunked')])
+2026-10-19 13:37:30,567 INFO httpx: HTTP Request: GET https://www.inmuebles.moldatuhome.com/casa-chalet-en-zeanuri-es1744510.html "HTTP/1.1 200 OK"
+2026-10-19 13:37:30,567 DEBUG httpcore.http11: receive_response_body.started request=<Request [b'GET']>
+2026-10-19 13:37:30,695 DEBUG httpcore.http11: receive_response_body.complete
+2026-10-19 13:37:30,695 DEBUG httpcore.http11: response_closed.started
+2026-10-19 13:37:30,695 DEBUG httpcore.http11: response_closed.complete
+2026-10-19 13:37:30,698 DEBUG httpcore.connection: connect_tcp.started host='nominatim.openstreetmap.org' port=443 local_address=None timeout=30 socket_options=None
+2026-10-19 13:37:30,716 DEBUG httpcore.connection: connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x7f9a8fb488c0>
+2026-10-19 13:37:30,716 DEBUG httpcore.connection: start_tls.started ssl_context=<ssl.SSLContext object at 0x7f9a8fc982d0> server_hostname='nominatim.openstreetmap.org' timeout=30
+2026-10-19 13:37:30,726 DEBUG httpcore.connection: start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x7f9a8fb48d10>
+2026-10-19 13:37:30,727 DEBUG httpcore.http11: send_request_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:30,727 DEBUG httpcore.http11: send_request_headers.complete
+2026-10-19 13:37:30,727 DEBUG httpcore.http11: send_request_body.started request=<Request [b'GET']>
+2026-10-19 13:37:30,727 DEBUG httpcore.http11: send_request_body.complete
+2026-10-19 13:37:30,727 DEBUG httpcore.http11: receive_response_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:30,944 DEBUG httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Connection', b'keep-alive'), (b'Content-Length', b'22'), (b'server', b'gunicorn/asgi'), (b'content-type', b'application/json; charset=utf-8'), (b'x-nominatim-server', b'poldi.openstreetmap.org'), (b'Content-Encoding', b'gzip'), (b'Accept-Ranges', b'bytes'), (b'Age', b'0'), (b'Date', b'Mon, 19 Oct 2026 13:37:30 GMT'), (b'Via', b'1.1 varnish'), (b'X-Served-By', b'cache-chi-klot8100082-CHI, cache-chi-kmdw8640082-CHI'), (b'X-Cache', b'MISS, MISS'), (b'X-Cache-Hits', b'0, 0'), (b'X-Timer', b'S1792417051.730058,VS0,VE209'), (b'Vary', b'accept-language, Accept-Encoding'), (b'Strict-Transport-Security', b'max-age=300'), (b'alt-svc', b'h3=":443";ma=86400,h3-29=":443";ma=86400,h3-27=":443";ma=86400')])
+2026-10-19 13:37:30,944 INFO httpx: HTTP Request: GET https://nominatim.openstreetmap.org/search?q=Zeanuri%2C+Gipuzkoa&format=jsonv2&limit=1&countrycodes=es&viewbox=-2.62%2C42.88%2C-1.7%2C43.45&bounded=1 "HTTP/1.1 200 OK"
+2026-10-19 13:37:30,945 DEBUG httpcore.http11: receive_response_body.started request=<Request [b'GET']>
+2026-10-19 13:37:30,945 DEBUG httpcore.http11: receive_response_body.complete
+2026-10-19 13:37:30,945 DEBUG httpcore.http11: response_closed.started
+2026-10-19 13:37:30,945 DEBUG httpcore.http11: response_closed.complete
+2026-10-19 13:37:30,945 INFO fincas.pipeline: Sin ubicación: moldatu https://www.inmuebles.moldatuhome.com/casa-chalet-en-zeanuri-es1744510.html
+2026-10-19 13:37:30,945 INFO fincas.pipeline: moldatu 1744510 | caserio | 250000 € | Zeanuri | costa=None km | punt=None | no
+2026-10-19 13:37:31,154 DEBUG httpcore.http11: send_request_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:31,154 DEBUG httpcore.http11: send_request_headers.complete
+2026-10-19 13:37:31,154 DEBUG httpcore.http11: send_request_body.started request=<Request [b'GET']>
+2026-10-19 13:37:31,154 DEBUG httpcore.http11: send_request_body.complete
+2026-10-19 13:37:31,154 DEBUG httpcore.http11: receive_response_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:31,497 DEBUG httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Alt-Svc', b'h3=":60413"; ma=2592000,h3=":60418"; ma=2592000,h3=":60414"; ma=2592000'), (b'Content-Encoding', b'gzip'), (b'Content-Type', b'text/html; charset=UTF-8'), (b'Date', b'Mon, 19 Oct 2026 13:37:31 GMT'), (b'Server', b'BitNinja-WafPro'), (b'Set-Cookie', b'backend-port=; Path=/; Max-Age=0; HttpOnly; Domain=www.inmuebles.moldatuhome.com'), (b'Vary', b'Accept-Encoding'), (b'Via', b'1.1 Caddy'), (b'X-Cache-Status', b'BYPASS'), (b'X-Powered-By', b'BitNinja'), (b'X-Powered-By', b'BitNinja'), (b'Transfer-Encoding', b'chunked')])
+2026-10-19 13:37:31,497 INFO httpx: HTTP Request: GET https://www.inmuebles.moldatuhome.com/casas-de-pueblo-en-venta-20-1.html "HTTP/1.1 200 OK"
+2026-10-19 13:37:31,497 DEBUG httpcore.http11: receive_response_body.started request=<Request [b'GET']>
+2026-10-19 13:37:31,625 DEBUG httpcore.http11: receive_response_body.complete
+2026-10-19 13:37:31,625 DEBUG httpcore.http11: response_closed.started
+2026-10-19 13:37:31,625 DEBUG httpcore.http11: response_closed.complete
+2026-10-19 13:37:32,154 DEBUG httpcore.http11: send_request_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:32,154 DEBUG httpcore.http11: send_request_headers.complete
+2026-10-19 13:37:32,155 DEBUG httpcore.http11: send_request_body.started request=<Request [b'GET']>
+2026-10-19 13:37:32,155 DEBUG httpcore.http11: send_request_body.complete
+2026-10-19 13:37:32,155 DEBUG httpcore.http11: receive_response_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:32,580 DEBUG httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Alt-Svc', b'h3=":60413"; ma=2592000,h3=":60418"; ma=2592000,h3=":60414"; ma=2592000'), (b'Content-Encoding', b'gzip'), (b'Content-Type', b'text/html; charset=UTF-8'), (b'Date', b'Mon, 19 Oct 2026 13:37:32 GMT'), (b'Server', b'BitNinja-WafPro'), (b'Set-Cookie', b'backend-port=; Path=/; Max-Age=0; HttpOnly; Domain=www.inmuebles.moldatuhome.com'), (b'Set-Cookie', b'last_seen=1772555%2C1752836%2C1741779%2C1640721%2C1736384%2C1713297%2C1761673%2C1713299%2C1731380%2C1744510%2C1775612; expires=Wed, 18 Nov 2026 14:37:32 GMT; Max-Age=2595600; path=/; domain=inmuebles.moldatuhome.com'), (b'Vary', b'Accept-Encoding'), (b'Via', b'1.1 Caddy'), (b'X-Cache-Status', b'BYPASS'), (b'X-Powered-By', b'BitNinja'), (b'X-Powered-By', b'BitNinja'), (b'Transfer-Encoding', b'chunked')])
+2026-10-19 13:37:32,581 INFO httpx: HTTP Request: GET https://www.inmuebles.moldatuhome.com/casa-de-pueblo-en-ollo-es1775612.html "HTTP/1.1 200 OK"
+2026-10-19 13:37:32,581 DEBUG httpcore.http11: receive_response_body.started request=<Request [b'GET']>
+2026-10-19 13:37:32,708 DEBUG httpcore.http11: receive_response_body.complete
+2026-10-19 13:37:32,708 DEBUG httpcore.http11: response_closed.started
+2026-10-19 13:37:32,708 DEBUG httpcore.http11: response_closed.complete
+2026-10-19 13:37:32,711 INFO fincas.pipeline: moldatu 1775612 | None | 42000 € | Ollo | costa=None km | punt=None | no
+2026-10-19 13:37:33,154 DEBUG httpcore.http11: send_request_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:33,155 DEBUG httpcore.http11: send_request_headers.complete
+2026-10-19 13:37:33,155 DEBUG httpcore.http11: send_request_body.started request=<Request [b'GET']>
+2026-10-19 13:37:33,155 DEBUG httpcore.http11: send_request_body.complete
+2026-10-19 13:37:33,155 DEBUG httpcore.http11: receive_response_headers.started request=<Request [b'GET']>
+2026-10-19 13:37:33,599 DEBUG httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Alt-Svc', b'h3=":60413"; ma=2592000,h3=":60418"; ma=2592000,h3=":60414"; ma=2592000'), (b'Content-Encoding', b'gzip'), (b'Content-Type', b'text/html; charset=UTF-8'), (b'Date', b'Mon, 19 Oct 2026 13:37:33 GMT'), (b'Server', b'BitNinja-WafPro'), (b'Set-Cookie', b'backend-port=; Path=/; Max-Age=0; HttpOnly; Domain=www.inmuebles.moldatuhome.com'), (b'Set-Cookie', b'last_seen=1772555%2C1752836%2C1741779%2C1640721%2C1736384%2C1713297%2C1761673%2C1713299%2C1731380%2C1744510%2C1775612%2C1769290; expires=Wed, 18 Nov 2026 14:37:33 GMT; Max-Age=2595600; path=/; domain=inmuebles.moldatuhome.com'), (b'Vary', b'Accept-Encoding'), (b'Via', b'1.1 Caddy'), (b'X-Cache-Status', b'BYPASS'), (b'X-Powered-By', b'BitNinja'), (b'X-Powered-By', b'BitNinja'), (b'Transfer-Encoding', b'chunked')])
+2026-10-19 13:37:33,599 INFO httpx: HTTP Request: GET https://www.inmuebles.moldatuhome.com/casa-de-pueblo-en-corella-con-vistas-es1769290.html "HTTP/1.1 200 OK"
+2026-10-19 13:37:33,599 DEBUG httpcore.http11: receive_response_body.started request=<Request [b'GET']>
+2026-10-19 13:37:33,727 DEBUG httpcore.http11: receive_response_body.complete
+2026-10-19 13:37:33,727 DEBUG httpcore.http11: response_closed.started
+2026-10-19 13:37:33,727 DEBUG httpcore.http11: response_closed.complete
+2026-10-19 13:37:33,730 INFO fincas.pipeline: moldatu 1769290 | None | 210000 € | Corella | costa=None km | punt=None | no
+2026-10-19 13:37:33,730 INFO fincas.pipeline: moldatu: 32 anuncios en listado
+2026-10-19 13:37:33,730 DEBUG httpcore.connection: close.started
+2026-10-19 13:37:33,730 DEBUG httpcore.connection: close.complete
+2026-10-19 13:37:33,730 DEBUG httpcore.connection: close.started
+2026-10-19 13:37:33,730 DEBUG httpcore.connection: close.complete
+2026-10-19 13:37:33,730 INFO fincas: Vistos 53 anuncios, 3 nuevos que cumplen filtros
+🏡 3 fincas nuevas en Gipuzkoa · desde 60.000 €
+[52] Finca rústica · 60.000 € · Lezo
+    Finca rústica en Lezo
+    Costa 3,2 km · Zarautz 25,9 km · surf Hondarribia 8,2 km · Tolosa ~34 min
+    Moldatu Home: https://www.inmuebles.moldatuhome.com/finca-rustica-en-lezo-es1772555.html
+
+— Precio a consultar —
+
+[63] Finca rústica · A consultar · San Sebastián
+    Finca rústica de 1,0522 ha en venta en San Sebastián, Guipúzcoa
+    Costa 2,2 km · Zarautz 15,0 km · surf Donostia (Zurriola) 3,5 km · Tolosa ~27 min
+    Cocampo: https://www.cocampo.com/es/es/propiedades/4d74879b-0d71-5717-b25f-640891e27192/
+
+[47] Finca rústica · A consultar · Hernani
+    Finca rústica de 0,3485 ha en venta en Hernani, Guipúzcoa
+    Costa 9,5 km · Zarautz 19,3 km · surf Donostia (Zurriola) 10,3 km · Tolosa ~34 min
+    Cocampo: https://www.cocampo.com/es/es/propiedades/06f6fd06-7094-5c68-a4c7-2cc0f63ec856/

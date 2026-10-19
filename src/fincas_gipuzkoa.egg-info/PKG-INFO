@@ -1,0 +1,14 @@
+Metadata-Version: 2.4
+Name: fincas-gipuzkoa
+Version: 0.1.0
+Summary: Buscador automático de fincas rústicas en Gipuzkoa
+Requires-Python: >=3.12
+Requires-Dist: httpx>=0.27
+Requires-Dist: selectolax>=0.3.21
+Requires-Dist: shapely>=2.0
+Requires-Dist: pyproj>=3.6
+Requires-Dist: pyyaml>=6.0
+Provides-Extra: dev
+Requires-Dist: pytest>=8; extra == "dev"
+Provides-Extra: geodata
+Requires-Dist: osmium>=3.7; extra == "geodata"
