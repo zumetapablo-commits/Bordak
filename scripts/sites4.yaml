@@ -1,0 +1,13 @@
+milanuncios:
+  candidates: ["https://www.milanuncios.com/"]
+  extra:
+    - "https://www.milanuncios.com/terrenos-en-guipuzcoa/"
+    - "https://www.milanuncios.com/fincas-rusticas-en-guipuzcoa/"
+    - "https://www.milanuncios.com/casas-de-campo-en-guipuzcoa/"
+    - "https://www.milanuncios.com/venta-de-terrenos-en-guipuzcoa/"
+wallapop:
+  candidates: ["https://es.wallapop.com/"]
+  extra:
+    - "https://es.wallapop.com/app/search?keywords=terreno&latitude=43.28&longitude=-2.17&distance=30000"
+    - "https://es.wallapop.com/inmobiliaria/terrenos/guipuzcoa"
+    - "https://api.wallapop.com/api/v3/search?keywords=terreno&latitude=43.28&longitude=-2.17&distance=30000"
