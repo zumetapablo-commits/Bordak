@@ -81,3 +81,10 @@ def test_failed_email_is_retried(store, enricher, munis, cfg):
     assert [l.source_id for l in store.pending_notifications()] == ["1"]
     store.mark_notified(store.pending_notifications())
     assert store.pending_notifications() == []
+
+
+def test_empty_source_warns_only_when_it_drops_to_zero(store, enricher, munis, cfg):
+    assert go(FakeSource([]), store, enricher, munis, cfg).warnings == []
+    go(FakeSource([item(1, 100000)]), store, enricher, munis, cfg)
+    r = go(FakeSource([]), store, enricher, munis, cfg)
+    assert any("antes 1" in w for w in r.warnings)

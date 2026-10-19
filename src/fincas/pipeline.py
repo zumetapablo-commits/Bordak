@@ -66,9 +66,10 @@ def run(sources: list[Source], client: PoliteClient, store: Store, geocoder: Geo
                 hit = process_listing(l, src, client, store, geocoder, enricher, cfg, seed)
                 if hit:
                     res.new_hits.append(hit)
+            previous = store.last_count(src.name)
             store.log_source_run(src.name, True, n)
-            if n == 0:
-                res.warnings.append(f"{src.name}: 0 anuncios en el listado (¿ha cambiado la web?)")
+            if n == 0 and previous:  # avisa solo cuando una fuente con anuncios se queda a cero
+                res.warnings.append(f"{src.name}: 0 anuncios en el listado (antes {previous}; ¿ha cambiado la web?)")
         except Exception as e:  # noqa: BLE001 - una fuente rota no debe parar las demás
             log.exception("Fuente %s falló", src.name)
             store.log_source_run(src.name, False, n, repr(e))

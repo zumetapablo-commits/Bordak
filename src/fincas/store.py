@@ -139,6 +139,12 @@ class Store:
             "INSERT INTO source_runs VALUES (?,?,?,?,?)", (source, _now(), int(ok), n, error)
         )
 
+    def last_count(self, source: str) -> int | None:
+        row = self.db.execute(
+            "SELECT n_listings FROM source_runs WHERE source=? AND ok=1 ORDER BY rowid DESC LIMIT 1", (source,)
+        ).fetchone()
+        return row["n_listings"] if row else None
+
     def consecutive_failures(self, source: str) -> int:
         rows = self.db.execute(
             "SELECT ok FROM source_runs WHERE source=? ORDER BY rowid DESC LIMIT 20", (source,)
