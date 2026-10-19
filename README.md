@@ -18,15 +18,28 @@ Tolosa, y manda un correo solo con los **anuncios nuevos**.
   El workflow lo commitea tras cada ejecución.
 - `config.yaml`: filtros, pesos de la puntuación y fuentes activas.
 
+## Fuentes
+| Fuente | Estado | Cómo se lee |
+|---|---|---|
+| Cocampo | ✅ | JSON-LD del listado de Gipuzkoa + coordenadas de la ficha |
+| Moldatu Home | ✅ | HTML de inmuebles.moldatuhome.com; robots.txt prohíbe paginar, se usan las páginas por municipio |
+| SIRO | ✅ | Catálogo público (Supabase) que usa su propia web; ahora sin anuncios rústicos |
+| Egaña, Flysch, Adoshome | ⏸ | Falta la web correcta (`adoshomes.com` es de Barcelona; `flysch.es` es turismo) |
+| Milanuncios, Wallapop | ⛔ | Responden 403 a cualquier robot (Wallapop incluso a robots.txt); no se fuerza |
+
+Los anuncios con precio «a consultar» que cumplen la distancia se avisan en un bloque aparte
+(`filters.include_price_on_request` en `config.yaml`).
+
 ## Puesta en marcha
 1. `pip install -e .[dev]` y `pytest`.
-2. `python scripts/build_geodata.py`: genera `data/coastline_gipuzkoa.geojson` y
-   `data/municipios.csv` con tiempos OSRM a Tolosa. Commitea el resultado.
+2. Datos geográficos: ya están en `data/`. Para regenerarlos, lanza el workflow
+   «Generar datos geográficos» (extracto OSM de Geofabrik + tiempos OSRM a Tolosa).
 3. Secrets del repo: `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASSWORD`, `MAIL_TO`.
    Con Gmail: `smtp.gmail.com`, `587` y una contraseña de aplicación.
 4. `fincas test-email` en local, o lanza el workflow a mano.
-5. Primera carga: lanza el workflow con `seed = true` para no recibir todos los anuncios
-   existentes de golpe.
+5. La primera ejecución marca como vistos los anuncios existentes sin enviar correo.
+   El workflow «Prueba en seco» ejecuta todo sin guardar ni enviar y deja el registro y
+   una vista previa del correo en la rama `pruebas`.
 
 ## Comandos
 ```

@@ -75,3 +75,12 @@ def test_siro():
     assert a.source_id == "SIRO-0007" and a.price == 240000 and a.address == "Gaintxurizketa"
     assert a.url == "https://www.siroinmobiliaria.com/propiedades/caserio-en-lezo-siro-0007"
     assert b.price is None and b.title.startswith("Terreno:")
+
+
+def test_moldatu_detail_uses_listing_map():
+    from fincas.sources import moldatu
+
+    l = Listing("moldatu", "1772555", "u", "Finca rústica en Lezo", description="corta")
+    moldatu.parse_detail(read("moldatu", "detail_lezo.html"), l)
+    assert (round(l.lat, 4), round(l.lon, 4)) == (43.3266, -1.8587)
+    assert len(l.description) > len("corta")

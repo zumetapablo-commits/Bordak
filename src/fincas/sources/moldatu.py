@@ -30,8 +30,6 @@ BASE = "https://www.inmuebles.moldatuhome.com"
 # id de tipo Inmoweb → prefijo de URL. Solo los que pueden ser rústicos.
 TYPES = {9: "fincas-rusticas", 5: "parcelas", 3: "casas-chalets", 20: "casas-de-pueblo"}
 TOTAL_RE = re.compile(r"Mostrando\s+\d+\s+a\s+(\d+)\s+de\s+(\d+)")
-COORD_RE = re.compile(r"""(?:data-lat|lat(?:itud)?)["']?\s*[=:]\s*["']?(4[23]\.\d+)["']?.{0,80}?"""
-                      r"""(?:data-lng|lng|lon(?:gitud)?)["']?\s*[=:]\s*["']?(-[0-3]\.\d+)""", re.S)
 
 
 def parse_list(html: str) -> tuple[list[Listing], int, int]:
@@ -76,9 +74,10 @@ def parse_detail(html: str, listing: Listing) -> None:
             listing.description = text
             break
     if listing.lat is None:
-        m = COORD_RE.search(html)
-        if m:
-            listing.lat, listing.lon = float(m.group(1)), float(m.group(2))
+        mapa = tree.css_first("#mapa[data-lat][data-lng]")  # mapa de la propia ficha
+        if mapa:
+            listing.lat = float(mapa.attributes["data-lat"])
+            listing.lon = float(mapa.attributes["data-lng"])
 
 
 @register
