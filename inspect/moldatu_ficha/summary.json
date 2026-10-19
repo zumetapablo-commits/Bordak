@@ -1,0 +1,201 @@
+{
+  "site": "moldatu_ficha",
+  "tried": [
+    {
+      "url": "https://www.inmuebles.moldatuhome.com/finca-rustica-en-lezo-es1772555.html",
+      "status": 200,
+      "final": "https://www.inmuebles.moldatuhome.com/finca-rustica-en-lezo-es1772555.html"
+    }
+  ],
+  "pages": [
+    {
+      "url": "https://www.inmuebles.moldatuhome.com/finca-rustica-en-lezo-es1772555.html",
+      "title": "Venta Finca rústica en Lezo",
+      "bytes": 79724,
+      "text_chars": 14343,
+      "n_scripts": 15,
+      "json_ld": [],
+      "next_data": false,
+      "nuxt": false,
+      "wordpress": false,
+      "generator": [],
+      "prices_found": [
+        "60.000€",
+        "60.000€",
+        "60.000€"
+      ],
+      "api_hints": [],
+      "text_sample": "                         Portada      ¿Quiere vender o alquilar?      Contacto        Propiedades       Venta        Apartamentos      Apartamentos en venta en San Sebastián      Apartamentos en venta en Sestao      Apartamentos en venta en Irún      Apartamentos en venta en Bilbao          Áticos      Áticos en venta en Astigarraga      Áticos en venta en Irún          Casas / Chalets      Casas / Chalets en venta en Ezquioga-Ichaso      Casas / Chalets en venta en Irún      Casas / Chalets en venta en Mendaro      Casas / Chalets en venta en Lezo      Casas / Chalets en venta en Leaburu      Casas / Chalets en venta en Burgos      Casas / Chalets en venta en San Sebastián      Casas / Chalets en venta en Bedia      Casas / Chalets en venta en Oyarzun      Casas / Chalets en venta en Segu",
+      "file": "00.html"
+    },
+    {
+      "url": "https://www.inmuebles.moldatuhome.com/",
+      "title": "Bienvenidos",
+      "bytes": 63315,
+      "text_chars": 11202,
+      "n_scripts": 13,
+      "json_ld": [],
+      "next_data": false,
+      "nuxt": false,
+      "wordpress": false,
+      "generator": [],
+      "prices_found": [
+        "60.000€"
+      ],
+      "api_hints": [],
+      "text_sample": "   Bienvenidos                                       Portada      ¿Quiere vender o alquilar?      Contacto        Propiedades       Venta        Apartamentos      Apartamentos en venta en San Sebastián      Apartamentos en venta en Sestao      Apartamentos en venta en Irún      Apartamentos en venta en Bilbao          Áticos      Áticos en venta en Astigarraga      Áticos en venta en Irún          Casas / Chalets      Casas / Chalets en venta en Ezquioga-Ichaso      Casas / Chalets en venta en Irún      Casas / Chalets en venta en Mendaro      Casas / Chalets en venta en Lezo      Casas / Chalets en venta en Leaburu      Casas / Chalets en venta en Burgos      Casas / Chalets en venta en San Sebastián      Casas / Chalets en venta en Bedia      Casas / Chalets en venta en Oyarzun      Casa",
+      "file": "01.html"
+    },
+    {
+      "url": "https://www.inmuebles.moldatuhome.com/form_captacion/",
+      "title": "¿Quiere vender o alquilar?",
+      "bytes": 72941,
+      "text_chars": 12702,
+      "n_scripts": 13,
+      "json_ld": [],
+      "next_data": false,
+      "nuxt": false,
+      "wordpress": false,
+      "generator": [],
+      "prices_found": [
+        "60.000€"
+      ],
+      "api_hints": [],
+      "text_sample": "                         Portada      ¿Quiere vender o alquilar?      Contacto        Propiedades       Venta        Apartamentos      Apartamentos en venta en San Sebastián      Apartamentos en venta en Sestao      Apartamentos en venta en Irún      Apartamentos en venta en Bilbao          Áticos      Áticos en venta en Astigarraga      Áticos en venta en Irún          Casas / Chalets      Casas / Chalets en venta en Ezquioga-Ichaso      Casas / Chalets en venta en Irún      Casas / Chalets en venta en Mendaro      Casas / Chalets en venta en Lezo      Casas / Chalets en venta en Leaburu      Casas / Chalets en venta en Burgos      Casas / Chalets en venta en San Sebastián      Casas / Chalets en venta en Bedia      Casas / Chalets en venta en Oyarzun      Casas / Chalets en venta en Segu",
+      "file": "02.html"
+    },
+    {
+      "url": "https://www.inmuebles.moldatuhome.com/apartamentos-en-venta-1-1.html",
+      "title": "Apartamentos en venta",
+      "bytes": 82073,
+      "text_chars": 13551,
+      "n_scripts": 13,
+      "json_ld": [],
+      "next_data": false,
+      "nuxt": false,
+      "wordpress": false,
+      "generator": [],
+      "prices_found": [
+        "60.000€",
+        "135.000€",
+        "135.000€",
+        "155.000€",
+        "570.000€",
+        "590.000€",
+        "625.000€"
+      ],
+      "api_hints": [],
+      "text_sample": "                         Portada      ¿Quiere vender o alquilar?      Contacto        Propiedades       Venta        Apartamentos      Apartamentos en venta en San Sebastián      Apartamentos en venta en Sestao      Apartamentos en venta en Irún      Apartamentos en venta en Bilbao          Áticos      Áticos en venta en Astigarraga      Áticos en venta en Irún          Casas / Chalets      Casas / Chalets en venta en Ezquioga-Ichaso      Casas / Chalets en venta en Irún      Casas / Chalets en venta en Mendaro      Casas / Chalets en venta en Lezo      Casas / Chalets en venta en Leaburu      Casas / Chalets en venta en Burgos      Casas / Chalets en venta en San Sebastián      Casas / Chalets en venta en Bedia      Casas / Chalets en venta en Oyarzun      Casas / Chalets en venta en Segu",
+      "file": "03.html"
+    },
+    {
+      "url": "https://www.inmuebles.moldatuhome.com/apartamentos-en-venta-en-san-sebastian-1-1-0102.html",
+      "title": "Apartamentos en venta en San Sebastián",
+      "bytes": 77180,
+      "text_chars": 12819,
+      "n_scripts": 13,
+      "json_ld": [],
+      "next_data": false,
+      "nuxt": false,
+      "wordpress": false,
+      "generator": [],
+      "prices_found": [
+        "60.000€",
+        "570.000€",
+        "590.000€",
+        "625.000€"
+      ],
+      "api_hints": [],
+      "text_sample": "                         Portada      ¿Quiere vender o alquilar?      Contacto        Propiedades       Venta        Apartamentos      Apartamentos en venta en San Sebastián      Apartamentos en venta en Sestao      Apartamentos en venta en Irún      Apartamentos en venta en Bilbao          Áticos      Áticos en venta en Astigarraga      Áticos en venta en Irún          Casas / Chalets      Casas / Chalets en venta en Ezquioga-Ichaso      Casas / Chalets en venta en Irún      Casas / Chalets en venta en Mendaro      Casas / Chalets en venta en Lezo      Casas / Chalets en venta en Leaburu      Casas / Chalets en venta en Burgos      Casas / Chalets en venta en San Sebastián      Casas / Chalets en venta en Bedia      Casas / Chalets en venta en Oyarzun      Casas / Chalets en venta en Segu",
+      "file": "04.html"
+    },
+    {
+      "url": "https://www.inmuebles.moldatuhome.com/apartamentos-en-venta-en-sestao-1-1-03535.html",
+      "title": "Apartamentos en venta en Sestao",
+      "bytes": 72800,
+      "text_chars": 12222,
+      "n_scripts": 13,
+      "json_ld": [],
+      "next_data": false,
+      "nuxt": false,
+      "wordpress": false,
+      "generator": [],
+      "prices_found": [
+        "60.000€",
+        "155.000€"
+      ],
+      "api_hints": [],
+      "text_sample": "                         Portada      ¿Quiere vender o alquilar?      Contacto        Propiedades       Venta        Apartamentos      Apartamentos en venta en San Sebastián      Apartamentos en venta en Sestao      Apartamentos en venta en Irún      Apartamentos en venta en Bilbao          Áticos      Áticos en venta en Astigarraga      Áticos en venta en Irún          Casas / Chalets      Casas / Chalets en venta en Ezquioga-Ichaso      Casas / Chalets en venta en Irún      Casas / Chalets en venta en Mendaro      Casas / Chalets en venta en Lezo      Casas / Chalets en venta en Leaburu      Casas / Chalets en venta en Burgos      Casas / Chalets en venta en San Sebastián      Casas / Chalets en venta en Bedia      Casas / Chalets en venta en Oyarzun      Casas / Chalets en venta en Segu",
+      "file": "05.html"
+    },
+    {
+      "url": "https://www.inmuebles.moldatuhome.com/apartamentos-en-venta-en-irun-1-1-0170.html",
+      "title": "Apartamentos en venta en Irún",
+      "bytes": 72848,
+      "text_chars": 12228,
+      "n_scripts": 13,
+      "json_ld": [],
+      "next_data": false,
+      "nuxt": false,
+      "wordpress": false,
+      "generator": [],
+      "prices_found": [
+        "60.000€",
+        "135.000€"
+      ],
+      "api_hints": [],
+      "text_sample": "                         Portada      ¿Quiere vender o alquilar?      Contacto        Propiedades       Venta        Apartamentos      Apartamentos en venta en San Sebastián      Apartamentos en venta en Sestao      Apartamentos en venta en Irún      Apartamentos en venta en Bilbao          Áticos      Áticos en venta en Astigarraga      Áticos en venta en Irún          Casas / Chalets      Casas / Chalets en venta en Ezquioga-Ichaso      Casas / Chalets en venta en Irún      Casas / Chalets en venta en Mendaro      Casas / Chalets en venta en Lezo      Casas / Chalets en venta en Leaburu      Casas / Chalets en venta en Burgos      Casas / Chalets en venta en San Sebastián      Casas / Chalets en venta en Bedia      Casas / Chalets en venta en Oyarzun      Casas / Chalets en venta en Segu",
+      "file": "06.html"
+    },
+    {
+      "url": "https://www.inmuebles.moldatuhome.com/apartamentos-en-venta-en-bilbao-1-1-059.html",
+      "title": "Apartamentos en venta en Bilbao",
+      "bytes": 74464,
+      "text_chars": 12430,
+      "n_scripts": 13,
+      "json_ld": [],
+      "next_data": false,
+      "nuxt": false,
+      "wordpress": false,
+      "generator": [],
+      "prices_found": [
+        "60.000€",
+        "135.000€"
+      ],
+      "api_hints": [],
+      "text_sample": "                         Portada      ¿Quiere vender o alquilar?      Contacto        Propiedades       Venta        Apartamentos      Apartamentos en venta en San Sebastián      Apartamentos en venta en Sestao      Apartamentos en venta en Irún      Apartamentos en venta en Bilbao          Áticos      Áticos en venta en Astigarraga      Áticos en venta en Irún          Casas / Chalets      Casas / Chalets en venta en Ezquioga-Ichaso      Casas / Chalets en venta en Irún      Casas / Chalets en venta en Mendaro      Casas / Chalets en venta en Lezo      Casas / Chalets en venta en Leaburu      Casas / Chalets en venta en Burgos      Casas / Chalets en venta en San Sebastián      Casas / Chalets en venta en Bedia      Casas / Chalets en venta en Oyarzun      Casas / Chalets en venta en Segu",
+      "file": "07.html"
+    },
+    {
+      "url": "https://www.inmuebles.moldatuhome.com/aticos-en-venta-18-1.html",
+      "title": "Áticos en venta",
+      "bytes": 73565,
+      "text_chars": 12390,
+      "n_scripts": 13,
+      "json_ld": [],
+      "next_data": false,
+      "nuxt": false,
+      "wordpress": false,
+      "generator": [],
+      "prices_found": [
+        "60.000€",
+        "269.500€",
+        "620.000€"
+      ],
+      "api_hints": [],
+      "text_sample": "                         Portada      ¿Quiere vender o alquilar?      Contacto        Propiedades       Venta        Apartamentos      Apartamentos en venta en San Sebastián      Apartamentos en venta en Sestao      Apartamentos en venta en Irún      Apartamentos en venta en Bilbao          Áticos      Áticos en venta en Astigarraga      Áticos en venta en Irún          Casas / Chalets      Casas / Chalets en venta en Ezquioga-Ichaso      Casas / Chalets en venta en Irún      Casas / Chalets en venta en Mendaro      Casas / Chalets en venta en Lezo      Casas / Chalets en venta en Leaburu      Casas / Chalets en venta en Burgos      Casas / Chalets en venta en San Sebastián      Casas / Chalets en venta en Bedia      Casas / Chalets en venta en Oyarzun      Casas / Chalets en venta en Segu",
+      "file": "08.html"
+    }
+  ],
+  "robots_status": 200,
+  "home_links": [
+    "https://www.inmuebles.moldatuhome.com/",
+    "https://www.inmuebles.moldatuhome.com/form_captacion/",
+    "https://www.inmuebles.moldatuhome.com/apartamentos-en-venta-1-1.html",
+    "https://www.inmuebles.moldatuhome.com/apartamentos-en-venta-en-san-sebastian-1-1-0102.html",
+    "https://www.inmuebles.moldatuhome.com/apartamentos-en-venta-en-sestao-1-1-03535.html",
+    "https://www.inmuebles.moldatuhome.com/apartamentos-en-venta-en-irun-1-1-0170.html",
+    "https://www.inmuebles.moldatuhome.com/apartamentos-en-venta-en-bilbao-1-1-059.html",
+    "https://www.inmuebles.moldatuhome.com/aticos-en-venta-18-1.html"
+  ]
+}
