@@ -94,6 +94,20 @@ class Store:
              l.score, int(matches), int(notified), now, now),
         )
 
+    def pending_notifications(self) -> list[Listing]:
+        """Anuncios que cumplen los filtros y aún no se han avisado (incluye envíos fallidos)."""
+        rows = self.db.execute(
+            "SELECT * FROM listings WHERE matches=1 AND notified=0 ORDER BY score DESC"
+        ).fetchall()
+        return [
+            Listing(source=r["source"], source_id=r["source_id"], url=r["url"], title=r["title"],
+                    price=r["price"], municipality=r["municipality"], lat=r["lat"], lon=r["lon"],
+                    kind=r["kind"], geo_approx=bool(r["geo_approx"]), coast_km=r["coast_km"],
+                    zarautz_km=r["zarautz_km"], surf_km=r["surf_km"], surf_spot=r["surf_spot"],
+                    tolosa_min=r["tolosa_min"], score=r["score"])
+            for r in rows
+        ]
+
     def mark_notified(self, listings: list[Listing]) -> None:
         self.db.executemany(
             "UPDATE listings SET notified=1 WHERE source=? AND source_id=?",

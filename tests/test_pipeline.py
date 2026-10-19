@@ -71,3 +71,13 @@ def test_parse_price():
     assert parse_price("Precio: 1.250.000,00 €") == 1250000
     assert parse_price("95000€") == 95000
     assert parse_price("Consultar") is None
+
+
+def test_failed_email_is_retried(store, enricher, munis, cfg):
+    r = go(FakeSource([item(1, 100000)]), store, enricher, munis, cfg)
+    assert len(r.new_hits) == 1
+    # el envío falló: no se llamó a mark_notified → sigue pendiente en la siguiente pasada
+    go(FakeSource([item(1, 100000)]), store, enricher, munis, cfg)
+    assert [l.source_id for l in store.pending_notifications()] == ["1"]
+    store.mark_notified(store.pending_notifications())
+    assert store.pending_notifications() == []

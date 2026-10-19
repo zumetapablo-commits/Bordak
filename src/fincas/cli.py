@@ -56,7 +56,12 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     cfg = load_config(args.config)
-    store = Store(ROOT / cfg["db_path"])
+    db_path = ROOT / cfg["db_path"]
+    seed = args.seed
+    if not db_path.exists() and not args.dry_run:
+        log.info("Primera ejecución: se marcan como vistos los anuncios actuales sin enviar correo")
+        seed = True
+    store = Store(db_path)
     if args.dry_run:  # trabaja sobre una copia en memoria
         mem = sqlite3.connect(":memory:")
         store.db.backup(mem)
@@ -69,17 +74,20 @@ def main(argv: list[str] | None = None) -> int:
         munis = default_municipalities()
         enricher = Enricher(cfg, default_coastline(), munis)
         geocoder = Geocoder(client, store, munis)
-        res = run(load_sources(cfg, args.source), client, store, geocoder, enricher, cfg, seed=args.seed)
+        res = run(load_sources(cfg, args.source), client, store, geocoder, enricher, cfg, seed=seed)
 
     log.info("Vistos %d anuncios, %d nuevos que cumplen filtros", res.seen, len(res.new_hits))
     if args.dry_run:
         subject, text, _ = notify.render(res.new_hits, res.warnings)
         print(subject, "\n", text, sep="")
         return 0
-    if res.new_hits or res.warnings:
-        notify.send(*notify.render(res.new_hits, res.warnings))
-        store.mark_notified(res.new_hits)
-    store.close()
+    pending = store.pending_notifications()  # nuevos + los de envíos fallidos anteriores
+    try:
+        if pending or res.warnings:
+            notify.send(*notify.render(pending, res.warnings))
+            store.mark_notified(pending)
+    finally:
+        store.close()
     return 0
 
 
