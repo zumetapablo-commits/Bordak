@@ -1,0 +1,10 @@
+siro:
+  candidates: ["https://www.siroinmobiliaria.com/js/tarjetas.js"]
+  extra:
+    - "https://www.siroinmobiliaria.com/js/catalogo.js"
+moldatu:
+  candidates: ["https://www.inmuebles.moldatuhome.com/fincas-rusticas-en-venta-9-1.html"]
+  extra:
+    - "https://www.inmuebles.moldatuhome.com/parcelas-en-venta-5-1.html"
+    - "https://www.inmuebles.moldatuhome.com/casas-chalets-en-venta-3-1.html"
+    - "https://www.inmuebles.moldatuhome.com/fincas-rusticas-en-venta-en-lezo-9-1-017301.html"
