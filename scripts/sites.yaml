@@ -1,0 +1,37 @@
+# Sitios a inspeccionar. `candidates`: dominios posibles (se usa el primero que responda).
+# `extra`: URLs concretas de listado a descargar además de los enlaces de la portada.
+cocampo:
+  candidates: ["https://www.cocampo.com/es/es/"]
+  extra:
+    - "https://www.cocampo.com/es/es/explorar/comprar/fincas-rusticas/espana/pais-vasco/guipuzcoa/"
+    - "https://www.cocampo.com/es/es/explorar/comprar/casas-rusticas/espana/pais-vasco/guipuzcoa/"
+egana:
+  candidates:
+    - "https://www.inmobiliariaegana.com/"
+    - "https://www.inmobiliariaegana.es/"
+    - "https://www.eganainmobiliaria.com/"
+    - "https://www.egana.es/"
+    - "https://www.eganazarautz.com/"
+siro:
+  candidates:
+    - "https://www.siroinmobiliaria.com/"
+    - "https://www.inmobiliariasiro.com/"
+    - "https://www.siroinmobiliaria.es/"
+    - "https://www.siro.es/"
+moldatu:
+  candidates:
+    - "https://www.moldatuhome.com/"
+    - "https://moldatuhome.com/"
+    - "https://www.moldatu.com/"
+    - "https://www.moldatu.es/"
+flysch:
+  candidates:
+    - "https://www.flyschinmobiliaria.com/"
+    - "https://www.inmobiliariaflysch.com/"
+    - "https://www.flysch.es/"
+    - "https://www.flyschhome.com/"
+adoshome:
+  candidates:
+    - "https://adoshomes.com/"
+    - "https://www.adoshomes.com/"
+    - "https://www.adoshome.com/"

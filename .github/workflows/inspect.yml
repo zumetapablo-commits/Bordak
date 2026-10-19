@@ -1,0 +1,34 @@
+name: Inspeccionar webs
+
+on:
+  workflow_dispatch:
+    inputs:
+      sites:
+        description: "Sitios separados por espacio (vacío = todos)"
+        default: ""
+
+permissions:
+  contents: write
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install .
+      - run: python scripts/inspect_sites.py scripts/sites.yaml ${{ inputs.sites }}
+      - name: Publicar resultados en la rama "inspeccion"
+        run: |
+          git config user.name "fincas-bot"
+          git config user.email "fincas-bot@users.noreply.github.com"
+          mv inspect /tmp/inspect
+          git checkout --orphan inspeccion
+          git rm -rfq .
+          cp -r /tmp/inspect ./inspect
+          git add inspect
+          git commit -qm "Inspección ${{ github.run_id }}"
+          git push -f origin inspeccion
