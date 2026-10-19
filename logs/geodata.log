@@ -1,13 +1,15 @@
+Overpass falló: https://overpass-api.de/api/interpreter -> 502
+Overpass falló: https://overpass.kumi.systems/api/interpreter -> 500
+Overpass falló: https://overpass.private.coffee/api/interpreter -> 500
+Overpass falló: https://overpass-api.de/api/interpreter -> 502
+Overpass falló: https://overpass.kumi.systems/api/interpreter -> 500
+Overpass falló: https://overpass.private.coffee/api/interpreter -> 500
 Traceback (most recent call last):
-  File "/home/runner/work/Bordak/Bordak/scripts/build_geodata.py", line 90, in <module>
+  File "/home/runner/work/Bordak/Bordak/scripts/build_geodata.py", line 108, in <module>
     build_coastline(c)
-  File "/home/runner/work/Bordak/Bordak/scripts/build_geodata.py", line 36, in build_coastline
+  File "/home/runner/work/Bordak/Bordak/scripts/build_geodata.py", line 54, in build_coastline
     data = overpass(client, f'[out:json][timeout:120];way["natural"="coastline"]({COAST_BBOX});out geom;')
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/Bordak/Bordak/scripts/build_geodata.py", line 32, in overpass
-    return client._client.post(OVERPASS, data={"data": query}, timeout=180).raise_for_status().json()
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/httpx/_models.py", line 829, in raise_for_status
-    raise HTTPStatusError(message, request=request, response=self)
-httpx.HTTPStatusError: Server error '502 Bad Gateway' for url 'https://overpass-api.de/api/interpreter'
-For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/502
+  File "/home/runner/work/Bordak/Bordak/scripts/build_geodata.py", line 50, in overpass
+    raise RuntimeError(f"Overpass no disponible: {last}")
+RuntimeError: Overpass no disponible: https://overpass.private.coffee/api/interpreter -> 500
