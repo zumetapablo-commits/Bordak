@@ -13,7 +13,7 @@ from pathlib import Path
 from urllib.parse import urljoin, urlsplit
 
 import yaml
-from selectolax.parser import HTMLParser
+from selectolax.lexbor import LexborHTMLParser as HTMLParser
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
@@ -21,7 +21,7 @@ sys.path.insert(0, str(ROOT / "src"))
 from fincas.http import PoliteClient, RobotsDisallowed  # noqa: E402
 
 OUT = ROOT / "inspect"
-UA = "fincas-gipuzkoa-bot/0.1 (inspección puntual, uso personal)"
+UA = "fincas-gipuzkoa-bot/0.1 (inspeccion puntual, uso personal)"
 LINK_RE = re.compile(
     r"venta|vender|comprar|erosi|salgai|inmueble|propiedad|propiedades|terreno|r[uú]stic|caser|baserri|"
     r"finca|borda|buscar|search|resultado|listado|catalog|inmobiliaria|etxebizitz",

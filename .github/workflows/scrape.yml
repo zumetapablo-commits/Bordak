@@ -31,13 +31,15 @@ jobs:
 
       - run: pip install .
 
-      - name: Generar datos geográficos si faltan
+      - name: Comprobar datos geográficos
         run: |
           if [ ! -f data/coastline_gipuzkoa.geojson ] || [ ! -f data/municipios.csv ]; then
-            python scripts/build_geodata.py
+            echo "::error::Faltan los datos geográficos: lanza el workflow 'Generar datos geográficos'"
+            exit 1
           fi
 
       - name: Buscar
+        id: buscar
         env:
           SMTP_HOST: ${{ secrets.SMTP_HOST }}
           SMTP_PORT: ${{ secrets.SMTP_PORT }}
@@ -47,10 +49,10 @@ jobs:
         run: fincas run ${{ inputs.seed && '--seed' || '' }}
 
       - name: Guardar estado
-        if: always()
+        if: success() || failure() && steps.buscar.outcome == 'failure'
         run: |
           git config user.name "fincas-bot"
           git config user.email "fincas-bot@users.noreply.github.com"
-          git add state/ data/
+          git add state/
           git diff --cached --quiet || git commit -m "Actualiza estado [skip ci]"
           git push

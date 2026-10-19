@@ -24,7 +24,7 @@ OSRM = "https://router.project-osrm.org/table/v1/driving/"
 # Costa: Gipuzkoa ampliada (incluye Ondarroa y Hendaia para no falsear los extremos)
 COAST_BBOX = "43.15,-2.60,43.50,-1.65"  # S,W,N,E
 
-UA = "fincas-gipuzkoa-bot/0.1 (generación única de datos geográficos)"
+UA = "fincas-gipuzkoa-bot/0.1 (generacion unica de datos geograficos)"
 
 
 def overpass(client: PoliteClient, query: str) -> dict:

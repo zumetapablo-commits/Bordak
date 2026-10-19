@@ -20,8 +20,13 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install .
-      - run: python scripts/inspect_sites.py scripts/sites.yaml ${{ inputs.sites }}
+      - name: Inspeccionar
+        run: |
+          mkdir -p inspect
+          set -o pipefail
+          python scripts/inspect_sites.py scripts/sites.yaml ${{ inputs.sites }} 2>&1 | tee inspect/run.log
       - name: Publicar resultados en la rama "inspeccion"
+        if: always()
         run: |
           git config user.name "fincas-bot"
           git config user.email "fincas-bot@users.noreply.github.com"

@@ -1,0 +1,31 @@
+name: Generar datos geográficos
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install .
+      - name: Generar
+        run: |
+          mkdir -p logs
+          set -o pipefail
+          python scripts/build_geodata.py 2>&1 | tee logs/geodata.log
+      - name: Guardar datos y registro
+        if: always()
+        run: |
+          git config user.name "fincas-bot"
+          git config user.email "fincas-bot@users.noreply.github.com"
+          git add -f logs/geodata.log data/
+          git diff --cached --quiet || git commit -m "Datos geográficos (run ${{ github.run_id }}) [skip ci]"
+          git push
