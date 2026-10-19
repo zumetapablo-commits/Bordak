@@ -1,0 +1,13 @@
+# Segunda pasada: fuentes reales de datos detectadas en la primera.
+siro:
+  candidates: ["https://www.siroinmobiliaria.com/propiedades"]
+  extra:
+    - "https://www.siroinmobiliaria.com/js/propiedades.js"
+    - "https://www.siroinmobiliaria.com/js/app.js?v=4"
+    - "https://www.siroinmobiliaria.com/sitemap.xml"
+moldatu:
+  candidates: ["https://www.inmuebles.moldatuhome.com/"]
+cocampo:
+  candidates: ["https://www.cocampo.com/es/es/propiedades/8307ccbd-313a-422e-a1ff-3c6dd4bca975/"]
+  extra:
+    - "https://www.cocampo.com/es/es/explorar/comprar/espana/pais-vasco/guipuzcoa/"

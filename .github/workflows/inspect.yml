@@ -3,6 +3,9 @@ name: Inspeccionar webs
 on:
   workflow_dispatch:
     inputs:
+      file:
+        description: "Fichero de sitios"
+        default: "scripts/sites.yaml"
       sites:
         description: "Sitios separados por espacio (vacío = todos)"
         default: ""
@@ -24,7 +27,7 @@ jobs:
         run: |
           mkdir -p inspect
           set -o pipefail
-          python scripts/inspect_sites.py scripts/sites.yaml ${{ inputs.sites }} 2>&1 | tee inspect/run.log
+          python scripts/inspect_sites.py ${{ inputs.file }} ${{ inputs.sites }} 2>&1 | tee inspect/run.log
       - name: Publicar resultados en la rama "inspeccion"
         if: always()
         run: |

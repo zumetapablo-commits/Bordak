@@ -8,6 +8,7 @@ from __future__ import annotations
 import csv
 import json
 import sys
+import time
 from pathlib import Path
 
 import yaml
@@ -19,7 +20,11 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from fincas.http import PoliteClient  # noqa: E402
 
-OVERPASS = "https://overpass-api.de/api/interpreter"
+OVERPASS_MIRRORS = [
+    "https://overpass-api.de/api/interpreter",
+    "https://overpass.kumi.systems/api/interpreter",
+    "https://overpass.private.coffee/api/interpreter",
+]
 OSRM = "https://router.project-osrm.org/table/v1/driving/"
 # Costa: Gipuzkoa ampliada (incluye Ondarroa y Hendaia para no falsear los extremos)
 COAST_BBOX = "43.15,-2.60,43.50,-1.65"  # S,W,N,E
@@ -28,8 +33,21 @@ UA = "fincas-gipuzkoa-bot/0.1 (generacion unica de datos geograficos)"
 
 
 def overpass(client: PoliteClient, query: str) -> dict:
-    client._throttle("overpass-api.de")
-    return client._client.post(OVERPASS, data={"data": query}, timeout=180).raise_for_status().json()
+    # Los servidores públicos de Overpass se saturan a menudo (502/504/429): reintenta y rota
+    last = None
+    for attempt in range(6):
+        url = OVERPASS_MIRRORS[attempt % len(OVERPASS_MIRRORS)]
+        client._throttle(url.split("/")[2])
+        try:
+            r = client._client.post(url, data={"data": query}, timeout=180)
+            if r.status_code == 200:
+                return r.json()
+            last = f"{url} -> {r.status_code}"
+        except Exception as e:  # noqa: BLE001
+            last = f"{url} -> {e!r}"
+        print("Overpass falló:", last, flush=True)
+        time.sleep(15 * (attempt + 1))
+    raise RuntimeError(f"Overpass no disponible: {last}")
 
 
 def build_coastline(client: PoliteClient) -> None:
