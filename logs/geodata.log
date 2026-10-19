@@ -1,15 +1,4 @@
-Overpass falló: https://overpass-api.de/api/interpreter -> 502
-Overpass falló: https://overpass.kumi.systems/api/interpreter -> 500
-Overpass falló: https://overpass.private.coffee/api/interpreter -> 500
-Overpass falló: https://overpass-api.de/api/interpreter -> 502
-Overpass falló: https://overpass.kumi.systems/api/interpreter -> 500
-Overpass falló: https://overpass.private.coffee/api/interpreter -> 500
-Traceback (most recent call last):
-  File "/home/runner/work/Bordak/Bordak/scripts/build_geodata.py", line 108, in <module>
-    build_coastline(c)
-  File "/home/runner/work/Bordak/Bordak/scripts/build_geodata.py", line 54, in build_coastline
-    data = overpass(client, f'[out:json][timeout:120];way["natural"="coastline"]({COAST_BBOX});out geom;')
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/Bordak/Bordak/scripts/build_geodata.py", line 50, in overpass
-    raise RuntimeError(f"Overpass no disponible: {last}")
-RuntimeError: Overpass no disponible: https://overpass.private.coffee/api/interpreter -> 500
+Descargando https://download.geofabrik.de/europe/spain/pais-vasco-latest.osm.pbf
+costa: 173 vías; municipios (todo el extracto): 282
+municipios de Gipuzkoa: 92
+tiempos OSRM: ok
