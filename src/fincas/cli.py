@@ -41,6 +41,7 @@ def main(argv: list[str] | None = None) -> int:
     r.add_argument("--seed", action="store_true", help="Marca todo lo actual como visto, sin correo")
     r.add_argument("--source", action="append", help="Ejecuta solo esta fuente (repetible)")
     r.add_argument("--config", default=None)
+    r.add_argument("--email-preview", metavar="FICHERO", help="Con --dry-run: guarda el correo en HTML")
     sub.add_parser("test-email", help="Envía un correo de prueba")
     p.add_argument("-v", "--verbose", action="store_true")
     args = p.parse_args(argv)
@@ -78,8 +79,13 @@ def main(argv: list[str] | None = None) -> int:
 
     log.info("Vistos %d anuncios, %d nuevos que cumplen filtros", res.seen, len(res.new_hits))
     if args.dry_run:
-        subject, text, _ = notify.render(res.new_hits, res.warnings)
+        subject, text, body = notify.render(res.new_hits, res.warnings)
         print(subject, "\n", text, sep="")
+        if args.email_preview:
+            with open(args.email_preview, "w", encoding="utf-8") as f:
+                f.write(f"<!doctype html><html><head><meta charset='utf-8'><title>{subject}</title>"
+                        f"<meta name='viewport' content='width=device-width'></head>"
+                        f"<body style='margin:0'>{body}</body></html>")
         return 0
     pending = store.pending_notifications()  # nuevos + los de envíos fallidos anteriores
     try:

@@ -47,7 +47,8 @@ class Enricher:
         f = self.cfg["filters"]
         return (
             l.kind in self.cfg["types"]
-            and l.price is not None and l.price <= f["max_price_eur"]
+            and (l.price <= f["max_price_eur"] if l.price is not None
+                 else f.get("include_price_on_request", False))
             and l.coast_km is not None and l.coast_km <= f["max_coast_km"]
         )
 

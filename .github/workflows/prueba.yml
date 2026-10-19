@@ -26,7 +26,7 @@ jobs:
           ARGS=""
           for s in ${{ inputs.sources }}; do ARGS="$ARGS --source $s"; done
           set -o pipefail
-          fincas run --dry-run $ARGS 2>&1 | tee /tmp/out/prueba.log
+          fincas -v run --dry-run --email-preview /tmp/out/correo.html $ARGS 2>&1 | tee /tmp/out/prueba.log
       - name: Publicar registro en la rama "pruebas"
         if: always()
         run: |
@@ -34,7 +34,7 @@ jobs:
           git config user.email "fincas-bot@users.noreply.github.com"
           git checkout --orphan pruebas
           git rm -rfq .
-          cp /tmp/out/prueba.log .
-          git add prueba.log
+          cp /tmp/out/* .
+          git add .
           git commit -qm "Prueba ${{ github.run_id }}"
           git push -f origin pruebas

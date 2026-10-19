@@ -1,0 +1,6 @@
+milanuncios_robots:
+  candidates: ["https://www.milanuncios.com/robots.txt"]
+wallapop_robots:
+  candidates: ["https://es.wallapop.com/robots.txt"]
+wallapop_api_robots:
+  candidates: ["https://api.wallapop.com/robots.txt"]

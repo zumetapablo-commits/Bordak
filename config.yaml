@@ -1,6 +1,8 @@
 filters:
   max_price_eur: 250000
   max_coast_km: 15
+  # Avisar también de anuncios con precio "a consultar" (van en un bloque aparte del correo)
+  include_price_on_request: true
 
 # Tipos aceptados (ver src/fincas/classify.py para las palabras clave)
 types: [terreno_rustico, borda, caseta, caserio, finca_rustica, huerta]

@@ -44,3 +44,12 @@ def test_filters_and_score(enricher, munis):
     pricey = Listing("x", "3", "u", "Borda", price=300000, kind="borda", lat=43.27, lon=-2.17)
     enricher.measure(pricey)
     assert not enricher.passes(pricey)
+
+
+def test_price_on_request(enricher, cfg):
+    l = Listing("x", "4", "u", "Borda", price=None, kind="borda", lat=43.27, lon=-2.17)
+    enricher.measure(l)
+    cfg["filters"]["include_price_on_request"] = True
+    assert enricher.passes(l)
+    cfg["filters"]["include_price_on_request"] = False
+    assert not enricher.passes(l)

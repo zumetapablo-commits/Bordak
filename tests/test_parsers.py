@@ -55,3 +55,23 @@ def test_moldatu_municipality_links_stay_robots_safe():
     links = moldatu.municipality_links(read("moldatu", "home.html"), "casas-chalets", 3)
     assert any(l.endswith("casas-chalets-en-venta-en-segura-3-1-014918.html") for l in links)
     assert all("?" not in l for l in links)
+
+
+def test_siro():
+    from fincas.sources import siro
+
+    url, key = siro.supabase_config(read("siro", "catalogo.js"))
+    assert url.endswith(".supabase.co") and key.startswith("sb_publishable_")
+    rows = [
+        {"id": "a", "referencia": "SIRO-0007", "slug": "caserio-en-lezo-siro-0007", "titulo": "Caserío con terreno",
+         "operacion": "venta", "tipo": "caserio", "estado": "publicada", "precio": 240000,
+         "precio_a_consultar": False, "municipio": "Lezo", "zona": "Gaintxurizketa"},
+        {"id": "b", "referencia": "SIRO-0008", "slug": "x", "titulo": "Parcela en Oiartzun", "operacion": "venta",
+         "tipo": "terreno", "estado": "publicada", "precio": 90000, "precio_a_consultar": True, "municipio": "Oiartzun"},
+        {"id": "c", "referencia": "SIRO-0009", "slug": "y", "titulo": "Casa", "operacion": "venta",
+         "tipo": "casa", "estado": "vendida", "precio": 1, "municipio": "Pasaia"},
+    ]
+    a, b = siro.parse_rows(rows)
+    assert a.source_id == "SIRO-0007" and a.price == 240000 and a.address == "Gaintxurizketa"
+    assert a.url == "https://www.siroinmobiliaria.com/propiedades/caserio-en-lezo-siro-0007"
+    assert b.price is None and b.title.startswith("Terreno:")
