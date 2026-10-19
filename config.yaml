@@ -1,0 +1,35 @@
+filters:
+  max_price_eur: 250000
+  max_coast_km: 15
+
+# Tipos aceptados (ver src/fincas/classify.py para las palabras clave)
+types: [terreno_rustico, borda, caseta, caserio, finca_rustica, huerta]
+
+scoring:
+  weights:
+    zarautz: 0.35
+    surf: 0.35
+    tolosa: 0.20
+    price: 0.10
+  # distancia (km) / tiempo (min) a partir de la cual la componente vale 0
+  zarautz_max_km: 40
+  surf_max_km: 25
+  tolosa_max_min: 60
+  approx_penalty: 5
+
+http:
+  user_agent: "fincas-gipuzkoa-bot/0.1 (+uso personal; contacto en el repo)"
+  min_interval_s: 1.0
+  timeout_s: 30
+  retries: 3
+
+db_path: state/fincas.sqlite
+
+# Fuentes: se activan a medida que se inspecciona cada web y se escribe su parser
+sources:
+  cocampo: {enabled: false}
+  egana: {enabled: false}
+  siro: {enabled: false}
+  moldatu: {enabled: false}
+  flysch: {enabled: false}
+  adoshome: {enabled: false}

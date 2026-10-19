@@ -1,0 +1,13 @@
+# Spots de surf de Gipuzkoa (coordenadas aproximadas, WGS84). Edita libremente.
+reference:
+  zarautz: {lat: 43.2840, lon: -2.1720}
+  tolosa: {lat: 43.1350, lon: -2.0780}
+spots:
+  - {name: Zarautz, lat: 43.2850, lon: -2.1700}
+  - {name: "Orio (Antilla)", lat: 43.2830, lon: -2.1290}
+  - {name: "Getaria (Gaztetape)", lat: 43.3010, lon: -2.2120}
+  - {name: "Zumaia (Itzurun)", lat: 43.2990, lon: -2.2600}
+  - {name: "Deba (Santiago)", lat: 43.2960, lon: -2.3530}
+  - {name: "Mutriku", lat: 43.3100, lon: -2.3830}
+  - {name: "Donostia (Zurriola)", lat: 43.3257, lon: -1.9750}
+  - {name: "Hondarribia", lat: 43.3830, lon: -1.7930}
