@@ -27,7 +27,7 @@ db_path: state/fincas.sqlite
 
 # Fuentes: se activan a medida que se inspecciona cada web y se escribe su parser
 sources:
-  cocampo: {enabled: false}
+  cocampo: {enabled: true}
   egana: {enabled: false}
   siro: {enabled: false}
   moldatu: {enabled: false}
