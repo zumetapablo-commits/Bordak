@@ -93,8 +93,8 @@ h2 b{color:#e9eef4}
 .vbtn:last-child{margin-right:0}
 .vbtn.on{background:#2b4a2f}
 .vbtn:active,.vbtn.sent{background:#2f81f7}
-.temps{display:-webkit-flex;display:flex;margin-top:8px}
-.temps .vbtn{background:#53361f;font-size:17px}
+.pmrow{margin-left:auto;display:-webkit-flex;display:flex}
+.pmrow .pm{width:64px;height:54px;border-radius:27px;font-size:32px;line-height:50px;padding:0;margin-left:10px;background:#53361f;-webkit-flex:none;flex:none}
 .toast{position:absolute;left:50%;bottom:10px;-webkit-transform:translateX(-50%);transform:translateX(-50%);background:#2f81f7;color:#fff;border-radius:20px;padding:8px 16px;font-size:14px;opacity:0;-webkit-transition:opacity .3s;transition:opacity .3s;pointer-events:none;white-space:nowrap}
 /* surf semana */
 .tabs{font-size:13px}
@@ -149,14 +149,14 @@ h2 b{color:#e9eef4}
     </div>
     <div class="card c-home">
       <div class="hdr">
-        <h2 style="margin:0"><b>Casa</b> · Alexa</h2>
+        <h2 style="margin:0"><b>Casa</b> · Alexa <span style="font-size:11px;color:#5d6b7c">v6</span></h2>
         <div><span class="status" id="status"><i></i>…</span> <span class="gear" id="gear">⚙</span></div>
       </div>
       <div class="tiles">
         <div class="tile full"><div class="vbox heat">
           <div class="vh"><span class="i">🔥</span><div><div class="n">Calefacción</div><div class="s" id="ls-climate">—</div></div>
-            <div class="vb"><div class="vbtn on" data-a="climate:on">Encender</div><div class="vbtn" data-a="climate:off">Apagar</div></div></div>
-          <div class="temps" id="temps"></div>
+            <div class="pmrow"><div class="pm vbtn" data-a="climate:down">−</div><div class="pm vbtn" data-a="climate:up">+</div></div></div>
+          <div class="vb"><div class="vbtn on" data-a="climate:on">Encender</div><div class="vbtn" data-a="climate:off">Apagar</div></div>
         </div></div>
         <div class="tile"><div class="vbox">
           <div class="vh"><span class="i">🔌</span><div><div class="n">Enchufe</div><div class="s" id="ls-plug">—</div></div></div>
@@ -222,7 +222,7 @@ var DEFAULTS = {
   // IDs de los disparadores de Voice Monkey (uno por acción)
   vm: {
     'climate:on':'calefaccion on', 'climate:off':'calefaccion off',
-    'climate:19':'calefaccion 19', 'climate:20':'calefaccion 20', 'climate:21':'calefaccion 21', 'climate:22':'calefaccion 22',
+    'climate:up':'calefaccion mas', 'climate:down':'calefaccion menos',
     'plug:on':'enchufe on', 'plug:off':'enchufe off',
     'vacuum:start':'aspiradora limpiar', 'vacuum:dock':'aspiradora base',
     'tv:on':'television on', 'tv:off':'television off'
@@ -236,11 +236,11 @@ var TOLOSA = {lat:43.135, lon:-2.078};
 var SURF_URL   = 'https://es.surf-forecast.com/breaks/Zarautz/forecasts/widget/a';
 var SCENE_NAMES = {'salgo-de-casa':'🚪 Salgo de casa','buenas-noches':'🌙 Buenas noches'};
 var VM_API = 'https://api-v3.voicemonkey.io';
-var TEMPS = [19,20,21,22];
-var LABELS = {'climate:on':'Calefacción · encender','climate:off':'Calefacción · apagar','plug:on':'Enchufe · encender','plug:off':'Enchufe · apagar','vacuum:start':'Aspiradora · limpiar','vacuum:dock':'Aspiradora · a la base','tv:on':'Televisión · encender','tv:off':'Televisión · apagar','climate:19':'Calefacción a 19°','climate:20':'Calefacción a 20°','climate:21':'Calefacción a 21°','climate:22':'Calefacción a 22°'};
+var LABELS = {'climate:on':'Calefacción · encender','climate:off':'Calefacción · apagar','plug:on':'Enchufe · encender','plug:off':'Enchufe · apagar','vacuum:start':'Aspiradora · limpiar','vacuum:dock':'Aspiradora · a la base','tv:on':'Televisión · encender','tv:off':'Televisión · apagar','climate:up':'Calefacción · subir','climate:down':'Calefacción · bajar'};
 var CROP_KEYS = ['sHeight','sScale'];
 
 var cfg = loadCfg();
+(function(){ var m=/[#&]vm=([^&]+)/.exec(location.hash||''); if(m){ cfg.vmToken=decodeURIComponent(m[1]); try{ window.localStorage.setItem('panelcasa.cfg', JSON.stringify(cfg)); }catch(e){} } })();
 function clone(o){ return JSON.parse(JSON.stringify(o)); }
 function loadCfg(){
   var c = clone(DEFAULTS);
@@ -456,7 +456,7 @@ try{ last = JSON.parse(window.localStorage.getItem('panelcasa.last')||'{}')||{};
 function setStatus(cls, txt){ var s=$('status'); s.className='status '+cls; s.innerHTML='<i></i>'+txt; }
 function toast(t){ var el=$('toast'); el.innerHTML=t; el.style.opacity='1'; clearTimeout(toast.t); toast.t=setTimeout(function(){ el.style.opacity='0'; },1800); }
 function hhmm(ms){ var d=new Date(ms); return pad(d.getHours())+':'+pad(d.getMinutes()); }
-var VERB = {'on':'encendido','off':'apagado','start':'limpiar','dock':'a la base'};
+var VERB = {'on':'encendido','off':'apagado','start':'limpiar','dock':'a la base','up':'subir 1°','down':'bajar 1°'};
 function renderLast(){
   var devs=['climate','plug','vacuum','tv'];
   for(var i=0;i<devs.length;i++){
@@ -530,9 +530,7 @@ function doAction(a, el){
   if(el){ el.className += ' sent'; setTimeout(function(){ el.className = el.className.replace(/ sent/g,''); }, 700); }
 }
 function bindVm(){
-  var t='', i;
-  for(i=0;i<TEMPS.length;i++) t+='<div class="vbtn" data-a="climate:'+TEMPS[i]+'">'+TEMPS[i]+'°</div>';
-  $('temps').innerHTML=t;
+  var i;
   var els=document.querySelectorAll('.vbtn[data-a]');
   for(i=0;i<els.length;i++){ (function(el){ tap(el, function(){ doAction(el.getAttribute('data-a'), el); }); })(els[i]); }
 }
@@ -550,7 +548,7 @@ function renderScenes(){
 }
 
 /* ======================= AJUSTES ======================= */
-var VM_KEYS = ['climate:on','climate:off','climate:19','climate:20','climate:21','climate:22','plug:on','plug:off','vacuum:start','vacuum:dock','tv:on','tv:off'];
+var VM_KEYS = ['climate:on','climate:off','climate:up','climate:down','plug:on','plug:off','vacuum:start','vacuum:dock','tv:on','tv:off'];
 function buildVmFields(){
   var h='', i;
   for(i=0;i<VM_KEYS.length;i+=2){
