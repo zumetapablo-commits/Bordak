@@ -149,7 +149,7 @@ h2 b{color:#e9eef4}
     </div>
     <div class="card c-home">
       <div class="hdr">
-        <h2 style="margin:0"><b>Casa</b> · Alexa <span style="font-size:11px;color:#5d6b7c">v9</span></h2>
+        <h2 style="margin:0"><b>Casa</b> · Alexa <span style="font-size:11px;color:#5d6b7c">v10</span></h2>
         <div><span class="status" id="status"><i></i>…</span> <span class="gear" id="gear">⚙</span></div>
       </div>
       <div class="tiles">
@@ -470,6 +470,7 @@ function renderLast(){
 /* Los disparadores de Voice Monkey tienen un ID tipo "enchufe-on-x4n8e".
    En ⚙ se puede poner el NOMBRE ("enchufe on") o el ID: el panel lo traduce. */
 var vmDevices = null;   // [{id,name}] leídos de la API
+var KNOWN_IDS = {'enchufe-on':'enchufe-c5f9d', 'enchufe-off':'enchufe-5c2qd'};
 function slug(t){
   t=String(t||'').toLowerCase();
   var from='áàäâéèëêíìïîóòöôúùüûñç', to='aaaaeeeeiiiioooouuuunc', r='', i, k;
@@ -478,12 +479,12 @@ function slug(t){
 }
 function resolveId(v){
   if(!v) return '';
-  if(!vmDevices) return v;
+  if(!vmDevices) return KNOWN_IDS[slug(v)] || v;
   var sv=slug(v), i, d;
   for(i=0;i<vmDevices.length;i++){ d=vmDevices[i]; if(d.id===v) return d.id; }
   for(i=0;i<vmDevices.length;i++){ d=vmDevices[i]; if(slug(d.name)===sv) return d.id; }
   for(i=0;i<vmDevices.length;i++){ d=vmDevices[i]; if(d.id.indexOf(sv+'-')===0) return d.id; }
-  return v;
+  return KNOWN_IDS[sv] || v;
 }
 function loadVmDevices(cb){
   if(!cfg.vmToken){ if(cb) cb(); return; }
@@ -491,7 +492,7 @@ function loadVmDevices(cb){
     if(!err && d && d.data){
       vmDevices=[]; for(var i=0;i<d.data.length;i++){ vmDevices.push({id:String(d.data[i].id), name:String(d.data[i].name||'')}); }
       setStatus('ok','Alexa lista · '+vmDevices.length+' disparadores');
-    } else if(err && /401|403/.test(err.message)){ setStatus('err','Token de Voice Monkey no válido'); }
+    } else if(err && /401|403/.test(err.message)){ setStatus('err','Token rechazado ('+cfg.vmToken.length+' car., '+esc(cfg.vmToken.substr(0,5))+'…'+esc(cfg.vmToken.substr(-4))+')'); }
     else { setStatus('ok','Alexa (sin lista de disparadores)'); }
     renderDevList(); if(cb) cb();
   });
@@ -512,33 +513,17 @@ function vmGet(url, cb){
 function trigger(val, label){
   if(!cfg.vmToken){ toast('Falta el token de Voice Monkey (⚙)'); return false; }
   if(!val){ toast('Falta el disparador de esta acción (⚙)'); return false; }
-  var tok=encodeURIComponent(cfg.vmToken), ts='&_='+new Date().getTime();
-  var v3 = VM_API+'/trigger?token='+tok+'&device='+encodeURIComponent(resolveId(val))+ts;
-  var v2 = 'https://api-v2.voicemonkey.io/trigger?token='+tok+'&device='+encodeURIComponent(slug(val))+ts;
+  var id=resolveId(val);
+  var url = VM_API+'/trigger?token='+encodeURIComponent(cfg.vmToken)+'&device='+encodeURIComponent(id)+'&_='+new Date().getTime();
+  function ping(){ var im=new Image(); im.src=url+'&p=1'; }
   toast('Enviando: '+label+'…');
-  function fail(st, txt, which){
-    var m=''; try{ var j=JSON.parse(txt); m=j.message||j.error||j.code||''; }catch(e){ m=String(txt||'').substr(0,80); }
-    var info = st===401 ? ' · token no válido ('+cfg.vmToken.length+' caracteres, empieza por '+esc(cfg.vmToken.substr(0,5))+'…)' :
-               st===404 ? ' · no existe el disparador "'+esc(val)+'"' : '';
-    if(m && st!==401) info += ' · '+esc(m);
-    toast('✗ Error '+st+' ['+which+']'+info);
-  }
-  function tryV2(){
-    vmGet(v2, function(st, txt){
-      var ok=false; try{ ok = JSON.parse(txt).success!==false; }catch(e){ ok = st>=200 && st<300; }
-      if(st>=200 && st<300 && ok){ cfg.vmApi='v2'; saveCfg(); toast('✓ Alexa (v2): '+label); }
-      else if(st===0){ var im=new Image(); im.src=v2; toast('✓ Enviado (v2): '+label); }
-      else { if(cfg.vmApi){ cfg.vmApi=''; saveCfg(); } fail(st, txt, 'v2'); }
-    });
-  }
-  if(cfg.vmApi==='v2'){ tryV2(); return true; }
-  vmGet(v3, function(st, txt){
-    var ok3=true; try{ ok3 = JSON.parse(txt).success!==false; }catch(e){}
-    if(st>=200 && st<300 && !ok3){ fail(st, txt, 'v3'); }
-    else if(st>=200 && st<300){ toast('✓ Alexa: '+label); }
-    else if(st===0){ var img=new Image(); img.src=v3; toast('✓ Enviado: '+label); }   // CORS bloqueado: se manda igual
-    else if(st===401 || st===403){ tryV2(); }                                        // token de la API antigua (v2)
-    else fail(st, txt, 'v3');
+  vmGet(url, function(st, txt){
+    var j=null; try{ j=JSON.parse(txt); }catch(e){}
+    if(st>=200 && st<300 && (!j || j.success!==false)){ toast('✓ Alexa: '+label); return; }
+    if(st===0){ ping(); toast('✓ Enviado: '+label); return; }
+    if(st===401 || st===403){ ping(); toast('✓ Enviado: '+label+' (sin confirmación)'); return; }
+    var m = j ? (j.message||j.error||'') : String(txt||'').substr(0,80);
+    toast('✗ Error '+st+(st===404?' · no existe el disparador "'+esc(val)+'" ('+esc(id)+')':'')+(m?' · '+esc(m):''));
   });
   return true;
 }
