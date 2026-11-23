@@ -149,7 +149,7 @@ h2 b{color:#e9eef4}
     </div>
     <div class="card c-home">
       <div class="hdr">
-        <h2 style="margin:0"><b>Casa</b> · Alexa <span style="font-size:11px;color:#5d6b7c">v6</span></h2>
+        <h2 style="margin:0"><b>Casa</b> · Alexa <span style="font-size:11px;color:#5d6b7c">v7</span></h2>
         <div><span class="status" id="status"><i></i>…</span> <span class="gear" id="gear">⚙</span></div>
       </div>
       <div class="tiles">
@@ -179,13 +179,13 @@ h2 b{color:#e9eef4}
   <div class="row">
     <div class="card c-surf">
       <div class="hdr"><h2><b>Surf Zarautz</b></h2>
-        <div class="tabs"><span class="tab act" id="tab-week">Semana</span><span class="tab" id="tab-sf">48 h surf-forecast</span></div></div>
-      <div id="surf-week">
+        <div class="tabs"><span class="tab act" id="tab-sf">surf-forecast 48 h</span><span class="tab" id="tab-week">Semana (7 días)</span></div></div>
+      <div id="surf-week" style="display:none">
         <div class="sea" id="sea"></div>
         <div class="sgrid" id="surf"><span class="muted small">Cargando previsión de olas…</span></div>
         <div class="legend">Olas: máx. de 7 a 19 h · periodo y dirección del swell · viento: media de 8 a 12 h (verde = terral/offshore, naranja = virazón fuerte) · ★ calidad estimada para nivel intermedio · <span id="s-upd2"></span></div>
       </div>
-      <div class="crop" id="s-crop" style="display:none"><div class="ph">Cargando surf-forecast…</div></div>
+      <div class="crop" id="s-crop"><div class="ph">Cargando surf-forecast…</div></div>
       <span class="small muted" id="s-upd" style="display:none"></span>
       <div class="links">
         <a href="https://es.surf-forecast.com/breaks/Zarautz/forecasts/latest/six_day" target="_blank">🌊 Semana completa</a>
@@ -323,7 +323,7 @@ function loadWeather(){
 }
 /* ======================= SURF SEMANA (Open-Meteo Marine) ======================= */
 var ZARAUTZ = {lat:43.290, lon:-2.170};
-var marine=null, swind=null, surfTab='week';
+var marine=null, swind=null, surfTab='sf';
 function arrow(d){ return '<span class="arr" style="-webkit-transform:rotate('+Math.round(d)+'deg);transform:rotate('+Math.round(d)+'deg)">↓</span>'; }
 function loadSurfWeek(){
   marine=null; swind=null;
@@ -408,7 +408,7 @@ function renderSurfWeek(){
   $('s-upd2').innerHTML='Open-Meteo, actualizado '+pad(n.getHours())+':'+pad(n.getMinutes());
 }
 function showSurfTab(t){
-  surfTab=t;
+  surfTab=t; try{ window.localStorage.setItem('panelcasa.tab', t); }catch(e){}
   $('tab-week').className='tab'+(t==='week'?' act':'');
   $('tab-sf').className='tab'+(t==='sf'?' act':'');
   $('surf-week').style.display = t==='week' ? '' : 'none';
@@ -576,6 +576,8 @@ tap($('f-save'), function(){
 tick(); setInterval(tick, 10000);
 buildVmFields(); bindVm(); renderLast(); renderScenes(); updStatus();
 loadWeather(); loadSurfWeek(); loadVmDevices();
+var savedTab='sf'; try{ savedTab=window.localStorage.getItem('panelcasa.tab')||'sf'; }catch(e){}
+setTimeout(function(){ showSurfTab(savedTab); }, 1500);
 setInterval(loadWeather, 15*60*1000);   // tiempo cada 15 min
 setInterval(loadSurfWeek, 60*60*1000);  // olas cada hora
 setInterval(function(){ if(surfTab==='sf') mountSurf(); }, 60*60*1000);
