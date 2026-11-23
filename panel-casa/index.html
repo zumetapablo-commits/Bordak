@@ -33,7 +33,26 @@ h2 b{color:#e9eef4}
 .clockrow{display:-webkit-flex;display:flex;-webkit-align-items:flex-end;align-items:flex-end}
 .clock{font-size:64px;font-weight:200;line-height:1;letter-spacing:-2px}
 .date{font-size:17px;color:#b7c2cf;margin:0 0 6px 14px;text-transform:capitalize}
-/* incrustados (Google / surf-forecast) */
+/* tiempo Tolosa */
+.wx{display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;margin-top:10px}
+.wx .ico{font-size:72px;line-height:1;margin-right:10px}
+.wx .t{font-size:64px;font-weight:200;line-height:1}
+.wx .d{margin-left:16px;font-size:15px;line-height:1.5;color:#b7c2cf}
+.wx .d b{color:#fff;font-size:18px;font-weight:600}
+.hours{display:-webkit-flex;display:flex;margin-top:12px;padding:10px 0 6px;border-top:1px solid #232c38}
+.h{-webkit-flex:1;flex:1;text-align:center;font-size:14px;color:#b7c2cf}
+.h .e{font-size:28px;display:block;margin:3px 0}
+.h b{color:#fff;font-weight:500;font-size:16px}
+.h .r{display:block;color:#5fb3ff;font-size:12px;height:15px}
+.days{display:-webkit-flex;display:flex;margin-top:6px}
+.dd{-webkit-flex:1;flex:1;text-align:center;background:#1c2430;border-radius:12px;margin:0 3px;padding:8px 2px}
+.dd.today{background:#1d3046}
+.dd .n{font-size:14px;color:#b7c2cf;text-transform:capitalize}
+.dd .e{font-size:34px;display:block;margin:4px 0}
+.dd .mx{font-size:18px;color:#fff}.dd .mn{font-size:15px;color:#8b98a8;margin-left:4px}
+.dd .r{display:block;color:#5fb3ff;font-size:12px;height:15px;margin-top:2px}
+.src{font-size:11px;color:#5d6b7c;margin-top:6px}
+/* incrustado surf-forecast */
 .crop{position:relative;overflow:hidden;border-radius:12px;background:#fff;margin-top:10px;-webkit-overflow-scrolling:touch}
 .crop iframe{position:absolute;border:0;-webkit-transform-origin:0 0;transform-origin:0 0}
 .crop .ph{position:absolute;left:0;top:0;right:0;bottom:0;display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;-webkit-justify-content:center;justify-content:center;color:#555;font-size:14px}
@@ -85,7 +104,9 @@ h2 b{color:#e9eef4}
   <div class="row">
     <div class="card c-left">
       <div class="clockrow"><div class="clock" id="clock">--:--</div><div class="date" id="date"></div></div>
-      <div class="crop" id="g-crop"><div class="ph">Cargando el tiempo de Google…</div></div>
+      <div class="wx" id="wx-now"><span class="muted small">Cargando el tiempo de Tolosa…</span></div>
+      <div class="hours" id="wx-hours"></div>
+      <div class="days" id="wx-days"></div>
     </div>
     <div class="card c-home">
       <div class="hdr">
@@ -113,7 +134,7 @@ h2 b{color:#e9eef4}
         <a href="https://es.surf-forecast.com/breaks/Zarautz/forecasts/latest/six_day" target="_blank">🌊 Semana completa</a>
         <a href="https://es.surf-forecast.com/breaks/Zarautz/forecasts/latest" target="_blank">Hora a hora</a>
         <a href="https://es.surf-forecast.com/breaks/Zarautz/tides/latest" target="_blank">Mareas</a>
-        <a href="https://www.google.com/search?q=tiempo+tolosa&amp;hl=es" target="_blank">Google · tiempo Tolosa</a>
+        <a href="https://www.aemet.es/es/eltiempo/prediccion/municipios/tolosa-id20071" target="_blank">AEMET Tolosa</a>
         <a href="#" id="reload-emb">↻ Recargar</a>
       </div>
     </div>
@@ -130,12 +151,8 @@ h2 b{color:#e9eef4}
   <div class="two"><div><label>Sensor humedad (opcional)</label><input id="f-e-homeHum" autocapitalize="off"></div><div><label>Enchufe</label><input id="f-e-plug" autocapitalize="off"></div></div>
   <div class="two"><div><label>Potencia enchufe (opcional)</label><input id="f-e-plugPower" autocapitalize="off"></div><div><label>Roomba (vacuum)</label><input id="f-e-vacuum" autocapitalize="off"></div></div>
   <div class="two"><div><label>Televisión (media_player)</label><input id="f-e-tv" autocapitalize="off"></div><div><label>Escenas (script./scene., separadas por coma)</label><input id="f-scenes" autocapitalize="off"></div></div>
-  <h3>Recorte del tiempo de Google</h3>
-  <div class="small muted">Si la tarjeta de Google sale descolocada, ajusta estos números (píxeles) hasta que quede centrada.</div>
-  <div class="two"><div><label>Desplazar arriba (px)</label><input id="f-gTop" type="number"></div><div><label>Desplazar izquierda (px)</label><input id="f-gLeft" type="number"></div></div>
-  <div class="two"><div><label>Escala (0.5–1.2)</label><input id="f-gScale" type="number" step="0.05"></div><div><label>Alto de la caja (px)</label><input id="f-gHeight" type="number"></div></div>
   <h3>Widget de surf</h3>
-  <div class="two"><div><label>Alto de la caja (px)</label><input id="f-sHeight" type="number"></div><div><label>Escala (0.6–1.3)</label><input id="f-sScale" type="number" step="0.05"></div></div>
+  <div class="two"><div><label>Alto de la caja (px, 0 = automático)</label><input id="f-sHeight" type="number"></div><div><label>Escala (0.6–1.3)</label><input id="f-sScale" type="number" step="0.05"></div></div>
   <div class="acts"><button id="f-reset">Restablecer recortes</button><button id="f-cancel">Cancelar</button><button class="pri" id="f-save">Guardar</button></div>
 </div></div>
 
@@ -151,16 +168,14 @@ var DEFAULTS = {
     plug:'switch.enchufe', plugPower:'', vacuum:'vacuum.roomba', tv:'media_player.tv'
   },
   scenes: 'script.salgo_de_casa, script.buenas_noches',
-  // Recorte de la tarjeta de Google (ajustable desde ⚙)
-  gTop: 150, gLeft: 0, gScale: 0.85, gHeight: 330,
-  // Widget de surf-forecast
-  sHeight: 330, sScale: 1,
+  // Widget de surf-forecast (sHeight 0 = ocupa el alto que quede libre)
+  sHeight: 0, sScale: 1,
   nightFrom: 23, nightTo: 7
 };
-var GOOGLE_URL = 'https://www.google.com/search?igu=1&hl=es&gl=es&q=tiempo+tolosa+gipuzkoa';
+var TOLOSA = {lat:43.135, lon:-2.078};
 var SURF_URL   = 'https://es.surf-forecast.com/breaks/Zarautz/forecasts/widget/a';
 var SCENE_NAMES = {'script.salgo_de_casa':'🚪 Salgo de casa','script.buenas_noches':'🌙 Buenas noches'};
-var CROP_KEYS = ['gTop','gLeft','gScale','gHeight','sHeight','sScale'];
+var CROP_KEYS = ['sHeight','sScale'];
 
 var cfg = loadCfg();
 function clone(o){ return JSON.parse(JSON.stringify(o)); }
@@ -198,23 +213,56 @@ var MESES = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','
 /* ======================= INCRUSTADOS ======================= */
 function num(v, d){ var n=parseFloat(v); return isNaN(n)?d:n; }
 function setTransform(el, s){ var t='scale('+s+')'; el.style.webkitTransform=t; el.style.transform=t; }
-function mountGoogle(){
-  var box=$('g-crop'), s=num(cfg.gScale,0.85), h=num(cfg.gHeight,330);
-  box.style.height = h+'px';
-  var w = box.clientWidth || 460;
-  var f = document.createElement('iframe');
-  f.setAttribute('scrolling','no');
-  // ancho del iframe = ancho de la caja / escala, para que la tarjeta ocupe todo el ancho
-  f.style.width  = Math.round(w/s)+'px';
-  f.style.height = Math.round((h+num(cfg.gTop,150)*s+200)/s)+'px';
-  f.style.left = (-num(cfg.gLeft,0)*s)+'px';
-  f.style.top  = (-num(cfg.gTop,150)*s)+'px';
-  setTransform(f, s);
-  f.src = GOOGLE_URL + '&t=' + new Date().getTime();
-  box.innerHTML=''; box.appendChild(f);
+var DIASC = ['dom','lun','mar','mié','jue','vie','sáb'];
+var COMPASS = ['N','NE','E','SE','S','SO','O','NO'];
+function compass(d){ return COMPASS[Math.round((((d%360)+360)%360)/45)%8]; }
+function dayOf(ymd){ var p=ymd.split('-'); return new Date(+p[0], +p[1]-1, +p[2]).getDay(); }
+function wxi(code, night){
+  var m = {0:['☀️','Despejado'],1:['🌤','Casi despejado'],2:['⛅','Nubes y claros'],3:['☁️','Nublado'],45:['🌫','Niebla'],48:['🌫','Niebla'],
+    51:['🌦','Llovizna'],53:['🌦','Llovizna'],55:['🌧','Llovizna intensa'],56:['🌧','Llovizna helada'],57:['🌧','Llovizna helada'],
+    61:['🌦','Lluvia débil'],63:['🌧','Lluvia'],65:['🌧','Lluvia fuerte'],66:['🌧','Lluvia helada'],67:['🌧','Lluvia helada'],
+    71:['🌨','Nieve débil'],73:['🌨','Nieve'],75:['❄️','Nieve fuerte'],77:['🌨','Granizo fino'],80:['🌦','Chubascos'],81:['🌧','Chubascos'],
+    82:['⛈','Chubascos fuertes'],85:['🌨','Chubascos de nieve'],86:['🌨','Chubascos de nieve'],95:['⛈','Tormenta'],96:['⛈','Tormenta y granizo'],99:['⛈','Tormenta y granizo']};
+  var r = m[code] || ['🌡','—'];
+  if(night && code<=2){ r = [code===0?'🌙':'☁️', code===0?'Despejado':r[1]]; }
+  return r;
+}
+var wxFirst=false;
+function loadWeather(){
+  var u = 'https://api.open-meteo.com/v1/forecast?latitude='+TOLOSA.lat+'&longitude='+TOLOSA.lon+
+    '&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m,wind_direction_10m,is_day'+
+    '&hourly=temperature_2m,precipitation_probability,weather_code,is_day'+
+    '&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,sunrise,sunset'+
+    '&timezone=Europe%2FMadrid&forecast_days=7';
+  xhr('GET', u, null, null, function(err, d){
+    if(err || !d || !d.current){ if(!$('wx-days').innerHTML) $('wx-now').innerHTML='<span class="muted small">No se pudo cargar el tiempo. Reintento en 5 min.</span>'; setTimeout(loadWeather, 5*60*1000); return; }
+    var c=d.current, dl=d.daily, hh=d.hourly, w=wxi(c.weather_code, !c.is_day), i, html='';
+    $('wx-now').innerHTML = '<span class="ico">'+w[0]+'</span><span class="t">'+Math.round(c.temperature_2m)+'°</span>'+
+      '<div class="d"><b>'+w[1]+'</b> · Tolosa<br>Sensación '+Math.round(c.apparent_temperature)+'° · Humedad '+Math.round(c.relative_humidity_2m)+'%<br>'+
+      'Viento '+Math.round(c.wind_speed_10m)+' km/h '+compass(c.wind_direction_10m)+' · Lluvia hoy '+(dl.precipitation_probability_max[0]||0)+'%<br>'+
+      'Hoy '+Math.round(dl.temperature_2m_max[0])+'° / '+Math.round(dl.temperature_2m_min[0])+'° · 🌅 '+dl.sunrise[0].substr(11,5)+' · 🌇 '+dl.sunset[0].substr(11,5)+'</div>';
+    var key=c.time.substr(0,13), start=0;
+    for(i=0;i<hh.time.length;i++){ if(hh.time[i].substr(0,13)===key){ start=i; break; } }
+    for(i=start+1;i<=start+8 && i<hh.time.length;i++){
+      var hw=wxi(hh.weather_code[i], !hh.is_day[i]), pp=hh.precipitation_probability[i];
+      html += '<div class="h">'+hh.time[i].substr(11,2)+'h<span class="e">'+hw[0]+'</span><b>'+Math.round(hh.temperature_2m[i])+'°</b><span class="r">'+(pp>=20?'💧'+pp+'%':'')+'</span></div>';
+    }
+    $('wx-hours').innerHTML = html; html='';
+    for(i=0;i<dl.time.length;i++){
+      var dw=wxi(dl.weather_code[i], false), dp=dl.precipitation_probability_max[i];
+      html += '<div class="dd'+(i===0?' today':'')+'"><div class="n">'+(i===0?'hoy':DIASC[dayOf(dl.time[i])])+'</div><span class="e">'+dw[0]+'</span>'+
+        '<span class="mx">'+Math.round(dl.temperature_2m_max[i])+'°</span><span class="mn">'+Math.round(dl.temperature_2m_min[i])+'°</span>'+
+        '<span class="r">'+(dp>=20?'💧'+dp+'%':'')+'</span></div>';
+    }
+    $('wx-days').innerHTML = html;
+    if(!$('wx-src')){ var sdiv=document.createElement('div'); sdiv.id='wx-src'; sdiv.className='src'; $('wx-days').parentNode.appendChild(sdiv); }
+    if(!wxFirst){ wxFirst=true; mountSurf(); }
+    var n=new Date(); $('wx-src').innerHTML='Previsión Open-Meteo · actualizada '+pad(n.getHours())+':'+pad(n.getMinutes());
+  });
 }
 function mountSurf(){
-  var box=$('s-crop'), s=num(cfg.sScale,1), h=num(cfg.sHeight,330);
+  var box=$('s-crop'), s=num(cfg.sScale,1), h=num(cfg.sHeight,0);
+  if(!h){ var r=box.getBoundingClientRect(), top=r.top+(window.pageYOffset||0); h=Math.max(300, Math.round(window.innerHeight-top-70)); }
   box.style.height = h+'px';
   var w = box.clientWidth || 980;
   var f = document.createElement('iframe');
@@ -227,7 +275,7 @@ function mountSurf(){
   box.innerHTML=''; box.appendChild(f);
   var d=new Date(); $('s-upd').innerHTML='actualizado '+pad(d.getHours())+':'+pad(d.getMinutes());
 }
-function mountAll(){ mountGoogle(); mountSurf(); }
+function mountAll(){ loadWeather(); mountSurf(); }
 tap($('reload-emb'), function(ev){ ev.preventDefault(); mountAll(); });
 
 /* ======================= RELOJ + ATENUACIÓN ======================= */
@@ -368,8 +416,8 @@ tap($('f-save'), function(){
 /* ======================= ARRANQUE ======================= */
 tick(); setInterval(tick, 10000);
 renderScenes(); renderHome(); refreshHA(); setInterval(refreshHA, 10000);
-mountAll();
-setInterval(mountGoogle, 30*60*1000);   // Google cada 30 min
+loadWeather(); setTimeout(function(){ if(!wxFirst) mountSurf(); }, 4000);
+setInterval(loadWeather, 15*60*1000);   // tiempo cada 15 min
 setInterval(mountSurf,   60*60*1000);   // surf-forecast cada hora
 var lastW = window.innerWidth;
 window.addEventListener('resize', function(){ if(Math.abs(window.innerWidth-lastW)>50){ lastW=window.innerWidth; mountAll(); } }, false);
