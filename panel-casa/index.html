@@ -93,6 +93,7 @@ h2 b{color:#e9eef4}
 .vbtn:last-child{margin-right:0}
 .vbtn.on{background:#2b4a2f}
 .vbtn:active,.vbtn.sent{background:#2f81f7}
+.vbtn.tb{background:#53361f;font-size:20px;padding:8px 4px}
 .pmrow{margin-left:auto;display:-webkit-flex;display:flex}
 .pmrow .pm{width:64px;height:54px;border-radius:27px;font-size:32px;line-height:50px;padding:0;margin-left:10px;background:#53361f;-webkit-flex:none;flex:none}
 .toast{position:absolute;left:50%;bottom:10px;-webkit-transform:translateX(-50%);transform:translateX(-50%);background:#2f81f7;color:#fff;border-radius:20px;padding:8px 16px;font-size:14px;opacity:0;-webkit-transition:opacity .3s;transition:opacity .3s;pointer-events:none;white-space:nowrap}
@@ -149,14 +150,13 @@ h2 b{color:#e9eef4}
     </div>
     <div class="card c-home">
       <div class="hdr">
-        <h2 style="margin:0"><b>Casa</b> · Alexa <span style="font-size:11px;color:#5d6b7c">v14</span></h2>
+        <h2 style="margin:0"><b>🏠 Naparrito</b> · Alexa <span style="font-size:11px;color:#5d6b7c">v15</span></h2>
         <div><span class="status" id="status"><i></i>…</span> <span class="gear" id="gear">⚙</span></div>
       </div>
       <div class="tiles">
-        <div class="tile full"><div class="vbox heat">
-          <div class="vh"><span class="i">🔥</span><div><div class="n">Calefacción</div><div class="s" id="ls-climate">—</div></div>
-            <div class="pmrow"><div class="pm vbtn" data-a="climate:down">−</div><div class="pm vbtn" data-a="climate:up">+</div></div></div>
-          <div class="vb"><div class="vbtn on" data-a="climate:on">Encender</div><div class="vbtn" data-a="climate:off">Apagar</div></div>
+        <div class="tile"><div class="vbox">
+          <div class="vh"><span class="i">🔥</span><div><div class="n">Calefacción</div><div class="s" id="ls-climate">—</div></div></div>
+          <div class="vb"><div class="vbtn on" data-a="climate:on">On</div><div class="vbtn" data-a="climate:off">Off</div><div class="vbtn tb" data-a="climate:down">−</div><div class="vbtn tb" data-a="climate:up">+</div></div>
         </div></div>
         <div class="tile"><div class="vbox">
           <div class="vh"><span class="i">🔌</span><div><div class="n">Enchufe</div><div class="s" id="ls-plug">—</div></div></div>
