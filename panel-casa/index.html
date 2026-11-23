@@ -149,7 +149,7 @@ h2 b{color:#e9eef4}
     </div>
     <div class="card c-home">
       <div class="hdr">
-        <h2 style="margin:0"><b>Casa</b> · Alexa <span style="font-size:11px;color:#5d6b7c">v7</span></h2>
+        <h2 style="margin:0"><b>Casa</b> · Alexa <span style="font-size:11px;color:#5d6b7c">v8</span></h2>
         <div><span class="status" id="status"><i></i>…</span> <span class="gear" id="gear">⚙</span></div>
       </div>
       <div class="tiles">
@@ -503,22 +503,39 @@ function renderDevList(){
   for(i=0;i<vmDevices.length;i++) h+=(i?' · ':'')+'<b>'+esc(vmDevices[i].name)+'</b> ('+esc(vmDevices[i].id)+')';
   el.innerHTML = vmDevices.length ? h : 'Tu cuenta de Voice Monkey no tiene disparadores todavía.';
 }
+function vmGet(url, cb){
+  var r = new XMLHttpRequest(), done=false;
+  try{ r.open('GET', url, true); r.timeout=12000; }catch(e){}
+  r.onreadystatechange=function(){ if(r.readyState!==4||done) return; done=true; cb(r.status, r.responseText||''); };
+  try{ r.send(null); }catch(e){ done=true; cb(0,''); }
+}
 function trigger(val, label){
   if(!cfg.vmToken){ toast('Falta el token de Voice Monkey (⚙)'); return false; }
   if(!val){ toast('Falta el disparador de esta acción (⚙)'); return false; }
-  var id=resolveId(val);
-  var url = VM_API+'/trigger?token='+encodeURIComponent(cfg.vmToken)+'&device='+encodeURIComponent(id)+'&_='+new Date().getTime();
+  var tok=encodeURIComponent(cfg.vmToken), ts='&_='+new Date().getTime();
+  var v3 = VM_API+'/trigger?token='+tok+'&device='+encodeURIComponent(resolveId(val))+ts;
+  var v2 = 'https://api-v2.voicemonkey.io/trigger?token='+tok+'&device='+encodeURIComponent(slug(val))+ts;
   toast('Enviando: '+label+'…');
-  var r = new XMLHttpRequest(), done=false;
-  try{ r.open('GET', url, true); r.timeout=12000; }catch(e){}
-  r.onreadystatechange=function(){
-    if(r.readyState!==4||done) return; done=true;
-    if(r.status>=200 && r.status<300){ toast('✓ Alexa: '+label); }
-    else if(r.status===0){ var img=new Image(); img.src=url+'&f=1'; toast('✓ Enviado: '+label); }   // CORS bloqueado: se manda igual
-    else { var m=''; try{ m=JSON.parse(r.responseText).message||''; }catch(e){}
-      toast('✗ Error '+r.status+(r.status===401?' · token no válido':(r.status===404?' · no existe "'+esc(id)+'"':(m?' · '+esc(m):'')))); }
-  };
-  try{ r.send(null); }catch(e){ var im=new Image(); im.src=url; toast('✓ Enviado: '+label); }
+  function fail(st, txt, which){
+    var m=''; try{ m=JSON.parse(txt).message||''; }catch(e){}
+    var info = st===401 ? ' · token no válido ('+cfg.vmToken.length+' caracteres, empieza por '+esc(cfg.vmToken.substr(0,5))+'…)' :
+               st===404 ? ' · no existe el disparador "'+esc(val)+'"' : (m?' · '+esc(m):'');
+    toast('✗ Error '+st+' ['+which+']'+info);
+  }
+  function tryV2(){
+    vmGet(v2, function(st, txt){
+      if(st>=200 && st<300){ cfg.vmApi='v2'; saveCfg(); toast('✓ Alexa: '+label); }
+      else if(st===0){ var im=new Image(); im.src=v2; toast('✓ Enviado: '+label); }
+      else fail(st, txt, 'v2');
+    });
+  }
+  if(cfg.vmApi==='v2'){ tryV2(); return true; }
+  vmGet(v3, function(st, txt){
+    if(st>=200 && st<300){ toast('✓ Alexa: '+label); }
+    else if(st===0){ var img=new Image(); img.src=v3; toast('✓ Enviado: '+label); }   // CORS bloqueado: se manda igual
+    else if(st===401 || st===403){ tryV2(); }                                        // token de la API antigua (v2)
+    else fail(st, txt, 'v3');
+  });
   return true;
 }
 function doAction(a, el){
@@ -566,7 +583,7 @@ tap($('gear'), function(){ fillForm(); renderDevList(); $('cfg').style.display='
 tap($('f-cancel'), function(){ $('cfg').style.display='none'; });
 tap($('f-reset'), function(){ for(var i=0;i<CROP_KEYS.length;i++) cfg[CROP_KEYS[i]] = DEFAULTS[CROP_KEYS[i]]; fillForm(); });
 tap($('f-save'), function(){
-  cfg.vmToken=$('f-vmToken').value.replace(/\s/g,''); cfg.scenes=$('f-scenes').value;
+  var nt=$('f-vmToken').value.replace(/\s/g,''); if(nt!==cfg.vmToken) cfg.vmApi=''; cfg.vmToken=nt; cfg.scenes=$('f-scenes').value;
   var i; for(i=0;i<VM_KEYS.length;i++) cfg.vm[VM_KEYS[i]]=$('vm-'+i).value.replace(/^\s+|\s+$/g,'');
   for(i=0;i<CROP_KEYS.length;i++) cfg[CROP_KEYS[i]]=num($('f-'+CROP_KEYS[i]).value, DEFAULTS[CROP_KEYS[i]]);
   saveCfg(); $('cfg').style.display='none'; renderScenes(); updStatus(); loadVmDevices(); if(surfTab==='sf') mountSurf();
