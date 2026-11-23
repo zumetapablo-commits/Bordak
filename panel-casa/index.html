@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Casa">
+<title>Panel de casa</title>
+<!--
+  PANEL DOMÓTICO PARA iPad (compatible con iPads viejos: iOS 9+, sólo ES5)
+  - Tiempo Tolosa: tarjeta de Google "tiempo tolosa" incrustada y recortada.
+  - Surf Zarautz: widget oficial de surf-forecast.com + botón a la previsión semanal.
+  - Casa: Home Assistant (API REST). Sin token => MODO DEMO.
+  Instalación: copiar a /config/www/ de Home Assistant y abrir en el iPad
+  http://IP_DE_HA:8123/local/panel-casa.html   (ajustes en el engranaje ⚙)
+-->
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0;background:#0d1117;color:#e9eef4;font-family:-apple-system,"Helvetica Neue",Helvetica,Arial,sans-serif;-webkit-user-select:none;user-select:none;-webkit-text-size-adjust:100%}
+a{color:#5fb3ff;text-decoration:none}
+.wrap{padding:10px}
+.row{display:-webkit-flex;display:flex}
+.card{background:#161c25;border-radius:18px;padding:12px 14px;margin:5px;position:relative;overflow:hidden}
+.c-left{-webkit-flex:1.15;flex:1.15}
+.c-home{-webkit-flex:1;flex:1}
+.c-surf{-webkit-flex:1;flex:1}
+h2{margin:0 0 8px;font-size:15px;font-weight:600;color:#8b98a8}
+h2 b{color:#e9eef4}
+.muted{color:#8b98a8}.small{font-size:13px}
+.hdr{display:-webkit-flex;display:flex;-webkit-justify-content:space-between;justify-content:space-between;-webkit-align-items:center;align-items:center}
+/* reloj */
+.clockrow{display:-webkit-flex;display:flex;-webkit-align-items:flex-end;align-items:flex-end}
+.clock{font-size:64px;font-weight:200;line-height:1;letter-spacing:-2px}
+.date{font-size:17px;color:#b7c2cf;margin:0 0 6px 14px;text-transform:capitalize}
+/* incrustados (Google / surf-forecast) */
+.crop{position:relative;overflow:hidden;border-radius:12px;background:#fff;margin-top:10px;-webkit-overflow-scrolling:touch}
+.crop iframe{position:absolute;border:0;-webkit-transform-origin:0 0;transform-origin:0 0}
+.crop .ph{position:absolute;left:0;top:0;right:0;bottom:0;display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;-webkit-justify-content:center;justify-content:center;color:#555;font-size:14px}
+.links{margin-top:8px;font-size:13px}
+.links a{display:inline-block;background:#1f2733;border-radius:10px;padding:8px 12px;margin-right:6px;color:#cfe3ff}
+/* casa */
+.hometemp{font-size:15px;color:#b7c2cf}
+.hometemp b{font-size:26px;color:#fff;font-weight:400}
+.tiles{display:-webkit-flex;display:flex;-webkit-flex-wrap:wrap;flex-wrap:wrap;margin:4px -5px 0}
+.tile{width:50%;padding:5px}
+.tile.full{width:100%}
+.btn{background:#1f2733;border-radius:14px;padding:11px 12px;min-height:72px;cursor:pointer;display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;-webkit-transition:background .2s;transition:background .2s}
+.btn .i{font-size:30px;margin-right:10px;opacity:.55}
+.btn .n{font-size:15px;font-weight:600}
+.btn .s{font-size:13px;color:#8b98a8;margin-top:2px}
+.btn.on{background:#2b4a2f}.btn.on .i{opacity:1}
+.btn.heat.on{background:#53361f}
+.thermo{display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;margin-left:auto}
+.pm{width:54px;height:54px;border-radius:27px;background:#2c3644;color:#fff;font-size:30px;line-height:52px;text-align:center;cursor:pointer}
+.tgt{font-size:30px;font-weight:300;width:84px;text-align:center}
+.scenes{display:-webkit-flex;display:flex;margin:6px -5px 0}
+.scene{-webkit-flex:1;flex:1;margin:0 5px;background:#1f2733;border-radius:12px;padding:10px;text-align:center;font-size:14px;cursor:pointer}
+.scene:active,.btn:active,.pm:active{background:#34404f}
+.status{font-size:12px;color:#8b98a8}
+.status i{display:inline-block;width:8px;height:8px;border-radius:4px;background:#8b98a8;margin-right:5px;font-style:normal}
+.status.ok i{background:#3fb950}.status.err i{background:#f85149}.status.demo i{background:#d29922}
+.gear{font-size:22px;padding:2px 6px;cursor:pointer;color:#8b98a8}
+/* modal */
+#dim{position:fixed;left:0;top:0;right:0;bottom:0;background:#000;opacity:0;pointer-events:none;-webkit-transition:opacity 1s;transition:opacity 1s}
+#cfg{position:fixed;left:0;top:0;right:0;bottom:0;background:rgba(0,0,0,.8);display:none;overflow:auto;-webkit-overflow-scrolling:touch}
+#cfg .box{background:#1a212b;max-width:640px;margin:24px auto;border-radius:16px;padding:18px 20px}
+#cfg h3{font-size:14px;color:#e9eef4;margin:16px 0 0}
+#cfg label{display:block;font-size:13px;color:#8b98a8;margin:8px 0 3px}
+#cfg input{width:100%;font-size:16px;padding:9px 10px;border-radius:8px;border:1px solid #2f3a48;background:#0f141b;color:#fff;-webkit-user-select:text;user-select:text}
+#cfg .two{display:-webkit-flex;display:flex}
+#cfg .two div{-webkit-flex:1;flex:1;margin-right:10px}
+#cfg .two div:last-child{margin-right:0}
+#cfg .acts{margin-top:16px;text-align:right}
+#cfg button{font-size:16px;padding:10px 18px;border-radius:10px;border:0;margin-left:8px;background:#2c3644;color:#fff}
+#cfg button.pri{background:#2f81f7}
+@media (orientation:portrait){
+  .row{-webkit-flex-wrap:wrap;flex-wrap:wrap}
+  .c-left,.c-home,.c-surf{-webkit-flex:1 1 100%;flex:1 1 100%;width:100%}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="row">
+    <div class="card c-left">
+      <div class="clockrow"><div class="clock" id="clock">--:--</div><div class="date" id="date"></div></div>
+      <div class="crop" id="g-crop"><div class="ph">Cargando el tiempo de Google…</div></div>
+    </div>
+    <div class="card c-home">
+      <div class="hdr">
+        <div class="hometemp">Casa <b id="htemp">--</b><b style="font-size:16px">°</b> <span id="hhum"></span></div>
+        <div><span class="status" id="status"><i></i>…</span> <span class="gear" id="gear">⚙</span></div>
+      </div>
+      <div class="tiles">
+        <div class="tile full"><div class="btn heat" id="t-climate">
+          <span class="i">🔥</span><div><div class="n">Calefacción</div><div class="s" id="s-climate">--</div></div>
+          <div class="thermo"><div class="pm" id="c-minus">−</div><div class="tgt" id="c-tgt">--°</div><div class="pm" id="c-plus">+</div></div>
+        </div></div>
+        <div class="tile"><div class="btn" id="t-plug"><span class="i">🔌</span><div><div class="n">Enchufe</div><div class="s" id="s-plug">--</div></div></div></div>
+        <div class="tile"><div class="btn" id="t-vacuum"><span class="i">🧹</span><div><div class="n">Roomba</div><div class="s" id="s-vacuum">--</div></div></div></div>
+        <div class="tile"><div class="btn" id="t-tv"><span class="i">📺</span><div><div class="n">Televisión</div><div class="s" id="s-tv">--</div></div></div></div>
+        <div class="tile"><div class="btn" id="t-night"><span class="i">🌙</span><div><div class="n">Pantalla</div><div class="s" id="s-night">Atenuar</div></div></div></div>
+      </div>
+      <div class="scenes" id="scenes"></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="card c-surf">
+      <div class="hdr"><h2><b>Surf Zarautz</b> · surf-forecast.com</h2><span class="small muted" id="s-upd"></span></div>
+      <div class="crop" id="s-crop"><div class="ph">Cargando surf-forecast…</div></div>
+      <div class="links">
+        <a href="https://es.surf-forecast.com/breaks/Zarautz/forecasts/latest/six_day" target="_blank">🌊 Semana completa</a>
+        <a href="https://es.surf-forecast.com/breaks/Zarautz/forecasts/latest" target="_blank">Hora a hora</a>
+        <a href="https://es.surf-forecast.com/breaks/Zarautz/tides/latest" target="_blank">Mareas</a>
+        <a href="https://www.google.com/search?q=tiempo+tolosa&amp;hl=es" target="_blank">Google · tiempo Tolosa</a>
+        <a href="#" id="reload-emb">↻ Recargar</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="dim"></div>
+<div id="cfg"><div class="box">
+  <h2><b>Ajustes</b></h2>
+  <h3>Home Assistant</h3>
+  <div class="small muted">Deja la URL vacía si el panel se sirve desde el propio Home Assistant (/local/). Sin token funciona en modo demo.</div>
+  <label>URL de Home Assistant</label><input id="f-haUrl" placeholder="http://192.168.1.50:8123" autocapitalize="off" autocorrect="off">
+  <label>Token de larga duración</label><input id="f-haToken" placeholder="eyJ0eXAi..." autocapitalize="off" autocorrect="off">
+  <div class="two"><div><label>Calefacción (climate)</label><input id="f-e-climate" autocapitalize="off"></div><div><label>Sensor temperatura casa</label><input id="f-e-homeTemp" autocapitalize="off"></div></div>
+  <div class="two"><div><label>Sensor humedad (opcional)</label><input id="f-e-homeHum" autocapitalize="off"></div><div><label>Enchufe</label><input id="f-e-plug" autocapitalize="off"></div></div>
+  <div class="two"><div><label>Potencia enchufe (opcional)</label><input id="f-e-plugPower" autocapitalize="off"></div><div><label>Roomba (vacuum)</label><input id="f-e-vacuum" autocapitalize="off"></div></div>
+  <div class="two"><div><label>Televisión (media_player)</label><input id="f-e-tv" autocapitalize="off"></div><div><label>Escenas (script./scene., separadas por coma)</label><input id="f-scenes" autocapitalize="off"></div></div>
+  <h3>Recorte del tiempo de Google</h3>
+  <div class="small muted">Si la tarjeta de Google sale descolocada, ajusta estos números (píxeles) hasta que quede centrada.</div>
+  <div class="two"><div><label>Desplazar arriba (px)</label><input id="f-gTop" type="number"></div><div><label>Desplazar izquierda (px)</label><input id="f-gLeft" type="number"></div></div>
+  <div class="two"><div><label>Escala (0.5–1.2)</label><input id="f-gScale" type="number" step="0.05"></div><div><label>Alto de la caja (px)</label><input id="f-gHeight" type="number"></div></div>
+  <h3>Widget de surf</h3>
+  <div class="two"><div><label>Alto de la caja (px)</label><input id="f-sHeight" type="number"></div><div><label>Escala (0.6–1.3)</label><input id="f-sScale" type="number" step="0.05"></div></div>
+  <div class="acts"><button id="f-reset">Restablecer recortes</button><button id="f-cancel">Cancelar</button><button class="pri" id="f-save">Guardar</button></div>
+</div></div>
+
+<script>
+(function(){
+'use strict';
+
+/* ======================= CONFIGURACIÓN ======================= */
+var DEFAULTS = {
+  haUrl: '', haToken: '',
+  entities: {
+    climate:'climate.calefaccion', homeTemp:'sensor.temperatura_salon', homeHum:'sensor.humedad_salon',
+    plug:'switch.enchufe', plugPower:'', vacuum:'vacuum.roomba', tv:'media_player.tv'
+  },
+  scenes: 'script.salgo_de_casa, script.buenas_noches',
+  // Recorte de la tarjeta de Google (ajustable desde ⚙)
+  gTop: 150, gLeft: 0, gScale: 0.85, gHeight: 330,
+  // Widget de surf-forecast
+  sHeight: 330, sScale: 1,
+  nightFrom: 23, nightTo: 7
+};
+var GOOGLE_URL = 'https://www.google.com/search?igu=1&hl=es&gl=es&q=tiempo+tolosa+gipuzkoa';
+var SURF_URL   = 'https://es.surf-forecast.com/breaks/Zarautz/forecasts/widget/a';
+var SCENE_NAMES = {'script.salgo_de_casa':'🚪 Salgo de casa','script.buenas_noches':'🌙 Buenas noches'};
+var CROP_KEYS = ['gTop','gLeft','gScale','gHeight','sHeight','sScale'];
+
+var cfg = loadCfg();
+function clone(o){ return JSON.parse(JSON.stringify(o)); }
+function loadCfg(){
+  var c = clone(DEFAULTS);
+  try{
+    var s = window.localStorage.getItem('panelcasa.cfg');
+    if(s){ var o = JSON.parse(s); for(var k in o){ if(k==='entities'){ for(var e in o.entities) c.entities[e]=o.entities[e]; } else c[k]=o[k]; } }
+  }catch(err){}
+  return c;
+}
+function saveCfg(){ try{ window.localStorage.setItem('panelcasa.cfg', JSON.stringify(cfg)); }catch(err){} }
+function demo(){ return !cfg.haToken; }
+
+/* ======================= UTILIDADES ======================= */
+function $(id){ return document.getElementById(id); }
+function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+function pad(n){ return n<10?'0'+n:''+n; }
+function tap(el, fn){ if(el) el.addEventListener('click', fn, false); }
+function xhr(method, url, body, headers, cb){
+  var r = new XMLHttpRequest(), done=false;
+  r.open(method, url, true);
+  try{ r.timeout = 15000; }catch(e){}
+  if(headers){ for(var k in headers){ if(headers.hasOwnProperty(k)) r.setRequestHeader(k, headers[k]); } }
+  r.onreadystatechange = function(){
+    if(r.readyState!==4 || done) return; done=true;
+    if(r.status>=200 && r.status<300){ var d=null; try{ d=JSON.parse(r.responseText); }catch(e){} cb(null,d); }
+    else cb(new Error('HTTP '+r.status));
+  };
+  r.send(body ? JSON.stringify(body) : null);
+}
+var DIAS  = ['domingo','lunes','martes','miércoles','jueves','viernes','sábado'];
+var MESES = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+
+/* ======================= INCRUSTADOS ======================= */
+function num(v, d){ var n=parseFloat(v); return isNaN(n)?d:n; }
+function setTransform(el, s){ var t='scale('+s+')'; el.style.webkitTransform=t; el.style.transform=t; }
+function mountGoogle(){
+  var box=$('g-crop'), s=num(cfg.gScale,0.85), h=num(cfg.gHeight,330);
+  box.style.height = h+'px';
+  var w = box.clientWidth || 460;
+  var f = document.createElement('iframe');
+  f.setAttribute('scrolling','no');
+  // ancho del iframe = ancho de la caja / escala, para que la tarjeta ocupe todo el ancho
+  f.style.width  = Math.round(w/s)+'px';
+  f.style.height = Math.round((h+num(cfg.gTop,150)*s+200)/s)+'px';
+  f.style.left = (-num(cfg.gLeft,0)*s)+'px';
+  f.style.top  = (-num(cfg.gTop,150)*s)+'px';
+  setTransform(f, s);
+  f.src = GOOGLE_URL + '&t=' + new Date().getTime();
+  box.innerHTML=''; box.appendChild(f);
+}
+function mountSurf(){
+  var box=$('s-crop'), s=num(cfg.sScale,1), h=num(cfg.sHeight,330);
+  box.style.height = h+'px';
+  var w = box.clientWidth || 980;
+  var f = document.createElement('iframe');
+  f.setAttribute('scrolling','no');
+  f.style.width = Math.round(w/s)+'px';
+  f.style.height = Math.round(h/s)+'px';
+  f.style.left='0'; f.style.top='0';
+  setTransform(f, s);
+  f.src = SURF_URL;
+  box.innerHTML=''; box.appendChild(f);
+  var d=new Date(); $('s-upd').innerHTML='actualizado '+pad(d.getHours())+':'+pad(d.getMinutes());
+}
+function mountAll(){ mountGoogle(); mountSurf(); }
+tap($('reload-emb'), function(ev){ ev.preventDefault(); mountAll(); });
+
+/* ======================= RELOJ + ATENUACIÓN ======================= */
+var manualDim = false;
+function tick(){
+  var d = new Date();
+  $('clock').innerHTML = pad(d.getHours())+':'+pad(d.getMinutes());
+  $('date').innerHTML = DIAS[d.getDay()]+', '+d.getDate()+' de '+MESES[d.getMonth()];
+  var h = d.getHours();
+  var night = cfg.nightFrom > cfg.nightTo ? (h>=cfg.nightFrom || h<cfg.nightTo) : (h>=cfg.nightFrom && h<cfg.nightTo);
+  $('dim').style.opacity = manualDim ? '0.85' : (night ? '0.6' : '0');
+  $('s-night').innerHTML = manualDim ? 'Atenuada · toca para encender' : (night ? 'Modo noche' : 'Atenuar');
+  $('t-night').className = 'btn' + (manualDim ? ' on' : '');
+}
+tap($('t-night'), function(){ manualDim = !manualDim; tick(); });
+
+/* ======================= HOME ASSISTANT ======================= */
+var st = {plug:{on:false,power:null}, climate:{on:true,cur:20.5,tgt:21,action:'heating',min:7,max:30,step:0.5},
+          temp:20.5, hum:52, vacuum:{state:'docked',bat:100}, tv:{on:false,src:''}};
+var lastLocal = 0;
+function haBase(){ return (cfg.haUrl||'').replace(/\/+$/,''); }
+function haHeaders(){ return {'Authorization':'Bearer '+cfg.haToken,'Content-Type':'application/json'}; }
+function setStatus(cls, txt){ var s=$('status'); s.className='status '+cls; s.innerHTML='<i></i>'+txt; }
+
+function refreshHA(){
+  if(demo()){ setStatus('demo','Modo demo'); renderHome(); return; }
+  var t0 = new Date().getTime();
+  xhr('GET', haBase()+'/api/states', null, haHeaders(), function(err, list){
+    if(err || !list){ setStatus('err','Sin conexión con HA'); return; }
+    if(t0 < lastLocal) return;
+    setStatus('ok','Conectado');
+    var m={}, i; for(i=0;i<list.length;i++) m[list[i].entity_id]=list[i];
+    var E = cfg.entities, s;
+    if((s=m[E.plug])) st.plug.on = s.state==='on';
+    if(E.plugPower && (s=m[E.plugPower])) st.plug.power = parseFloat(s.state);
+    if((s=m[E.climate])){ var a=s.attributes||{};
+      st.climate.on = s.state!=='off' && s.state!=='unavailable';
+      st.climate.cur = a.current_temperature; st.climate.tgt = a.temperature; st.climate.action = a.hvac_action||'';
+      st.climate.min = a.min_temp||7; st.climate.max = a.max_temp||30; st.climate.step = a.target_temp_step||0.5; }
+    st.temp = null; st.hum = null;
+    if(E.homeTemp && (s=m[E.homeTemp]) && !isNaN(parseFloat(s.state))) st.temp = parseFloat(s.state);
+    else if(m[E.climate]) st.temp = st.climate.cur;
+    if(E.homeHum && (s=m[E.homeHum]) && !isNaN(parseFloat(s.state))) st.hum = parseFloat(s.state);
+    if((s=m[E.vacuum])){ st.vacuum.state = s.state; st.vacuum.bat = (s.attributes||{}).battery_level; }
+    if((s=m[E.tv])){ st.tv.on = ['off','standby','unavailable','unknown'].indexOf(s.state)<0; st.tv.src=(s.attributes||{}).source||(s.attributes||{}).app_name||''; }
+    renderHome();
+  });
+}
+function call(domain, service, data){
+  lastLocal = new Date().getTime();
+  renderHome();
+  if(demo()) return;
+  xhr('POST', haBase()+'/api/services/'+domain+'/'+service, data, haHeaders(), function(err){
+    if(err) setStatus('err','Error al enviar');
+    setTimeout(refreshHA, 1200);
+  });
+}
+var VAC = {cleaning:'Limpiando',docked:'En la base',returning:'Volviendo a la base',idle:'En espera',paused:'En pausa',error:'Error',unavailable:'No disponible'};
+function renderHome(){
+  $('htemp').innerHTML = st.temp!=null ? (Math.round(st.temp*10)/10) : '--';
+  $('hhum').innerHTML = st.hum!=null ? '· 💧'+Math.round(st.hum)+'%' : '';
+  var c = st.climate;
+  $('t-climate').className = 'btn heat'+(c.on?' on':'');
+  $('s-climate').innerHTML = c.on ? (c.action==='heating' ? 'Calentando' : 'Encendida')+(c.cur!=null?' · ahora '+c.cur+'°':'') : 'Apagada · toca para encender';
+  $('c-tgt').innerHTML = c.tgt!=null ? c.tgt+'°' : '--°';
+  $('t-plug').className = 'btn'+(st.plug.on?' on':'');
+  $('s-plug').innerHTML = (st.plug.on?'Encendido':'Apagado')+(st.plug.power!=null&&!isNaN(st.plug.power)?' · '+Math.round(st.plug.power)+' W':'');
+  var vs = st.vacuum.state;
+  $('t-vacuum').className = 'btn'+(vs==='cleaning'?' on':'');
+  $('s-vacuum').innerHTML = (VAC[vs]||vs)+(st.vacuum.bat!=null?' · 🔋'+st.vacuum.bat+'%':'');
+  $('t-tv').className = 'btn'+(st.tv.on?' on':'');
+  $('s-tv').innerHTML = st.tv.on ? 'Encendida'+(st.tv.src?' · '+esc(st.tv.src):'') : 'Apagada';
+}
+function dom(e){ return e.split('.')[0]; }
+
+tap($('t-plug'), function(){
+  var e=cfg.entities.plug; st.plug.on=!st.plug.on;
+  call(dom(e), st.plug.on?'turn_on':'turn_off', {entity_id:e});
+});
+tap($('t-tv'), function(){
+  st.tv.on=!st.tv.on;
+  call('media_player', st.tv.on?'turn_on':'turn_off', {entity_id:cfg.entities.tv});
+});
+tap($('t-vacuum'), function(){
+  var cleaning = st.vacuum.state==='cleaning';
+  st.vacuum.state = cleaning ? 'returning' : 'cleaning';
+  call('vacuum', cleaning?'return_to_base':'start', {entity_id:cfg.entities.vacuum});
+});
+tap($('t-climate'), function(ev){
+  var t=ev.target; while(t && t!==this){ if(t.className && /pm/.test(t.className)) return; t=t.parentNode; }
+  st.climate.on=!st.climate.on;
+  call('climate','set_hvac_mode',{entity_id:cfg.entities.climate, hvac_mode: st.climate.on?'heat':'off'});
+});
+var tTimer=null;
+function bump(dir){
+  var c=st.climate, v=(c.tgt!=null?c.tgt:20)+dir*(c.step||0.5);
+  v=Math.max(c.min||7, Math.min(c.max||30, Math.round(v*10)/10));
+  c.tgt=v; lastLocal=new Date().getTime(); renderHome();
+  clearTimeout(tTimer);
+  tTimer=setTimeout(function(){ call('climate','set_temperature',{entity_id:cfg.entities.climate, temperature:v}); }, 1200);
+}
+tap($('c-minus'), function(){ bump(-1); });
+tap($('c-plus'),  function(){ bump(1); });
+
+function renderScenes(){
+  var list = (cfg.scenes||'').split(','), html='', i;
+  for(i=0;i<list.length;i++){
+    var e = list[i].replace(/\s/g,''); if(!e || e.indexOf('.')<0) continue;
+    var name = SCENE_NAMES[e] || ('✨ '+e.split('.')[1].replace(/_/g,' '));
+    html += '<div class="scene" data-e="'+esc(e)+'">'+esc(name)+'</div>';
+  }
+  $('scenes').innerHTML = html;
+  var els = $('scenes').getElementsByTagName('div');
+  for(i=0;i<els.length;i++){ (function(el){ tap(el, function(){
+    var e = el.getAttribute('data-e'); el.style.background='#2f81f7';
+    setTimeout(function(){ el.style.background=''; }, 600);
+    var d = dom(e); call(d==='script'||d==='scene' ? d : 'homeassistant', 'turn_on', {entity_id:e});
+  }); })(els[i]); }
+}
+
+/* ======================= AJUSTES ======================= */
+var EFIELDS = ['climate','homeTemp','homeHum','plug','plugPower','vacuum','tv'];
+function fillForm(){
+  $('f-haUrl').value = cfg.haUrl||''; $('f-haToken').value = cfg.haToken||''; $('f-scenes').value = cfg.scenes||'';
+  var i; for(i=0;i<EFIELDS.length;i++) $('f-e-'+EFIELDS[i]).value = cfg.entities[EFIELDS[i]]||'';
+  for(i=0;i<CROP_KEYS.length;i++) $('f-'+CROP_KEYS[i]).value = cfg[CROP_KEYS[i]];
+}
+tap($('gear'), function(){ fillForm(); $('cfg').style.display='block'; });
+tap($('f-cancel'), function(){ $('cfg').style.display='none'; });
+tap($('f-reset'), function(){ for(var i=0;i<CROP_KEYS.length;i++) cfg[CROP_KEYS[i]] = DEFAULTS[CROP_KEYS[i]]; fillForm(); });
+tap($('f-save'), function(){
+  cfg.haUrl = $('f-haUrl').value.replace(/\s/g,''); cfg.haToken = $('f-haToken').value.replace(/\s/g,''); cfg.scenes = $('f-scenes').value;
+  var i; for(i=0;i<EFIELDS.length;i++) cfg.entities[EFIELDS[i]] = $('f-e-'+EFIELDS[i]).value.replace(/\s/g,'');
+  for(i=0;i<CROP_KEYS.length;i++) cfg[CROP_KEYS[i]] = num($('f-'+CROP_KEYS[i]).value, DEFAULTS[CROP_KEYS[i]]);
+  saveCfg(); $('cfg').style.display='none'; renderScenes(); refreshHA(); mountAll();
+});
+
+/* ======================= ARRANQUE ======================= */
+tick(); setInterval(tick, 10000);
+renderScenes(); renderHome(); refreshHA(); setInterval(refreshHA, 10000);
+mountAll();
+setInterval(mountGoogle, 30*60*1000);   // Google cada 30 min
+setInterval(mountSurf,   60*60*1000);   // surf-forecast cada hora
+var lastW = window.innerWidth;
+window.addEventListener('resize', function(){ if(Math.abs(window.innerWidth-lastW)>50){ lastW=window.innerWidth; mountAll(); } }, false);
+setInterval(function(){ var d=new Date(); if(d.getHours()===4 && d.getMinutes()<1) location.reload(); }, 50000);
+})();
+</script>
+</body>
+</html>
