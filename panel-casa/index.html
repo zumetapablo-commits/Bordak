@@ -149,7 +149,7 @@ h2 b{color:#e9eef4}
     </div>
     <div class="card c-home">
       <div class="hdr">
-        <h2 style="margin:0"><b>Casa</b> · Alexa <span style="font-size:11px;color:#5d6b7c">v12</span></h2>
+        <h2 style="margin:0"><b>Casa</b> · Alexa <span style="font-size:11px;color:#5d6b7c">v13</span></h2>
         <div><span class="status" id="status"><i></i>…</span> <span class="gear" id="gear">⚙</span></div>
       </div>
       <div class="tiles">
@@ -206,6 +206,8 @@ h2 b{color:#e9eef4}
   <div class="small" id="vm-list" style="color:#b7c2cf;margin-top:8px"></div>
   <div class="small muted" style="margin-top:6px">Puedes poner el nombre del disparador (p. ej. «enchufe on») o su ID.</div>
   <div id="vm-fields"></div>
+  <div style="margin-top:10px"><button id="f-test" style="margin:0">Probar conexión</button></div>
+  <div class="small" id="vm-test" style="color:#b7c2cf;margin-top:6px;word-break:break-all"></div>
   <label>Escenas extra (IDs de Voice Monkey separados por coma, opcional)</label><input id="f-scenes" autocapitalize="off" placeholder="salgo-de-casa, buenas-noches">
   <h3>Widget de surf</h3>
   <div class="two"><div><label>Alto de la caja (px, 0 = automático)</label><input id="f-sHeight" type="number"></div><div><label>Escala (0.6–1.3)</label><input id="f-sScale" type="number" step="0.05"></div></div>
@@ -560,6 +562,25 @@ function renderScenes(){
   }); })(els[i]); }
 }
 
+function testVm(){
+  var t=cleanTok($('f-vmToken').value)||cfg.vmToken, out=$('vm-test'), res=[];
+  out.innerHTML='Probando…';
+  function show(){ out.innerHTML='Token: '+esc(t.substr(0,8))+'…'+esc(t.substr(-8))+' ('+t.length+' car.)<br>'+res.join('<br>')+'<br><span class="muted">'+esc(navigator.userAgent)+'</span>'; }
+  function body(st, txt){ var j=null; try{ j=JSON.parse(txt); }catch(e){} return 'HTTP '+st+' '+(j?(j.success===true?'OK ('+(j.data?j.data.length:0)+')':(j.message||j.error||'')):String(txt||'').substr(0,60)); }
+  vmGet(VM_API+'/devices?token='+encodeURIComponent(t)+'&_='+new Date().getTime(), function(st, txt){
+    res.push('A) GET ?token= → '+body(st, txt)); show();
+    var r=new XMLHttpRequest(); r.open('POST', VM_API+'/devices', true);
+    r.setRequestHeader('Content-Type','text/plain');
+    r.onreadystatechange=function(){ if(r.readyState!==4) return;
+      res.push('B) POST cuerpo → '+body(r.status, r.responseText)); show();
+      var q=new XMLHttpRequest(); q.open('GET', VM_API+'/devices?_='+new Date().getTime(), true);
+      q.setRequestHeader('Authorization','Bearer '+t);
+      q.onreadystatechange=function(){ if(q.readyState!==4) return; res.push('C) cabecera Bearer → '+body(q.status, q.responseText)); show(); };
+      try{ q.send(null); }catch(e){ res.push('C) error '+e); show(); }
+    };
+    try{ r.send(JSON.stringify({token:t})); }catch(e){ res.push('B) error '+e); show(); }
+  });
+}
 /* ======================= AJUSTES ======================= */
 var VM_KEYS = ['climate:on','climate:off','climate:up','climate:down','plug:on','plug:off','vacuum:start','vacuum:dock','tv:on','tv:off'];
 function buildVmFields(){
@@ -577,6 +598,7 @@ function fillForm(){
 }
 tap($('gear'), function(){ fillForm(); renderDevList(); $('cfg').style.display='block'; });
 tap($('f-cancel'), function(){ $('cfg').style.display='none'; });
+tap($('f-test'), function(){ testVm(); });
 tap($('f-reset'), function(){ for(var i=0;i<CROP_KEYS.length;i++) cfg[CROP_KEYS[i]] = DEFAULTS[CROP_KEYS[i]]; fillForm(); });
 tap($('f-save'), function(){
   var nt=cleanTok($('f-vmToken').value); if(nt!==cfg.vmToken) cfg.vmApi=''; cfg.vmToken=nt; cfg.scenes=$('f-scenes').value;
