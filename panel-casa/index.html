@@ -11,7 +11,7 @@
   PANEL DOMÓTICO PARA iPad (compatible con iPads viejos: iOS 9+, sólo ES5)
   - Tiempo Tolosa: tarjeta de Google "tiempo tolosa" incrustada y recortada.
   - Surf Zarautz: widget oficial de surf-forecast.com + botón a la previsión semanal.
-  - Casa: Home Assistant (API REST). Sin token => MODO DEMO.
+  - Casa: Alexa vía Voice Monkey (cada botón dispara una rutina de Alexa).
   Instalación: copiar a /config/www/ de Home Assistant y abrir en el iPad
   http://IP_DE_HA:8123/local/panel-casa.html   (ajustes en el engranaje ⚙)
 -->
@@ -80,6 +80,22 @@ h2 b{color:#e9eef4}
 .status i{display:inline-block;width:8px;height:8px;border-radius:4px;background:#8b98a8;margin-right:5px;font-style:normal}
 .status.ok i{background:#3fb950}.status.err i{background:#f85149}.status.demo i{background:#d29922}
 .gear{font-size:22px;padding:2px 6px;cursor:pointer;color:#8b98a8}
+/* botones Alexa */
+.vbox{background:#1f2733;border-radius:14px;padding:10px 12px;min-height:100px}
+.vbox.heat{background:#3a2a1d}
+.vh{display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center}
+.vh .i{font-size:28px;margin-right:10px}
+.vh .n{font-size:15px;font-weight:600}
+.vh .s{font-size:12px;color:#8b98a8;margin-top:2px}
+.vh .vb{margin:0 0 0 auto;width:52%}
+.vb{display:-webkit-flex;display:flex;margin-top:8px}
+.vbtn{-webkit-flex:1;flex:1;text-align:center;background:#2c3644;border-radius:10px;padding:11px 4px;font-size:14px;margin-right:6px;cursor:pointer}
+.vbtn:last-child{margin-right:0}
+.vbtn.on{background:#2b4a2f}
+.vbtn:active,.vbtn.sent{background:#2f81f7}
+.temps{display:-webkit-flex;display:flex;margin-top:8px}
+.temps .vbtn{background:#53361f;font-size:17px}
+.toast{position:absolute;left:50%;bottom:10px;-webkit-transform:translateX(-50%);transform:translateX(-50%);background:#2f81f7;color:#fff;border-radius:20px;padding:8px 16px;font-size:14px;opacity:0;-webkit-transition:opacity .3s;transition:opacity .3s;pointer-events:none;white-space:nowrap}
 /* modal */
 #dim{position:fixed;left:0;top:0;right:0;bottom:0;background:#000;opacity:0;pointer-events:none;-webkit-transition:opacity 1s;transition:opacity 1s}
 #cfg{position:fixed;left:0;top:0;right:0;bottom:0;background:rgba(0,0,0,.8);display:none;overflow:auto;-webkit-overflow-scrolling:touch}
@@ -110,20 +126,31 @@ h2 b{color:#e9eef4}
     </div>
     <div class="card c-home">
       <div class="hdr">
-        <div class="hometemp">Casa <b id="htemp">--</b><b style="font-size:16px">°</b> <span id="hhum"></span></div>
+        <h2 style="margin:0"><b>Casa</b> · Alexa</h2>
         <div><span class="status" id="status"><i></i>…</span> <span class="gear" id="gear">⚙</span></div>
       </div>
       <div class="tiles">
-        <div class="tile full"><div class="btn heat" id="t-climate">
-          <span class="i">🔥</span><div><div class="n">Calefacción</div><div class="s" id="s-climate">--</div></div>
-          <div class="thermo"><div class="pm" id="c-minus">−</div><div class="tgt" id="c-tgt">--°</div><div class="pm" id="c-plus">+</div></div>
+        <div class="tile full"><div class="vbox heat">
+          <div class="vh"><span class="i">🔥</span><div><div class="n">Calefacción</div><div class="s" id="ls-climate">—</div></div>
+            <div class="vb"><div class="vbtn on" data-a="climate:on">Encender</div><div class="vbtn" data-a="climate:off">Apagar</div></div></div>
+          <div class="temps" id="temps"></div>
         </div></div>
-        <div class="tile"><div class="btn" id="t-plug"><span class="i">🔌</span><div><div class="n">Enchufe</div><div class="s" id="s-plug">--</div></div></div></div>
-        <div class="tile"><div class="btn" id="t-vacuum"><span class="i">🧹</span><div><div class="n">Roomba</div><div class="s" id="s-vacuum">--</div></div></div></div>
-        <div class="tile"><div class="btn" id="t-tv"><span class="i">📺</span><div><div class="n">Televisión</div><div class="s" id="s-tv">--</div></div></div></div>
-        <div class="tile"><div class="btn" id="t-night"><span class="i">🌙</span><div><div class="n">Pantalla</div><div class="s" id="s-night">Atenuar</div></div></div></div>
+        <div class="tile"><div class="vbox">
+          <div class="vh"><span class="i">🔌</span><div><div class="n">Enchufe</div><div class="s" id="ls-plug">—</div></div></div>
+          <div class="vb"><div class="vbtn on" data-a="plug:on">Encender</div><div class="vbtn" data-a="plug:off">Apagar</div></div>
+        </div></div>
+        <div class="tile"><div class="vbox">
+          <div class="vh"><span class="i">🧹</span><div><div class="n">Aspiradora</div><div class="s" id="ls-vacuum">—</div></div></div>
+          <div class="vb"><div class="vbtn on" data-a="vacuum:start">Limpiar</div><div class="vbtn" data-a="vacuum:dock">A la base</div></div>
+        </div></div>
+        <div class="tile"><div class="vbox">
+          <div class="vh"><span class="i">📺</span><div><div class="n">Televisión</div><div class="s" id="ls-tv">—</div></div></div>
+          <div class="vb"><div class="vbtn on" data-a="tv:on">Encender</div><div class="vbtn" data-a="tv:off">Apagar</div></div>
+        </div></div>
+        <div class="tile"><div class="btn" id="t-night" style="min-height:100px"><span class="i">🌙</span><div><div class="n">Pantalla</div><div class="s" id="s-night">Atenuar</div></div></div></div>
       </div>
       <div class="scenes" id="scenes"></div>
+      <div class="toast" id="toast"></div>
     </div>
   </div>
   <div class="row">
@@ -143,17 +170,14 @@ h2 b{color:#e9eef4}
 <div id="dim"></div>
 <div id="cfg"><div class="box">
   <h2><b>Ajustes</b></h2>
-  <h3>Home Assistant</h3>
-  <div class="small muted">Deja la URL vacía si el panel se sirve desde el propio Home Assistant (/local/). Sin token funciona en modo demo.</div>
-  <label>URL de Home Assistant</label><input id="f-haUrl" placeholder="http://192.168.1.50:8123" autocapitalize="off" autocorrect="off">
-  <label>Token de larga duración</label><input id="f-haToken" placeholder="eyJ0eXAi..." autocapitalize="off" autocorrect="off">
-  <div class="two"><div><label>Calefacción (climate)</label><input id="f-e-climate" autocapitalize="off"></div><div><label>Sensor temperatura casa</label><input id="f-e-homeTemp" autocapitalize="off"></div></div>
-  <div class="two"><div><label>Sensor humedad (opcional)</label><input id="f-e-homeHum" autocapitalize="off"></div><div><label>Enchufe</label><input id="f-e-plug" autocapitalize="off"></div></div>
-  <div class="two"><div><label>Potencia enchufe (opcional)</label><input id="f-e-plugPower" autocapitalize="off"></div><div><label>Roomba (vacuum)</label><input id="f-e-vacuum" autocapitalize="off"></div></div>
-  <div class="two"><div><label>Televisión (media_player)</label><input id="f-e-tv" autocapitalize="off"></div><div><label>Escenas (script./scene., separadas por coma)</label><input id="f-scenes" autocapitalize="off"></div></div>
+  <h3>Alexa · Voice Monkey</h3>
+  <div class="small muted">Pega tu token de Voice Monkey (consola de voicemonkey.io &gt; API). Debajo, el ID de cada disparador ("Routine Trigger") tal como lo creaste en Voice Monkey.</div>
+  <label>Token de Voice Monkey</label><input id="f-vmToken" placeholder="token" autocapitalize="off" autocorrect="off">
+  <div id="vm-fields"></div>
+  <label>Escenas extra (IDs de Voice Monkey separados por coma, opcional)</label><input id="f-scenes" autocapitalize="off" placeholder="salgo-de-casa, buenas-noches">
   <h3>Widget de surf</h3>
   <div class="two"><div><label>Alto de la caja (px, 0 = automático)</label><input id="f-sHeight" type="number"></div><div><label>Escala (0.6–1.3)</label><input id="f-sScale" type="number" step="0.05"></div></div>
-  <div class="acts"><button id="f-reset">Restablecer recortes</button><button id="f-cancel">Cancelar</button><button class="pri" id="f-save">Guardar</button></div>
+  <div class="acts"><button id="f-reset">Restablecer surf</button><button id="f-cancel">Cancelar</button><button class="pri" id="f-save">Guardar</button></div>
 </div></div>
 
 <script>
@@ -162,19 +186,26 @@ h2 b{color:#e9eef4}
 
 /* ======================= CONFIGURACIÓN ======================= */
 var DEFAULTS = {
-  haUrl: '', haToken: '',
-  entities: {
-    climate:'climate.calefaccion', homeTemp:'sensor.temperatura_salon', homeHum:'sensor.humedad_salon',
-    plug:'switch.enchufe', plugPower:'', vacuum:'vacuum.roomba', tv:'media_player.tv'
+  vmToken: '',
+  // IDs de los disparadores de Voice Monkey (uno por acción)
+  vm: {
+    'climate:on':'calefaccion-on', 'climate:off':'calefaccion-off',
+    'climate:19':'calefaccion-19', 'climate:20':'calefaccion-20', 'climate:21':'calefaccion-21', 'climate:22':'calefaccion-22',
+    'plug:on':'enchufe-on', 'plug:off':'enchufe-off',
+    'vacuum:start':'aspiradora-limpiar', 'vacuum:dock':'aspiradora-base',
+    'tv:on':'television-on', 'tv:off':'television-off'
   },
-  scenes: 'script.salgo_de_casa, script.buenas_noches',
+  scenes: '',
   // Widget de surf-forecast (sHeight 0 = ocupa el alto que quede libre)
   sHeight: 0, sScale: 1,
   nightFrom: 23, nightTo: 7
 };
 var TOLOSA = {lat:43.135, lon:-2.078};
 var SURF_URL   = 'https://es.surf-forecast.com/breaks/Zarautz/forecasts/widget/a';
-var SCENE_NAMES = {'script.salgo_de_casa':'🚪 Salgo de casa','script.buenas_noches':'🌙 Buenas noches'};
+var SCENE_NAMES = {'salgo-de-casa':'🚪 Salgo de casa','buenas-noches':'🌙 Buenas noches'};
+var VM_URL = 'https://api-v3.voicemonkey.io/trigger';
+var TEMPS = [19,20,21,22];
+var LABELS = {'climate:on':'Calefacción · encender','climate:off':'Calefacción · apagar','plug:on':'Enchufe · encender','plug:off':'Enchufe · apagar','vacuum:start':'Aspiradora · limpiar','vacuum:dock':'Aspiradora · a la base','tv:on':'Televisión · encender','tv:off':'Televisión · apagar','climate:19':'Calefacción a 19°','climate:20':'Calefacción a 20°','climate:21':'Calefacción a 21°','climate:22':'Calefacción a 22°'};
 var CROP_KEYS = ['sHeight','sScale'];
 
 var cfg = loadCfg();
@@ -183,12 +214,11 @@ function loadCfg(){
   var c = clone(DEFAULTS);
   try{
     var s = window.localStorage.getItem('panelcasa.cfg');
-    if(s){ var o = JSON.parse(s); for(var k in o){ if(k==='entities'){ for(var e in o.entities) c.entities[e]=o.entities[e]; } else c[k]=o[k]; } }
+    if(s){ var o = JSON.parse(s); for(var k in o){ if(k==='vm'){ for(var e in o.vm) c.vm[e]=o.vm[e]; } else c[k]=o[k]; } }
   }catch(err){}
   return c;
 }
 function saveCfg(){ try{ window.localStorage.setItem('panelcasa.cfg', JSON.stringify(cfg)); }catch(err){} }
-function demo(){ return !cfg.haToken; }
 
 /* ======================= UTILIDADES ======================= */
 function $(id){ return document.getElementById(id); }
@@ -292,130 +322,88 @@ function tick(){
 }
 tap($('t-night'), function(){ manualDim = !manualDim; tick(); });
 
-/* ======================= HOME ASSISTANT ======================= */
-var st = {plug:{on:false,power:null}, climate:{on:true,cur:20.5,tgt:21,action:'heating',min:7,max:30,step:0.5},
-          temp:20.5, hum:52, vacuum:{state:'docked',bat:100}, tv:{on:false,src:''}};
-var lastLocal = 0;
-function haBase(){ return (cfg.haUrl||'').replace(/\/+$/,''); }
-function haHeaders(){ return {'Authorization':'Bearer '+cfg.haToken,'Content-Type':'application/json'}; }
+/* ======================= ALEXA (Voice Monkey) ======================= */
+var last = {};
+try{ last = JSON.parse(window.localStorage.getItem('panelcasa.last')||'{}')||{}; }catch(e){ last={}; }
 function setStatus(cls, txt){ var s=$('status'); s.className='status '+cls; s.innerHTML='<i></i>'+txt; }
-
-function refreshHA(){
-  if(demo()){ setStatus('demo','Modo demo'); renderHome(); return; }
-  var t0 = new Date().getTime();
-  xhr('GET', haBase()+'/api/states', null, haHeaders(), function(err, list){
-    if(err || !list){ setStatus('err','Sin conexión con HA'); return; }
-    if(t0 < lastLocal) return;
-    setStatus('ok','Conectado');
-    var m={}, i; for(i=0;i<list.length;i++) m[list[i].entity_id]=list[i];
-    var E = cfg.entities, s;
-    if((s=m[E.plug])) st.plug.on = s.state==='on';
-    if(E.plugPower && (s=m[E.plugPower])) st.plug.power = parseFloat(s.state);
-    if((s=m[E.climate])){ var a=s.attributes||{};
-      st.climate.on = s.state!=='off' && s.state!=='unavailable';
-      st.climate.cur = a.current_temperature; st.climate.tgt = a.temperature; st.climate.action = a.hvac_action||'';
-      st.climate.min = a.min_temp||7; st.climate.max = a.max_temp||30; st.climate.step = a.target_temp_step||0.5; }
-    st.temp = null; st.hum = null;
-    if(E.homeTemp && (s=m[E.homeTemp]) && !isNaN(parseFloat(s.state))) st.temp = parseFloat(s.state);
-    else if(m[E.climate]) st.temp = st.climate.cur;
-    if(E.homeHum && (s=m[E.homeHum]) && !isNaN(parseFloat(s.state))) st.hum = parseFloat(s.state);
-    if((s=m[E.vacuum])){ st.vacuum.state = s.state; st.vacuum.bat = (s.attributes||{}).battery_level; }
-    if((s=m[E.tv])){ st.tv.on = ['off','standby','unavailable','unknown'].indexOf(s.state)<0; st.tv.src=(s.attributes||{}).source||(s.attributes||{}).app_name||''; }
-    renderHome();
-  });
-}
-function call(domain, service, data){
-  lastLocal = new Date().getTime();
-  renderHome();
-  if(demo()) return;
-  xhr('POST', haBase()+'/api/services/'+domain+'/'+service, data, haHeaders(), function(err){
-    if(err) setStatus('err','Error al enviar');
-    setTimeout(refreshHA, 1200);
-  });
-}
-var VAC = {cleaning:'Limpiando',docked:'En la base',returning:'Volviendo a la base',idle:'En espera',paused:'En pausa',error:'Error',unavailable:'No disponible'};
-function renderHome(){
-  $('htemp').innerHTML = st.temp!=null ? (Math.round(st.temp*10)/10) : '--';
-  $('hhum').innerHTML = st.hum!=null ? '· 💧'+Math.round(st.hum)+'%' : '';
-  var c = st.climate;
-  $('t-climate').className = 'btn heat'+(c.on?' on':'');
-  $('s-climate').innerHTML = c.on ? (c.action==='heating' ? 'Calentando' : 'Encendida')+(c.cur!=null?' · ahora '+c.cur+'°':'') : 'Apagada · toca para encender';
-  $('c-tgt').innerHTML = c.tgt!=null ? c.tgt+'°' : '--°';
-  $('t-plug').className = 'btn'+(st.plug.on?' on':'');
-  $('s-plug').innerHTML = (st.plug.on?'Encendido':'Apagado')+(st.plug.power!=null&&!isNaN(st.plug.power)?' · '+Math.round(st.plug.power)+' W':'');
-  var vs = st.vacuum.state;
-  $('t-vacuum').className = 'btn'+(vs==='cleaning'?' on':'');
-  $('s-vacuum').innerHTML = (VAC[vs]||vs)+(st.vacuum.bat!=null?' · 🔋'+st.vacuum.bat+'%':'');
-  $('t-tv').className = 'btn'+(st.tv.on?' on':'');
-  $('s-tv').innerHTML = st.tv.on ? 'Encendida'+(st.tv.src?' · '+esc(st.tv.src):'') : 'Apagada';
-}
-function dom(e){ return e.split('.')[0]; }
-
-tap($('t-plug'), function(){
-  var e=cfg.entities.plug; st.plug.on=!st.plug.on;
-  call(dom(e), st.plug.on?'turn_on':'turn_off', {entity_id:e});
-});
-tap($('t-tv'), function(){
-  st.tv.on=!st.tv.on;
-  call('media_player', st.tv.on?'turn_on':'turn_off', {entity_id:cfg.entities.tv});
-});
-tap($('t-vacuum'), function(){
-  var cleaning = st.vacuum.state==='cleaning';
-  st.vacuum.state = cleaning ? 'returning' : 'cleaning';
-  call('vacuum', cleaning?'return_to_base':'start', {entity_id:cfg.entities.vacuum});
-});
-tap($('t-climate'), function(ev){
-  var t=ev.target; while(t && t!==this){ if(t.className && /pm/.test(t.className)) return; t=t.parentNode; }
-  st.climate.on=!st.climate.on;
-  call('climate','set_hvac_mode',{entity_id:cfg.entities.climate, hvac_mode: st.climate.on?'heat':'off'});
-});
-var tTimer=null;
-function bump(dir){
-  var c=st.climate, v=(c.tgt!=null?c.tgt:20)+dir*(c.step||0.5);
-  v=Math.max(c.min||7, Math.min(c.max||30, Math.round(v*10)/10));
-  c.tgt=v; lastLocal=new Date().getTime(); renderHome();
-  clearTimeout(tTimer);
-  tTimer=setTimeout(function(){ call('climate','set_temperature',{entity_id:cfg.entities.climate, temperature:v}); }, 1200);
-}
-tap($('c-minus'), function(){ bump(-1); });
-tap($('c-plus'),  function(){ bump(1); });
-
-function renderScenes(){
-  var list = (cfg.scenes||'').split(','), html='', i;
-  for(i=0;i<list.length;i++){
-    var e = list[i].replace(/\s/g,''); if(!e || e.indexOf('.')<0) continue;
-    var name = SCENE_NAMES[e] || ('✨ '+e.split('.')[1].replace(/_/g,' '));
-    html += '<div class="scene" data-e="'+esc(e)+'">'+esc(name)+'</div>';
+function toast(t){ var el=$('toast'); el.innerHTML=t; el.style.opacity='1'; clearTimeout(toast.t); toast.t=setTimeout(function(){ el.style.opacity='0'; },1800); }
+function hhmm(ms){ var d=new Date(ms); return pad(d.getHours())+':'+pad(d.getMinutes()); }
+var VERB = {'on':'encendido','off':'apagado','start':'limpiar','dock':'a la base'};
+function renderLast(){
+  var devs=['climate','plug','vacuum','tv'];
+  for(var i=0;i<devs.length;i++){
+    var l=last[devs[i]], el=$('ls-'+devs[i]);
+    if(!el) continue;
+    if(!l){ el.innerHTML='Sin órdenes todavía'; continue; }
+    var a=l.a.split(':')[1], txt = /^\d+$/.test(a) ? 'a '+a+'°' : (VERB[a]||a);
+    el.innerHTML='Última orden: '+txt+' · '+hhmm(l.t);
   }
-  $('scenes').innerHTML = html;
-  var els = $('scenes').getElementsByTagName('div');
+}
+function trigger(id, label){
+  if(!cfg.vmToken){ toast('Falta el token de Voice Monkey (⚙)'); return false; }
+  if(!id){ toast('Falta el ID de esta acción (⚙)'); return false; }
+  var url = VM_URL+'?token='+encodeURIComponent(cfg.vmToken)+'&device='+encodeURIComponent(id)+'&_='+new Date().getTime();
+  // petición "dispara y olvida": funciona en Safari antiguo y sin CORS
+  var img = new Image(); img.src = url;
+  toast('✓ Enviado a Alexa: '+label);
+  return true;
+}
+function doAction(a, el){
+  if(trigger(cfg.vm[a], LABELS[a]||a)){
+    last[a.split(':')[0]] = {a:a, t:new Date().getTime()};
+    try{ window.localStorage.setItem('panelcasa.last', JSON.stringify(last)); }catch(e){}
+    renderLast();
+  }
+  if(el){ el.className += ' sent'; setTimeout(function(){ el.className = el.className.replace(/ sent/g,''); }, 700); }
+}
+function bindVm(){
+  var t='', i;
+  for(i=0;i<TEMPS.length;i++) t+='<div class="vbtn" data-a="climate:'+TEMPS[i]+'">'+TEMPS[i]+'°</div>';
+  $('temps').innerHTML=t;
+  var els=document.querySelectorAll('.vbtn[data-a]');
+  for(i=0;i<els.length;i++){ (function(el){ tap(el, function(){ doAction(el.getAttribute('data-a'), el); }); })(els[i]); }
+}
+function updStatus(){ if(cfg.vmToken) setStatus('ok','Alexa lista'); else setStatus('demo','Falta configurar (⚙)'); }
+function renderScenes(){
+  var list=(cfg.scenes||'').split(','), html='', i;
+  for(i=0;i<list.length;i++){ var e=list[i].replace(/\s/g,''); if(!e) continue;
+    html+='<div class="scene" data-e="'+esc(e)+'">'+esc(SCENE_NAMES[e]||('✨ '+e.replace(/-/g,' ')))+'</div>'; }
+  $('scenes').innerHTML=html;
+  var els=$('scenes').getElementsByTagName('div');
   for(i=0;i<els.length;i++){ (function(el){ tap(el, function(){
-    var e = el.getAttribute('data-e'); el.style.background='#2f81f7';
-    setTimeout(function(){ el.style.background=''; }, 600);
-    var d = dom(e); call(d==='script'||d==='scene' ? d : 'homeassistant', 'turn_on', {entity_id:e});
+    var e=el.getAttribute('data-e'); el.style.background='#2f81f7'; setTimeout(function(){ el.style.background=''; },600);
+    trigger(e, el.textContent);
   }); })(els[i]); }
 }
 
 /* ======================= AJUSTES ======================= */
-var EFIELDS = ['climate','homeTemp','homeHum','plug','plugPower','vacuum','tv'];
+var VM_KEYS = ['climate:on','climate:off','climate:19','climate:20','climate:21','climate:22','plug:on','plug:off','vacuum:start','vacuum:dock','tv:on','tv:off'];
+function buildVmFields(){
+  var h='', i;
+  for(i=0;i<VM_KEYS.length;i+=2){
+    h+='<div class="two"><div><label>'+LABELS[VM_KEYS[i]]+'</label><input id="vm-'+i+'" autocapitalize="off" autocorrect="off"></div>'+
+       '<div><label>'+LABELS[VM_KEYS[i+1]]+'</label><input id="vm-'+(i+1)+'" autocapitalize="off" autocorrect="off"></div></div>';
+  }
+  $('vm-fields').innerHTML=h;
+}
 function fillForm(){
-  $('f-haUrl').value = cfg.haUrl||''; $('f-haToken').value = cfg.haToken||''; $('f-scenes').value = cfg.scenes||'';
-  var i; for(i=0;i<EFIELDS.length;i++) $('f-e-'+EFIELDS[i]).value = cfg.entities[EFIELDS[i]]||'';
-  for(i=0;i<CROP_KEYS.length;i++) $('f-'+CROP_KEYS[i]).value = cfg[CROP_KEYS[i]];
+  $('f-vmToken').value=cfg.vmToken||''; $('f-scenes').value=cfg.scenes||'';
+  var i; for(i=0;i<VM_KEYS.length;i++) $('vm-'+i).value=cfg.vm[VM_KEYS[i]]||'';
+  for(i=0;i<CROP_KEYS.length;i++) $('f-'+CROP_KEYS[i]).value=cfg[CROP_KEYS[i]];
 }
 tap($('gear'), function(){ fillForm(); $('cfg').style.display='block'; });
 tap($('f-cancel'), function(){ $('cfg').style.display='none'; });
 tap($('f-reset'), function(){ for(var i=0;i<CROP_KEYS.length;i++) cfg[CROP_KEYS[i]] = DEFAULTS[CROP_KEYS[i]]; fillForm(); });
 tap($('f-save'), function(){
-  cfg.haUrl = $('f-haUrl').value.replace(/\s/g,''); cfg.haToken = $('f-haToken').value.replace(/\s/g,''); cfg.scenes = $('f-scenes').value;
-  var i; for(i=0;i<EFIELDS.length;i++) cfg.entities[EFIELDS[i]] = $('f-e-'+EFIELDS[i]).value.replace(/\s/g,'');
-  for(i=0;i<CROP_KEYS.length;i++) cfg[CROP_KEYS[i]] = num($('f-'+CROP_KEYS[i]).value, DEFAULTS[CROP_KEYS[i]]);
-  saveCfg(); $('cfg').style.display='none'; renderScenes(); refreshHA(); mountAll();
+  cfg.vmToken=$('f-vmToken').value.replace(/\s/g,''); cfg.scenes=$('f-scenes').value;
+  var i; for(i=0;i<VM_KEYS.length;i++) cfg.vm[VM_KEYS[i]]=$('vm-'+i).value.replace(/\s/g,'');
+  for(i=0;i<CROP_KEYS.length;i++) cfg[CROP_KEYS[i]]=num($('f-'+CROP_KEYS[i]).value, DEFAULTS[CROP_KEYS[i]]);
+  saveCfg(); $('cfg').style.display='none'; renderScenes(); updStatus(); mountSurf();
 });
 
 /* ======================= ARRANQUE ======================= */
 tick(); setInterval(tick, 10000);
-renderScenes(); renderHome(); refreshHA(); setInterval(refreshHA, 10000);
+buildVmFields(); bindVm(); renderLast(); renderScenes(); updStatus();
 loadWeather(); setTimeout(function(){ if(!wxFirst) mountSurf(); }, 4000);
 setInterval(loadWeather, 15*60*1000);   // tiempo cada 15 min
 setInterval(mountSurf,   60*60*1000);   // surf-forecast cada hora
