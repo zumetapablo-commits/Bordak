@@ -149,7 +149,7 @@ h2 b{color:#e9eef4}
     </div>
     <div class="card c-home">
       <div class="hdr">
-        <h2 style="margin:0"><b>Casa</b> · Alexa <span style="font-size:11px;color:#5d6b7c">v11</span></h2>
+        <h2 style="margin:0"><b>Casa</b> · Alexa <span style="font-size:11px;color:#5d6b7c">v12</span></h2>
         <div><span class="status" id="status"><i></i>…</span> <span class="gear" id="gear">⚙</span></div>
       </div>
       <div class="tiles">
@@ -488,14 +488,19 @@ function resolveId(v){
   for(i=0;i<vmDevices.length;i++){ d=vmDevices[i]; if(d.id.indexOf(sv+'-')===0) return d.id; }
   return KNOWN_IDS[sv] || v;
 }
+var vmDiag='';
 function loadVmDevices(cb){
   if(!cfg.vmToken){ if(cb) cb(); return; }
-  xhr('GET', VM_API+'/devices?token='+encodeURIComponent(cfg.vmToken), null, null, function(err, d){
-    if(!err && d && d.data){
-      vmDevices=[]; for(var i=0;i<d.data.length;i++){ vmDevices.push({id:String(d.data[i].id), name:String(d.data[i].name||'')}); }
-      setStatus('ok','Alexa lista · '+vmDevices.length+' disparadores');
-    } else if(err && /401|403/.test(err.message)){ setStatus('err','Token rechazado ('+cfg.vmToken.length+' car., '+esc(cfg.vmToken.substr(0,5))+'…'+esc(cfg.vmToken.substr(-4))+')'); }
-    else { setStatus('ok','Alexa (sin lista de disparadores)'); }
+  vmGet(VM_API+'/devices?token='+encodeURIComponent(cfg.vmToken), function(st, txt){
+    var j=null; try{ j=JSON.parse(txt); }catch(e){}
+    if(st>=200 && st<300 && j && j.data){
+      vmDevices=[]; for(var i=0;i<j.data.length;i++){ vmDevices.push({id:String(j.data[i].id), name:String(j.data[i].name||'')}); }
+      vmDiag=''; setStatus('ok','Alexa lista · '+vmDevices.length+' disparadores');
+    } else {
+      var body = j ? (j.message||j.error||j.code||'') : String(txt||'').replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').substr(0,90);
+      vmDiag = 'HTTP '+st+(body?' · '+body:'');
+      setStatus(st===0?'ok':'err', (st===0?'Alexa (sin lista)':'Rechazado')+' · '+esc(vmDiag)+' · '+cfg.vmToken.length+' car.');
+    }
     renderDevList(); if(cb) cb();
   });
 }
