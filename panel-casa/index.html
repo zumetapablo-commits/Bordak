@@ -149,7 +149,7 @@ h2 b{color:#e9eef4}
     </div>
     <div class="card c-home">
       <div class="hdr">
-        <h2 style="margin:0"><b>Casa</b> · Alexa <span style="font-size:11px;color:#5d6b7c">v10</span></h2>
+        <h2 style="margin:0"><b>Casa</b> · Alexa <span style="font-size:11px;color:#5d6b7c">v11</span></h2>
         <div><span class="status" id="status"><i></i>…</span> <span class="gear" id="gear">⚙</span></div>
       </div>
       <div class="tiles">
@@ -239,8 +239,10 @@ var VM_API = 'https://api-v3.voicemonkey.io';
 var LABELS = {'climate:on':'Calefacción · encender','climate:off':'Calefacción · apagar','plug:on':'Enchufe · encender','plug:off':'Enchufe · apagar','vacuum:start':'Aspiradora · limpiar','vacuum:dock':'Aspiradora · a la base','tv:on':'Televisión · encender','tv:off':'Televisión · apagar','climate:up':'Calefacción · subir','climate:down':'Calefacción · bajar'};
 var CROP_KEYS = ['sHeight','sScale'];
 
+function cleanTok(t){ return String(t||'').replace(/[^A-Za-z0-9_\-]/g,''); }   // quita espacios y caracteres invisibles al pegar
 var cfg = loadCfg();
-(function(){ var m=/[#&]vm=([^&]+)/.exec(location.hash||''); if(m){ cfg.vmToken=decodeURIComponent(m[1]); try{ window.localStorage.setItem('panelcasa.cfg', JSON.stringify(cfg)); }catch(e){} } })();
+cfg.vmToken = cleanTok(cfg.vmToken);
+(function(){ var m=/[#&]vm=([^&]+)/.exec(location.hash||''); if(m){ cfg.vmToken=cleanTok(decodeURIComponent(m[1])); try{ window.localStorage.setItem('panelcasa.cfg', JSON.stringify(cfg)); }catch(e){} } })();
 function clone(o){ return JSON.parse(JSON.stringify(o)); }
 function loadCfg(){
   var c = clone(DEFAULTS);
@@ -572,7 +574,7 @@ tap($('gear'), function(){ fillForm(); renderDevList(); $('cfg').style.display='
 tap($('f-cancel'), function(){ $('cfg').style.display='none'; });
 tap($('f-reset'), function(){ for(var i=0;i<CROP_KEYS.length;i++) cfg[CROP_KEYS[i]] = DEFAULTS[CROP_KEYS[i]]; fillForm(); });
 tap($('f-save'), function(){
-  var nt=$('f-vmToken').value.replace(/\s/g,''); if(nt!==cfg.vmToken) cfg.vmApi=''; cfg.vmToken=nt; cfg.scenes=$('f-scenes').value;
+  var nt=cleanTok($('f-vmToken').value); if(nt!==cfg.vmToken) cfg.vmApi=''; cfg.vmToken=nt; cfg.scenes=$('f-scenes').value;
   var i; for(i=0;i<VM_KEYS.length;i++) cfg.vm[VM_KEYS[i]]=$('vm-'+i).value.replace(/^\s+|\s+$/g,'');
   for(i=0;i<CROP_KEYS.length;i++) cfg[CROP_KEYS[i]]=num($('f-'+CROP_KEYS[i]).value, DEFAULTS[CROP_KEYS[i]]);
   saveCfg(); $('cfg').style.display='none'; renderScenes(); updStatus(); loadVmDevices(); if(surfTab==='sf') mountSurf();
