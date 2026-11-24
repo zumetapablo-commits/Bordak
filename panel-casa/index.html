@@ -97,6 +97,28 @@ h2 b{color:#e9eef4}
 .pmrow{margin-left:auto;display:-webkit-flex;display:flex}
 .pmrow .pm{width:64px;height:54px;border-radius:27px;font-size:32px;line-height:50px;padding:0;margin-left:10px;background:#53361f;-webkit-flex:none;flex:none}
 .toast{position:absolute;left:50%;bottom:10px;-webkit-transform:translateX(-50%);transform:translateX(-50%);background:#2f81f7;color:#fff;border-radius:20px;padding:8px 16px;font-size:14px;opacity:0;-webkit-transition:opacity .3s;transition:opacity .3s;pointer-events:none;white-space:nowrap}
+/* foto */
+.photo{height:170px;border-radius:14px;background:#1f2733 no-repeat 50% 50%;background-size:cover;position:relative;overflow:hidden;display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;-webkit-justify-content:center;justify-content:center;color:#8b98a8;font-size:14px}
+.photo input{position:absolute;left:0;top:0;width:100%;height:100%;opacity:0}
+/* tabla surf semana (estilo surf-forecast) */
+.sfw{overflow-x:auto;-webkit-overflow-scrolling:touch;background:#fff;border-radius:10px;color:#222}
+.sfw table{border-collapse:collapse;width:100%;table-layout:fixed;font-size:12px}
+.sfw td,.sfw th{text-align:center;padding:2px 0;border-left:1px solid #e3e3e3;white-space:nowrap;overflow:hidden}
+.sfw .lab{background:#fff !important;color:#555 !important;font-size:11px !important;width:66px;text-align:right;padding-right:5px;color:#555;font-weight:400;border-left:0;font-size:11px}
+.sfw .dh th{background:#c9c9c9;color:#fff;font-weight:400;font-size:12px;padding:4px 0;border-left:2px solid #fff}
+.sfw .dh th.td{background:#9fb6cc}
+.sfw .hh td{background:#ececec;color:#444;font-size:11px}
+.sfw .ds{border-left:2px solid #bbb}
+.sfw .rt td{height:30px}
+.sfw .ht td{font-size:13px;padding-top:5px}
+.sfw .dr td{background:#2f8fdc;height:26px}
+.sfw .pe td{font-size:12px}
+.sfw .wi td{height:36px}
+.sfw .es td{font-size:10px;line-height:1.15;height:28px;white-space:normal}
+.sfw .es .off{background:#5fd35f}.sfw .es .cof{background:#a6eaa0}.sfw .es .cr{background:#ececec}.sfw .es .con{background:#cfcfcf}.sfw .es .on{background:#b4b4b4;color:#fff}
+.sfw .tw td{font-size:19px;background:#5d6b7c;height:30px}
+.sfw .tw td.dy{background:#a9c6e6}
+.sfw .ta td{font-size:12px}
 /* surf semana */
 .tabs{font-size:13px}
 .tab{display:inline-block;padding:7px 12px;border-radius:16px;background:#1f2733;color:#b7c2cf;margin-left:6px;cursor:pointer}
@@ -150,7 +172,7 @@ h2 b{color:#e9eef4}
     </div>
     <div class="card c-home">
       <div class="hdr">
-        <h2 style="margin:0"><b>🏠 Naparrito</b> · Alexa <span style="font-size:11px;color:#5d6b7c">v15</span></h2>
+        <h2 style="margin:0"><b>🏠 Naparrito</b> · Alexa <span style="font-size:11px;color:#5d6b7c">v16</span></h2>
         <div><span class="status" id="status"><i></i>…</span> <span class="gear" id="gear">⚙</span></div>
       </div>
       <div class="tiles">
@@ -170,7 +192,8 @@ h2 b{color:#e9eef4}
           <div class="vh"><span class="i">📺</span><div><div class="n">Televisión</div><div class="s" id="ls-tv">—</div></div></div>
           <div class="vb"><div class="vbtn on" data-a="tv:on">Encender</div><div class="vbtn" data-a="tv:off">Apagar</div></div>
         </div></div>
-        <div class="tile"><div class="btn" id="t-night" style="min-height:100px"><span class="i">🌙</span><div><div class="n">Pantalla</div><div class="s" id="s-night">Atenuar</div></div></div></div>
+        <div class="tile"><div class="btn" id="t-night" style="min-height:170px"><span class="i">🌙</span><div><div class="n">Pantalla</div><div class="s" id="s-night">Atenuar</div></div></div></div>
+        <div class="tile"><div class="photo" id="photo"><span id="photo-ph">📷 Toca para poner una foto</span><input type="file" accept="image/*" id="photo-in"></div></div>
       </div>
       <div class="scenes" id="scenes"></div>
       <div class="toast" id="toast"></div>
@@ -182,8 +205,8 @@ h2 b{color:#e9eef4}
         <div class="tabs"><span class="tab act" id="tab-sf">surf-forecast 48 h</span><span class="tab" id="tab-week">Semana (7 días)</span></div></div>
       <div id="surf-week" style="display:none">
         <div class="sea" id="sea"></div>
-        <div class="sgrid" id="surf"><span class="muted small">Cargando previsión de olas…</span></div>
-        <div class="legend">Olas: máx. de 7 a 19 h · periodo y dirección del swell · viento: media de 8 a 12 h (verde = terral/offshore, naranja = virazón fuerte) · ★ calidad estimada para nivel intermedio · <span id="s-upd2"></span></div>
+        <div class="sfw" id="surf"><span class="muted small">Cargando previsión de olas…</span></div>
+        <div class="legend">7 días a las 8, 12 y 16 h · ★ calidad estimada (0–10) · ⚠ mar grande · estado: verde = terral (off), gris = viento del mar (on) · <span id="s-upd2"></span></div>
       </div>
       <div class="crop" id="s-crop"><div class="ph">Cargando surf-forecast…</div></div>
       <span class="small muted" id="s-upd" style="display:none"></span>
@@ -335,7 +358,7 @@ function loadSurfWeek(){
     '&hourly=wave_height,wave_direction,wave_period,swell_wave_height,swell_wave_period,swell_wave_direction,sea_surface_temperature,sea_level_height_msl'+
     '&timezone=Europe%2FMadrid&forecast_days=7';
   var wu='https://api.open-meteo.com/v1/forecast?latitude='+ZARAUTZ.lat+'&longitude='+ZARAUTZ.lon+
-    '&hourly=wind_speed_10m,wind_direction_10m,weather_code,is_day&timezone=Europe%2FMadrid&forecast_days=7';
+    '&hourly=wind_speed_10m,wind_direction_10m,weather_code,is_day,temperature_2m&timezone=Europe%2FMadrid&forecast_days=7';
   xhr('GET', mu, null, null, function(e,d){ marine=(e||!d||!d.hourly)?false:d; renderSurfWeek(); });
   xhr('GET', wu, null, null, function(e,d){ swind=(e||!d||!d.hourly)?false:d; renderSurfWeek(); });
 }
@@ -347,68 +370,74 @@ function hourScore(wh, per, spd, dir){
   var w = spd<8?2 : (offshore && spd<30)?2 : spd<15?1 : 0;
   return size+p+w;
 }
+var SLOTS=[8,12,16];
+function svgStar(n){ return '<svg width="26" height="26" viewBox="0 0 24 24"><path d="M12 1.5l3.1 6.6 7.2.9-5.3 5 1.4 7.1L12 17.6 5.6 21.1 7 14l-5.3-5 7.2-.9z" fill="#f7a823" stroke="#d07a00" stroke-width="0.8"/><text x="12" y="15.6" text-anchor="middle" font-size="8.5" font-weight="700" fill="#5a3200" font-family="Helvetica,Arial">'+n+'</text></svg>'; }
+function svgWarn(){ return '<svg width="24" height="22" viewBox="0 0 24 22"><path d="M12 1L23 21H1z" fill="#e02424"/><text x="12" y="18.5" text-anchor="middle" font-size="12" font-weight="700" fill="#fff" font-family="Helvetica,Arial">!</text></svg>'; }
+function svgDir(d){ return '<svg width="18" height="18" viewBox="0 0 18 18"><g transform="rotate('+Math.round(d)+' 9 9)"><path d="M9 17 L3.5 9.5 L7 9.5 L7 1.5 L11 1.5 L11 9.5 L14.5 9.5 Z" fill="#fff"/></g></svg>'; }
+function svgWind(spd, d){
+  var c = spd<20?'#fff' : spd<30?'#7ee35a' : spd<45?'#ffd84a' : '#ff6b6b';
+  return '<svg width="32" height="32" viewBox="0 0 34 34"><g transform="rotate('+Math.round(d)+' 17 17)"><path d="M17 33.5 L12.5 26 L21.5 26 Z" fill="#222"/></g><circle cx="17" cy="17" r="11.5" fill="#222"/><text x="17" y="21" text-anchor="middle" font-size="11.5" font-weight="700" fill="'+c+'" font-family="Helvetica,Arial">'+Math.round(spd)+'</text></svg>';
+}
+function windState(dir){  // Zarautz mira al norte: terral = viento del sur (~175°)
+  var df=Math.abs(((dir-175)%360+540)%360-180);
+  return df<=35?['off','off'] : df<=70?['cof','cross<br>off'] : df<=110?['cr','cross'] : df<=145?['con','cross<br>on'] : ['on','on'];
+}
 function renderSurfWeek(){
   if(marine===null || swind===null) return;
-  if(marine===false){ $('surf').innerHTML='<span class="muted small">No se pudo cargar la previsión de olas. Reintento en 10 min.</span>'; setTimeout(loadSurfWeek, 10*60*1000); return; }
-  var mh=marine.hourly, wmap={}, i, j;
-  if(swind){ for(i=0;i<swind.hourly.time.length;i++) wmap[swind.hourly.time[i]]=i; }
-  var days=[], byDay={};
-  for(i=0;i<mh.time.length;i++){ var dk=mh.time[i].substr(0,10); if(!byDay[dk]){ byDay[dk]=[]; days.push(dk); } byDay[dk].push(i); }
-  var n=new Date(), nowKey=n.getFullYear()+'-'+pad(n.getMonth()+1)+'-'+pad(n.getDate())+'T'+pad(n.getHours()), ni=0;
-  for(i=0;i<mh.time.length;i++){ if(mh.time[i].substr(0,13)===nowKey){ ni=i; break; } }
-  var sea='';
+  if(marine===false){ $('surf').innerHTML='<span class="small" style="color:#555;padding:8px;display:block">No se pudo cargar la previsión de olas. Reintento en 10 min.</span>'; setTimeout(loadSurfWeek, 10*60*1000); return; }
+  var mh=marine.hourly, wh=swind?swind.hourly:null, idx={}, widx={}, i, k;
+  for(i=0;i<mh.time.length;i++) idx[mh.time[i]]=i;
+  if(wh) for(i=0;i<wh.time.length;i++) widx[wh.time[i]]=i;
+  var days=[], seen={};
+  for(i=0;i<mh.time.length;i++){ var dk=mh.time[i].substr(0,10); if(!seen[dk]){ seen[dk]=1; days.push(dk); } }
+  days=days.slice(0,7);
+  // línea "ahora": agua, olas, viento, mareas
+  var n=new Date(), nowKey=n.getFullYear()+'-'+pad(n.getMonth()+1)+'-'+pad(n.getDate())+'T'+pad(n.getHours())+':00', ni=idx[nowKey]||0, sea='';
   if(mh.sea_surface_temperature && mh.sea_surface_temperature[ni]!=null) sea+='🌡 Agua <b>'+mh.sea_surface_temperature[ni].toFixed(1)+'°</b> · ';
   if(mh.wave_height[ni]!=null) sea+='Ahora <b>'+mh.wave_height[ni].toFixed(1)+' m</b> '+(mh.wave_period[ni]!=null?Math.round(mh.wave_period[ni])+' s ':'')+compass(mh.wave_direction[ni]||0);
-  if(swind && wmap[mh.time[ni]]!=null){ var wi=wmap[mh.time[ni]]; sea+=' · viento <b>'+Math.round(swind.hourly.wind_speed_10m[wi])+' km/h</b> '+compass(swind.hourly.wind_direction_10m[wi]); }
+  if(wh && widx[mh.time[ni]]!=null){ var w0=widx[mh.time[ni]]; sea+=' · viento <b>'+Math.round(wh.wind_speed_10m[w0])+' km/h</b> '+compass(wh.wind_direction_10m[w0]); }
   var lv=mh.sea_level_height_msl;
   if(lv && days.length){
-    var tides=[], idx=byDay[days[0]];
-    for(i=1;i<idx.length-1;i++){
-      var a=lv[idx[i-1]], b=lv[idx[i]], c=lv[idx[i+1]];
-      if(a==null||b==null||c==null) continue;
-      if(b>a && b>=c) tides.push('pleamar '+mh.time[idx[i]].substr(11,2)+'h');
-      if(b<a && b<=c) tides.push('bajamar '+mh.time[idx[i]].substr(11,2)+'h');
-    }
+    var tides=[];
+    for(i=1;i<23;i++){ var t0=idx[days[0]+'T'+pad(i-1)+':00'], t1=idx[days[0]+'T'+pad(i)+':00'], t2=idx[days[0]+'T'+pad(i+1)+':00'];
+      if(t0==null||t1==null||t2==null) continue; var a=lv[t0], b=lv[t1], c=lv[t2]; if(a==null||b==null||c==null) continue;
+      if(b>a && b>=c) tides.push('pleamar '+i+'h'); if(b<a && b<=c) tides.push('bajamar '+i+'h'); }
     if(tides.length) sea+='<br>🌊 Mareas hoy (aprox.): '+tides.join(' · ');
   }
   $('sea').innerHTML=sea;
-  var html='';
-  for(var k=0;k<days.length && k<7;k++){
-    var ids=byDay[days[k]], maxH=0, pers=[], best=-1, bestH='', bars='', wsum=0, wn=0, wx_=0, wy_=0, swd=null, wcode=null;
-    for(i=0;i<ids.length;i++){
-      j=ids[i]; var hr=+mh.time[j].substr(11,2), wh=mh.wave_height[j];
-      if(wh==null) continue;
-      if(hr%2===0 && hr>=6 && hr<=20) bars+='<span style="height:'+Math.min(100,Math.round(wh/3.5*100))+'%"></span>';
-      if(hr<7||hr>19) continue;
-      if(wh>maxH) maxH=wh;
-      var per = mh.swell_wave_period && mh.swell_wave_period[j]!=null ? mh.swell_wave_period[j] : (mh.wave_period[j]||0);
-      pers.push(per);
-      if(swd===null) swd = mh.swell_wave_direction && mh.swell_wave_direction[j]!=null ? mh.swell_wave_direction[j] : mh.wave_direction[j];
-      var w2=wmap[mh.time[j]], spd=10, dir=0;
-      if(swind && w2!=null){ spd=swind.hourly.wind_speed_10m[w2]; dir=swind.hourly.wind_direction_10m[w2];
-        if(hr===13) wcode=swind.hourly.weather_code[w2];
-        if(hr>=8&&hr<=12){ wsum+=spd; wn++; wx_+=Math.sin(dir*Math.PI/180); wy_+=Math.cos(dir*Math.PI/180); } }
-      var sc=hourScore(wh, per, spd, dir);
-      if(sc>best){ best=sc; bestH=hr+'h'; }
+  // tabla
+  var rows={dh:'',hh:'',rt:'',ht:'',dr:'',pe:'',wi:'',es:'',tw:'',ta:''};
+  for(k=0;k<days.length;k++){
+    rows.dh+='<th colspan="'+SLOTS.length+'"'+(k===0?' class="td"':'')+'>'+(k===0?'hoy':DIASC[dayOf(days[k])])+' '+(+days[k].substr(8,2))+'</th>';
+    for(var q=0;q<SLOTS.length;q++){
+      var key=days[k]+'T'+pad(SLOTS[q])+':00', j=idx[key], w=widx[key], cls=(q===0?' class="ds"':'');
+      var hgt = j!=null ? mh.wave_height[j] : null;
+      var per = j!=null ? (mh.swell_wave_period && mh.swell_wave_period[j]!=null ? mh.swell_wave_period[j] : mh.wave_period[j]) : null;
+      var wdir = j!=null ? (mh.swell_wave_direction && mh.swell_wave_direction[j]!=null ? mh.swell_wave_direction[j] : mh.wave_direction[j]) : null;
+      var spd = (wh && w!=null) ? wh.wind_speed_10m[w] : null, dir = (wh && w!=null) ? wh.wind_direction_10m[w] : null;
+      var rating='';
+      if(hgt!=null){
+        if(hgt>3.2) rating=svgWarn();
+        else { var sc=hourScore(hgt, per||0, spd!=null?spd:10, dir!=null?dir:0), r10=Math.round(sc*10/6); if(r10>0) rating=svgStar(r10); }
+      }
+      rows.hh+='<td'+cls+'>'+SLOTS[q]+'h</td>';
+      rows.rt+='<td'+cls+'>'+rating+'</td>';
+      rows.ht+='<td'+cls+'>'+(hgt!=null?hgt.toFixed(1):'–')+'</td>';
+      rows.dr+='<td'+cls+'>'+(wdir!=null?svgDir(wdir):'')+'</td>';
+      rows.pe+='<td'+cls+'>'+(per!=null?Math.round(per):'–')+'</td>';
+      rows.wi+='<td'+cls+'>'+(spd!=null?svgWind(spd,dir):'–')+'</td>';
+      if(dir!=null){ var stt=windState(dir); rows.es+='<td class="'+stt[0]+(q===0?' ds':'')+'">'+stt[1]+'</td>'; } else rows.es+='<td'+cls+'>–</td>';
+      var dayt = wh && w!=null ? wh.is_day[w] : 1;
+      rows.tw+='<td class="'+(dayt?'dy':'')+(q===0?' ds':'')+'">'+(wh && w!=null ? wxi(wh.weather_code[w], !dayt)[0] : '')+'</td>';
+      rows.ta+='<td'+cls+'>'+(wh && w!=null && wh.temperature_2m ? Math.round(wh.temperature_2m[w])+'°' : '–')+'</td>';
     }
-    if(!pers.length) continue;
-    var avgP=0; for(i=0;i<pers.length;i++) avgP+=pers[i]; avgP/=pers.length;
-    var stars = best>=6?3 : best>=4?2 : best>=2?1 : 0, st='';
-    for(i=0;i<3;i++) st += i<stars ? '★' : '☆';
-    var wtxt='—', wcls='';
-    if(wn){ var wavg=wsum/wn, wd=(Math.atan2(wx_,wy_)*180/Math.PI+360)%360;
-      wcls=(wd>=112&&wd<=248)?'off':(wavg>=15?'onsh':'');
-      wtxt=arrow(wd)+' '+Math.round(wavg)+' km/h<br>'+compass(wd); }
-    html+='<div class="sd'+(k===0?' today':'')+'"><div class="dn">'+(k===0?'hoy':DIASC[dayOf(days[k])])+'</div>'+
-      '<div class="st">'+st+'</div>'+
-      '<div class="wv">'+maxH.toFixed(1)+'<small> m</small></div>'+
-      '<div class="pr">'+Math.round(avgP)+' s · '+(swd!=null?arrow(swd)+' '+compass(swd):'')+'</div>'+
-      '<div class="bar">'+bars+'</div>'+
-      '<div class="lbl">viento mañana</div><div class="wd '+wcls+'">'+wtxt+'</div>'+
-      (wcode!=null?'<span class="wi">'+wxi(wcode,false)[0]+'</span>':'')+
-      '<div class="best">'+(stars>0?'mejor ~'+bestH:'&nbsp;')+'</div></div>';
   }
-  $('surf').innerHTML=html||'<span class="muted small">Sin datos</span>';
+  function tr(c, label, cells){ return '<tr class="'+c+'"><td class="lab">'+label+'</td>'+cells+'</tr>'; }
+  $('surf').innerHTML='<table>'+
+    '<tr class="dh"><th class="lab" style="background:#fff;color:#555">Fecha</th>'+rows.dh+'</tr>'+
+    tr('hh','Hora',rows.hh)+tr('rt','Notación',rows.rt)+tr('ht','Altura (m)',rows.ht)+tr('dr','Dirección',rows.dr)+
+    tr('pe','Período (s)',rows.pe)+tr('wi','Viento km/h',rows.wi)+tr('es','Estado',rows.es)+tr('tw','Tiempo',rows.tw)+tr('ta','Temp. aire',rows.ta)+
+    '</table>';
   $('s-upd2').innerHTML='Open-Meteo, actualizado '+pad(n.getHours())+':'+pad(n.getMinutes());
 }
 function showSurfTab(t){
@@ -582,6 +611,57 @@ function testVm(){
     try{ r.send(JSON.stringify({token:t})); }catch(e){ res.push('B) error '+e); show(); }
   });
 }
+/* ======================= FOTO (solo en este iPad) ======================= */
+function showPhoto(){
+  var d=null; try{ d=window.localStorage.getItem('panelcasa.photo'); }catch(e){}
+  if(d){ $('photo').style.backgroundImage='url('+d+')'; $('photo-ph').style.display='none'; }
+}
+function exifOrientation(buf){
+  try{
+    var v=new DataView(buf); if(v.getUint16(0,false)!==0xFFD8) return 1;
+    var len=v.byteLength, off=2;
+    while(off<len){
+      var m=v.getUint16(off,false); off+=2;
+      if(m===0xFFE1){
+        if(v.getUint32(off+2,false)!==0x45786966) return 1;
+        var tiff=off+8, little=v.getUint16(tiff,false)===0x4949;
+        var ifd=tiff+v.getUint32(tiff+4,little), tags=v.getUint16(ifd,little);
+        for(var i=0;i<tags;i++){ var e=ifd+2+i*12; if(v.getUint16(e,little)===0x0112) return v.getUint16(e+8,little); }
+        return 1;
+      } else if((m&0xFF00)!==0xFF00) break;
+      else off+=v.getUint16(off,false);
+    }
+  }catch(err){}
+  return 1;
+}
+tap($('photo-in'), function(){});
+$('photo-in').addEventListener('change', function(){
+  var f=this.files && this.files[0]; if(!f) return;
+  $('photo-ph').innerHTML='Cargando foto…'; $('photo-ph').style.display='';
+  var fr=new FileReader();
+  fr.onload=function(){
+    var auto = window.CSS && CSS.supports && CSS.supports('image-orientation','from-image');
+    var ori = auto ? 1 : exifOrientation(fr.result);
+    var url=(window.URL||window.webkitURL).createObjectURL(f), img=new Image();
+    img.onload=function(){
+      var w=img.naturalWidth||img.width, h=img.naturalHeight||img.height, sc=Math.min(1, 700/Math.max(w,h));
+      var cw=Math.round(w*sc), ch=Math.round(h*sc), swap=(ori>=5 && ori<=8);
+      var cv=document.createElement('canvas'); cv.width=swap?ch:cw; cv.height=swap?cw:ch;
+      var cx=cv.getContext('2d');
+      if(ori===3){ cx.translate(cw,ch); cx.rotate(Math.PI); }
+      else if(ori===6){ cx.translate(ch,0); cx.rotate(Math.PI/2); }
+      else if(ori===8){ cx.translate(0,cw); cx.rotate(-Math.PI/2); }
+      cx.drawImage(img,0,0,cw,ch);
+      var data=cv.toDataURL('image/jpeg',0.82);
+      try{ window.localStorage.setItem('panelcasa.photo', data); }catch(e){ toast('No cabe la foto en la memoria del iPad'); }
+      $('photo').style.backgroundImage='url('+data+')'; $('photo-ph').style.display='none';
+      try{ (window.URL||window.webkitURL).revokeObjectURL(url); }catch(e){}
+    };
+    img.src=url;
+  };
+  fr.readAsArrayBuffer(f);
+}, false);
+
 /* ======================= AJUSTES ======================= */
 var VM_KEYS = ['climate:on','climate:off','climate:up','climate:down','plug:on','plug:off','vacuum:start','vacuum:dock','tv:on','tv:off'];
 function buildVmFields(){
@@ -610,7 +690,7 @@ tap($('f-save'), function(){
 
 /* ======================= ARRANQUE ======================= */
 tick(); setInterval(tick, 10000);
-buildVmFields(); bindVm(); renderLast(); renderScenes(); updStatus();
+buildVmFields(); bindVm(); renderLast(); renderScenes(); updStatus(); showPhoto();
 loadWeather(); loadSurfWeek();
 try{ vmDevices=JSON.parse(window.localStorage.getItem('panelcasa.devs')||'null'); }catch(e){ vmDevices=null; }
 if(vmDevices && cfg.vmToken){ setStatus('ok','Alexa lista · '+vmDevices.length+' disparadores'); } else { loadVmDevices(); }
