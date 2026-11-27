@@ -172,7 +172,7 @@ h2 b{color:#e9eef4}
     </div>
     <div class="card c-home">
       <div class="hdr">
-        <h2 style="margin:0"><b>🏠 Naparrito</b> · Alexa <span style="font-size:11px;color:#5d6b7c">v16</span></h2>
+        <h2 style="margin:0"><b>🏠 Naparrito</b> · Alexa <span style="font-size:11px;color:#5d6b7c">v17</span></h2>
         <div><span class="status" id="status"><i></i>…</span> <span class="gear" id="gear">⚙</span></div>
       </div>
       <div class="tiles">
@@ -227,7 +227,7 @@ h2 b{color:#e9eef4}
   <div class="small muted">Pega tu token de Voice Monkey (consola de voicemonkey.io &gt; API). Debajo, el disparador ("Routine Trigger") de cada botón.</div>
   <label>Token de Voice Monkey</label><input id="f-vmToken" placeholder="token" autocapitalize="off" autocorrect="off">
   <div class="small" id="vm-list" style="color:#b7c2cf;margin-top:8px"></div>
-  <div class="small muted" style="margin-top:6px">Puedes poner el nombre del disparador (p. ej. «enchufe on») o su ID.</div>
+  <div class="small muted" style="margin-top:6px">En cada botón puedes poner el nombre de un disparador de Voice Monkey (p. ej. «enchufe on») o pegar la URL completa de un disparador de URL Routine Trigger (empieza por https://).</div>
   <div id="vm-fields"></div>
   <div style="margin-top:10px"><button id="f-test" style="margin:0">Probar conexión</button></div>
   <div class="small" id="vm-test" style="color:#b7c2cf;margin-top:6px;word-break:break-all"></div>
@@ -550,8 +550,15 @@ function vmGet(url, cb){
   try{ r.send(null); }catch(e){ done=true; cb(0,''); }
 }
 function trigger(val, label){
-  if(!cfg.vmToken){ toast('Falta el token de Voice Monkey (⚙)'); return false; }
   if(!val){ toast('Falta el disparador de esta acción (⚙)'); return false; }
+  // URL completa (p. ej. URL Routine Trigger de virtualsmarthome.xyz): se abre tal cual
+  if(/^https?:\/\//i.test(val)){
+    var u = val + (val.indexOf('?')>=0 ? '&' : '?') + '_t=' + new Date().getTime();
+    var im = new Image(); im.src = u;
+    toast('✓ Enviado: '+label);
+    return true;
+  }
+  if(!cfg.vmToken){ toast('Falta el token de Voice Monkey (⚙)'); return false; }
   var id=resolveId(val);
   var url = VM_API+'/trigger?token='+encodeURIComponent(cfg.vmToken)+'&device='+encodeURIComponent(id)+'&_='+new Date().getTime();
   function ping(){ var im=new Image(); im.src=url+'&p=1'; }
